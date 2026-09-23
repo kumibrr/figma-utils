@@ -22,12 +22,13 @@ export default {
   sets: [
     { name: 'primitives', file: 'src/css/colors.css', selector: ':root' },
     { name: 'semantic/brand/nova', file: 'src/css/brands.css', selector: ":root, [data-brand='nova']" },
+    { name: 'semantic/brand/orbit', file: 'src/css/brands.css', selector: "[data-brand='orbit']" },
     { name: 'semantic/theme/light', file: 'src/css/theme.css', selector: ':root' },
     { name: 'semantic/theme/dark', file: 'src/css/theme.css', selector: "[data-mode='dark']" },
     { name: 'typography', file: 'src/css/typography.css', selector: ':root' },
   ],
   themes: {
-    Brand: ['semantic/brand/nova'],
+    Brand: ['semantic/brand/nova', 'semantic/brand/orbit'],
     Theme: ['semantic/theme/light', 'semantic/theme/dark'],
   },
 };
@@ -35,8 +36,10 @@ export default {
 
 - **sets** — each set is the custom properties of one selector block in one file. Blocks
   with the same selector in a file are merged. Paths are relative to the config file.
-- **themes** — sets that are modes of one axis. The key must be the capitalized last
-  segment of the sets' shared parent (`Brand` for `semantic/brand/*`).
+- **themes** — sets that are modes of one axis (one Figma collection). A group needs at
+  least two sets, all declaring the same custom properties (a Figma variable has a value
+  in every mode). The key must be the capitalized last segment of the sets' shared parent
+  (`Brand` for `semantic/brand/*`).
 - **overrides** — `{ '--color-white': ['base', 'white'] }` to place a name elsewhere.
 - **path** — `(cssName, setName) => string[]` to replace the naming rule entirely. The
   first segment must be the set's first segment.
@@ -57,6 +60,9 @@ export default {
 Names become paths by splitting on `-` under the set's first segment:
 `--gray-100` in `primitives` → `primitives.gray.100`.
 
+CSS keywords and named colours (`transparent`, `none`, `red`, …) are unsupported values,
+never font families.
+
 The build fails — listing every problem at once — on unsupported values, references to
 undeclared properties, cycles, path collisions, duplicate declarations and invalid theme
 groups. Nothing is silently dropped.
@@ -66,7 +72,8 @@ groups. Nothing is silently dropped.
     npx css-to-dtcg                    # DTCG files into outDir
     npx css-to-dtcg --target figma     # Figma Import-mode files into figmaOutDir
 
-The output directory is replaced on every run and must be inside the project.
+The output directory is replaced on every run. It must be inside the project, must not
+contain any source CSS file, and `outDir` and `figmaOutDir` must not be inside each other.
 
 ## Importing into Figma
 

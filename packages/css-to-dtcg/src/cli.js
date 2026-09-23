@@ -38,6 +38,19 @@ export async function run(argv, { log = console.log, error = console.error } = {
       throw new TokenBuildError([`output directory ${outDir} must be inside ${root} and not the project root itself`]);
     }
 
+    const inside = (parent, child) => {
+      const path = relative(parent, child);
+      return path === '' || (!path.startsWith('..') && !isAbsolute(path));
+    };
+    const otherOutDir = resolve(root, target === 'figma' ? (config.outDir ?? 'tokens') : (config.figmaOutDir ?? 'figma'));
+    if (inside(outDir, otherOutDir) || inside(otherOutDir, outDir)) {
+      throw new TokenBuildError([`outDir and figmaOutDir must not be inside each other (${outDir}, ${otherOutDir})`]);
+    }
+    const source = config.sets.map((set) => set.file).find((file) => inside(outDir, resolve(root, file)));
+    if (source) {
+      throw new TokenBuildError([`output directory ${outDir} contains the source file ${source}; it is replaced on every run`]);
+    }
+
     rmSync(outDir, { recursive: true, force: true });
     for (const file of files) {
       const destination = resolve(outDir, file.path);

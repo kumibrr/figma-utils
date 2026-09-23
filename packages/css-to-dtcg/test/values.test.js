@@ -68,3 +68,16 @@ describe('normalizeHex', () => {
     expect(() => parseValue('#12345')).toThrow(/unsupported value shape/);
   });
 });
+
+describe('CSS keywords', () => {
+  it('rejects keywords and named colours instead of reading them as font families', () => {
+    for (const keyword of ['transparent', 'none', 'inherit', 'currentColor', 'red', 'RebeccaPurple']) {
+      expect(() => parseValue(keyword), keyword).toThrow(/unsupported value shape/);
+    }
+  });
+
+  it('still reads generic families and quoted names', () => {
+    expect(parseValue('serif').token).toEqual({ $type: 'fontFamily', $value: ['serif'] });
+    expect(parseValue("'Red'").token).toEqual({ $type: 'fontFamily', $value: ['Red'] });
+  });
+});

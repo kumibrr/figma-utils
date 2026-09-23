@@ -138,6 +138,27 @@ export function buildModel(config, { readFile }) {
     }
   }
 
+  // A theme group becomes one Figma collection with one mode per set: it needs
+  // at least two sets, and every set must declare the same custom properties
+  // because a Figma variable has a value in every mode.
+  const declarationsOf = new Map(rawSets.map((raw) => [raw.name, raw.declarations]));
+  for (const [group, names] of Object.entries(config.themes ?? {})) {
+    if (names.length < 2) {
+      errors.push(`themes.${group}: a theme group needs at least two sets; a single set is a plain set`);
+      continue;
+    }
+    if (!names.every((name) => setNames.has(name)) || new Set(names.map(parentOf)).size !== 1) {
+      continue;
+    }
+    const declared = new Set(names.flatMap((name) => [...declarationsOf.get(name).keys()]));
+    for (const name of names) {
+      const missing = [...declared].filter((cssName) => !declarationsOf.get(name).has(cssName));
+      if (missing.length > 0) {
+        errors.push(`themes.${group}: set ${name} is missing ${missing.join(', ')}, which other sets in the group declare`);
+      }
+    }
+  }
+
   // 4. Paths and the global index.
   /** @type {Map<string, { path: string[], sets: string[] }>} */
   const index = new Map();
@@ -242,7 +263,8 @@ export function buildModel(config, { readFile }) {
           token: { $type: literal.$type, $value: `{${target.path.join('.')}}` },
         };
         for (const setName of target.sets) {
-          if (setName !== raw.name) {
+          // An alias inside the own group stays in the same mode, as in Figma.
+          if (setName !== raw.name && !(group && groupOf.get(setName) === group)) {
             references.add(setName);
           }
         }

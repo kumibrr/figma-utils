@@ -120,6 +120,7 @@ describe('buildModel', () => {
     const errors = errorsOf(() => build({}, map));
 
     expect(errors).toEqual([
+      'themes.Theme: set semantic/theme/dark is missing --shadow-default, which other sets in the group declare',
       'semantic/theme/light --shadow-default: unsupported value shape: 0 1px red',
       'semantic/theme/light --text-default: var(--ghost) does not match any custom property in the configured sets',
     ]);
@@ -183,6 +184,7 @@ describe('buildModel', () => {
       'themes.Brands: group key must be "Brand" to match its collection "semantic/brand"',
       'themes.Theme: sets must share one parent path, got semantic/theme, (none)',
       'themes.Other: unknown set nope',
+      'themes.Other: a theme group needs at least two sets; a single set is a plain set',
     ]);
   });
 
@@ -215,17 +217,24 @@ describe('buildModel', () => {
               ['--gray-100', '#f7f7f8'],
             ]),
           },
+          {
+            name: 'semantic/accent/plain',
+            declarations: new Map([
+              ['--accent-700', '#000000'],
+              ['--gray-100', '#f7f7f8'],
+            ]),
+          },
         ],
         consumes: ['--gray-100'],
       };
     };
     const map = { ...files, 'theme.css': ":root { --text-default: var(--gray-900); }\n[data-mode='dark'] { --text-default: var(--gray-900); }" };
     const model = build(
-      { customSets, themes: { ...config.themes, Accent: ['semantic/accent/nova'] } },
+      { customSets, themes: { ...config.themes, Accent: ['semantic/accent/nova', 'semantic/accent/plain'] } },
       map,
     );
 
-    expect(model.sets.at(-1)).toMatchObject({ name: 'semantic/accent/nova', group: 'Accent', collection: 'semantic/accent' });
+    expect(model.sets.at(-2)).toMatchObject({ name: 'semantic/accent/nova', group: 'Accent', collection: 'semantic/accent' });
     expect(model.sets[0].tokens.map((token) => token.cssName)).not.toContain('--gray-100');
     expect(model.pathOf('--gray-100')).toEqual(['semantic', 'gray', '100']);
   });
@@ -254,5 +263,39 @@ describe('buildModel', () => {
     );
 
     expect(errors).toEqual(['collections reference each other in a cycle: a, b']);
+  });
+});
+
+describe('theme groups map to Figma collections', () => {
+  it('rejects a group with a single set, which Figma would treat as a plain collection', () => {
+    const errors = errorsOf(() =>
+      build({ themes: { Brand: ['semantic/brand/nova', 'semantic/brand/orbit'], Theme: ['semantic/theme/light'] } }),
+    );
+
+    expect(errors).toContain('themes.Theme: a theme group needs at least two sets; a single set is a plain set');
+  });
+
+  it('rejects group members that declare different custom properties', () => {
+    const map = {
+      ...files,
+      'theme.css':
+        ":root {\n  --text-default: var(--gray-900);\n  --text-muted: var(--gray-100);\n}\n[data-mode='dark'] {\n  --text-default: var(--gray-100);\n}",
+    };
+
+    expect(errorsOf(() => build({}, map))).toEqual([
+      'themes.Theme: set semantic/theme/dark is missing --text-muted, which other sets in the group declare',
+    ]);
+  });
+
+  it('does not list sibling modes as sources when a mode aliases inside its own group', () => {
+    const map = {
+      ...files,
+      'brands.css':
+        ":root, [data-brand='nova'] {\n  --brand-700: var(--nova-700);\n  --brand-hover: var(--brand-700);\n}\n[data-brand='orbit'] {\n  --brand-700: var(--orbit-700);\n  --brand-hover: var(--brand-700);\n}",
+    };
+    const [, nova, orbit] = build({}, map).sets;
+
+    expect(nova.references).toEqual(['primitives']);
+    expect(orbit.references).toEqual(['primitives']);
   });
 });

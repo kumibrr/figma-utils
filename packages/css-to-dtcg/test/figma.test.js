@@ -6,7 +6,8 @@ import { figmaColor, toFigmaFiles } from '../src/targets/figma.js';
 const files = {
   'colors.css': ':root { --gray-900: #2a2a2e; --nova-700: #6038c4; --base-overlay: #1515178c; }',
   'brands.css': ":root, [data-brand='nova'] { --brand-700: var(--nova-700); }\n[data-brand='orbit'] { --brand-700: var(--gray-900); }",
-  'theme.css': ":root { --text-default: var(--gray-900); --text-muted: var(--text-default); --primary-default: var(--brand-700); }",
+  'theme.css':
+    ":root { --text-default: var(--gray-900); --text-muted: var(--text-default); --primary-default: var(--brand-700); }\n[data-mode='dark'] { --text-default: var(--nova-700); --text-muted: var(--text-default); --primary-default: var(--brand-700); }",
   'typography.css': ":root { --size-s: 0.875rem; --weight-bold: 700; --family-title: 'Fraunces', serif; --weight-title: var(--weight-bold); }",
 };
 
@@ -17,9 +18,10 @@ const model = buildModel(
       { name: 'semantic/brand/nova', file: 'brands.css', selector: ":root, [data-brand='nova']" },
       { name: 'semantic/brand/orbit', file: 'brands.css', selector: "[data-brand='orbit']" },
       { name: 'semantic/theme/light', file: 'theme.css', selector: ':root' },
+      { name: 'semantic/theme/dark', file: 'theme.css', selector: "[data-mode='dark']" },
       { name: 'typography', file: 'typography.css', selector: ':root' },
     ],
-    themes: { Brand: ['semantic/brand/nova', 'semantic/brand/orbit'], Theme: ['semantic/theme/light'] },
+    themes: { Brand: ['semantic/brand/nova', 'semantic/brand/orbit'], Theme: ['semantic/theme/light', 'semantic/theme/dark'] },
   },
   { readFile: (file) => files[file] },
 );
@@ -49,6 +51,7 @@ describe('toFigmaFiles', () => {
       'semantic/brand/nova.tokens.json',
       'semantic/brand/orbit.tokens.json',
       'semantic/theme/light.tokens.json',
+      'semantic/theme/dark.tokens.json',
       'typography/default.tokens.json',
     ]);
   });

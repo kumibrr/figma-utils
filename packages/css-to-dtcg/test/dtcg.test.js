@@ -5,7 +5,7 @@ import { themeInputs, toDtcgFiles } from '../src/targets/dtcg.js';
 
 const files = {
   'colors.css': ':root { --gray-900: #2a2a2e; --nova-700: #6038c4; }',
-  'brands.css': ":root, [data-brand='nova'] { --brand-700: var(--nova-700); }",
+  'brands.css': ":root, [data-brand='nova'] { --brand-700: var(--nova-700); }\n[data-brand='orbit'] { --brand-700: var(--gray-900); }",
   'theme.css': ":root { --text-default: var(--gray-900); --primary-default: var(--brand-700); }\n[data-mode='dark'] { --text-default: var(--gray-900); --primary-default: var(--brand-700); }",
 };
 
@@ -17,8 +17,12 @@ const model = buildModel(
       { name: 'semantic/theme/dark', file: 'theme.css', selector: "[data-mode='dark']" },
       { name: 'primitives', file: 'colors.css', selector: ':root' },
       { name: 'semantic/brand/nova', file: 'brands.css', selector: ":root, [data-brand='nova']" },
+      { name: 'semantic/brand/orbit', file: 'brands.css', selector: "[data-brand='orbit']" },
     ],
-    themes: { Theme: ['semantic/theme/light', 'semantic/theme/dark'], Brand: ['semantic/brand/nova'] },
+    themes: {
+      Theme: ['semantic/theme/light', 'semantic/theme/dark'],
+      Brand: ['semantic/brand/nova', 'semantic/brand/orbit'],
+    },
   },
   { readFile: (file) => files[file] },
 );
@@ -30,6 +34,7 @@ describe('toDtcgFiles', () => {
       'semantic/theme/dark.json',
       'primitives.json',
       'semantic/brand/nova.json',
+      'semantic/brand/orbit.json',
       '$themes.json',
     ]);
   });
@@ -56,6 +61,7 @@ describe('toDtcgFiles', () => {
 
     expect(themes).toEqual([
       { name: 'nova', group: 'Brand', selectedTokenSets: { primitives: 'source', 'semantic/brand/nova': 'enabled' } },
+      { name: 'orbit', group: 'Brand', selectedTokenSets: { primitives: 'source', 'semantic/brand/orbit': 'enabled' } },
       { name: 'light', group: 'Theme', selectedTokenSets: { primitives: 'source', 'semantic/theme/light': 'enabled' } },
       { name: 'dark', group: 'Theme', selectedTokenSets: { primitives: 'source', 'semantic/theme/dark': 'enabled' } },
     ]);
@@ -65,6 +71,7 @@ describe('toDtcgFiles', () => {
     expect(themeInputs(model).map((set) => set.name)).toEqual([
       'primitives',
       'semantic/brand/nova',
+      'semantic/brand/orbit',
       'semantic/theme/light',
       'semantic/theme/dark',
     ]);

@@ -98,4 +98,21 @@ describe('run', () => {
     expect(await run(['--nope'], io)).toBe(1);
     expect(errors[0]).toMatch(/Unknown option/);
   });
+
+  it('refuses an output directory that contains a source file', async () => {
+    writeProject({ sets: [{ name: 'primitives', file: 'styles/colors.css', selector: ':root' }], outDir: 'styles' });
+    mkdirSync(join(dir, 'styles'));
+    writeFileSync(join(dir, 'styles', 'colors.css'), ':root { --gray-100: #f7f7f8; }\n');
+
+    expect(await run(['--config', join(dir, 'css-to-dtcg.config.mjs')], io)).toBe(1);
+    expect(errors[0]).toMatch(/contains the source file styles\/colors\.css/);
+    expect(existsSync(join(dir, 'styles', 'colors.css'))).toBe(true);
+  });
+
+  it('refuses output directories nested in each other', async () => {
+    writeProject({ ...config, outDir: 'tokens', figmaOutDir: 'tokens/figma' });
+
+    expect(await run(['--config', join(dir, 'css-to-dtcg.config.mjs')], io)).toBe(1);
+    expect(errors[0]).toMatch(/must not be inside each other/);
+  });
 });
