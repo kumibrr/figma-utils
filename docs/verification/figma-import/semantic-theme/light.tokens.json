@@ -1,0 +1,18 @@
+{
+  "text": {
+    "default": {
+      "$type": "color",
+      "$value": { "colorSpace": "srgb", "components": [0.16470588235294117, 0.16470588235294117, 0.1803921568627451], "alpha": 1, "hex": "#2A2A2E" },
+      "$extensions": {
+        "com.figma.scopes": ["ALL_SCOPES"],
+        "com.figma.aliasData": { "targetVariableName": "gray/900", "targetVariableSetName": "primitives" }
+      }
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{text.default}",
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] }
+    }
+  },
+  "$extensions": { "com.figma.modeName": "light" }
+}

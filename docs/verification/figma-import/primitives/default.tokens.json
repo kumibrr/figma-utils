@@ -1,0 +1,25 @@
+{
+  "gray": {
+    "100": {
+      "$type": "color",
+      "$value": { "colorSpace": "srgb", "components": [0.9686274509803922, 0.9686274509803922, 0.9725490196078431], "alpha": 1, "hex": "#F7F7F8" },
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] }
+    },
+    "900": {
+      "$type": "color",
+      "$value": { "colorSpace": "srgb", "components": [0.16470588235294117, 0.16470588235294117, 0.1803921568627451], "alpha": 1, "hex": "#2A2A2E" },
+      "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] }
+    }
+  },
+  "size": {
+    "s": { "$type": "number", "$value": 0.875, "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] } },
+    "ratio": { "$type": "number", "$value": 0.2, "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] } }
+  },
+  "weight": {
+    "bold": { "$type": "number", "$value": 700, "$extensions": { "com.figma.scopes": ["FONT_WEIGHT"] } }
+  },
+  "family": {
+    "title": { "$type": "string", "$value": "Fraunces", "$extensions": { "com.figma.scopes": ["FONT_FAMILY"], "com.figma.type": "string" } }
+  },
+  "$extensions": { "com.figma.modeName": "default" }
+}
