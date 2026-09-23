@@ -1,0 +1,27 @@
+:root {
+  --size-xs: 0.75rem;
+  --size-s: 0.875rem;
+  --size-m: 1rem;
+  --size-l: 1.25rem;
+  --size-xl: 1.5rem;
+  --size-xxl: 2rem;
+  --size-display: 3rem;
+
+  --leading-xs: 1rem;
+  --leading-s: 1.25rem;
+  --leading-m: 1.5rem;
+  --leading-l: 1.75rem;
+  --leading-xl: 2rem;
+  --leading-xxl: 2.5rem;
+  --leading-display: 3.6rem;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-title: var(--weight-bold);
+
+  --family-body: 'Inter', sans-serif;
+  --family-title: 'Fraunces', serif;
+  --family-legend: 'JetBrains Mono', monospace;
+  --family-heading: var(--family-title);
+}

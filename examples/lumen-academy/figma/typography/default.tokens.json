@@ -1,0 +1,215 @@
+{
+  "size": {
+    "xs": {
+      "$type": "number",
+      "$value": 0.75,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "s": {
+      "$type": "number",
+      "$value": 0.875,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "m": {
+      "$type": "number",
+      "$value": 1,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "l": {
+      "$type": "number",
+      "$value": 1.25,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "xl": {
+      "$type": "number",
+      "$value": 1.5,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "xxl": {
+      "$type": "number",
+      "$value": 2,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "display": {
+      "$type": "number",
+      "$value": 3,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    }
+  },
+  "leading": {
+    "xs": {
+      "$type": "number",
+      "$value": 1,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "s": {
+      "$type": "number",
+      "$value": 1.25,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "m": {
+      "$type": "number",
+      "$value": 1.5,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "l": {
+      "$type": "number",
+      "$value": 1.75,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "xl": {
+      "$type": "number",
+      "$value": 2,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "xxl": {
+      "$type": "number",
+      "$value": 2.5,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "display": {
+      "$type": "number",
+      "$value": 3.6,
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    }
+  },
+  "weight": {
+    "regular": {
+      "$type": "number",
+      "$value": 400,
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_WEIGHT"
+        ]
+      }
+    },
+    "medium": {
+      "$type": "number",
+      "$value": 500,
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_WEIGHT"
+        ]
+      }
+    },
+    "bold": {
+      "$type": "number",
+      "$value": 700,
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_WEIGHT"
+        ]
+      }
+    },
+    "title": {
+      "$type": "number",
+      "$value": "{weight.bold}",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_WEIGHT"
+        ]
+      }
+    }
+  },
+  "family": {
+    "body": {
+      "$type": "string",
+      "$value": "Inter",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_FAMILY"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "title": {
+      "$type": "string",
+      "$value": "Fraunces",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_FAMILY"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "legend": {
+      "$type": "string",
+      "$value": "JetBrains Mono",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_FAMILY"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "heading": {
+      "$type": "string",
+      "$value": "{family.title}",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_FAMILY"
+        ],
+        "com.figma.type": "string"
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "default"
+  }
+}

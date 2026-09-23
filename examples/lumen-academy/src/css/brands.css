@@ -1,0 +1,40 @@
+/* Each brand rebinds the --brand-* ramp. nova is the default. */
+:root,
+[data-brand='nova'] {
+  --brand-100: var(--nova-100);
+  --brand-200: var(--nova-200);
+  --brand-300: var(--nova-300);
+  --brand-400: var(--nova-400);
+  --brand-500: var(--nova-500);
+  --brand-600: var(--nova-600);
+  --brand-700: var(--nova-700);
+  --brand-800: var(--nova-800);
+  --brand-900: var(--nova-900);
+  --brand-1000: var(--nova-1000);
+}
+
+[data-brand='orbit'] {
+  --brand-100: var(--orbit-100);
+  --brand-200: var(--orbit-200);
+  --brand-300: var(--orbit-300);
+  --brand-400: var(--orbit-400);
+  --brand-500: var(--orbit-500);
+  --brand-600: var(--orbit-600);
+  --brand-700: var(--orbit-700);
+  --brand-800: var(--orbit-800);
+  --brand-900: var(--orbit-900);
+  --brand-1000: var(--orbit-1000);
+}
+
+[data-brand='ember'] {
+  --brand-100: var(--ember-100);
+  --brand-200: var(--ember-200);
+  --brand-300: var(--ember-300);
+  --brand-400: var(--ember-400);
+  --brand-500: var(--ember-500);
+  --brand-600: var(--ember-600);
+  --brand-700: var(--ember-700);
+  --brand-800: var(--ember-800);
+  --brand-900: var(--ember-900);
+  --brand-1000: var(--ember-1000);
+}

@@ -1,0 +1,59 @@
+/* Lumen Academy — a made-up palette for the figma-utils example. */
+:root {
+  --nova-100: #f3f0ff;
+  --nova-200: #e4dcff;
+  --nova-300: #cbbcff;
+  --nova-400: #ab94fb;
+  --nova-500: #8f6ef2;
+  --nova-600: #7650e0;
+  --nova-700: #6038c4;
+  --nova-800: #4b2a9c;
+  --nova-900: #361e72;
+  --nova-1000: #22124a;
+
+  --orbit-100: #e6fbf8;
+  --orbit-200: #c2f3ec;
+  --orbit-300: #8fe6da;
+  --orbit-400: #56d3c3;
+  --orbit-500: #2bb8a8;
+  --orbit-600: #17998c;
+  --orbit-700: #0f7a71;
+  --orbit-800: #0c5e57;
+  --orbit-900: #09433e;
+  --orbit-1000: #052a27;
+
+  --ember-100: #fff6e5;
+  --ember-200: #ffe8bf;
+  --ember-300: #ffd48a;
+  --ember-400: #ffbb4d;
+  --ember-500: #f7a01f;
+  --ember-600: #e0850b;
+  --ember-700: #b86806;
+  --ember-800: #8f4f06;
+  --ember-900: #663806;
+  --ember-1000: #402304;
+
+  --gray-100: #f7f7f8;
+  --gray-200: #ececef;
+  --gray-300: #d9d9de;
+  --gray-400: #bdbdc4;
+  --gray-500: #9a9aa3;
+  --gray-600: #77777f;
+  --gray-700: #5a5a61;
+  --gray-800: #404046;
+  --gray-900: #2a2a2e;
+  --gray-1000: #151517;
+
+  --base-white: #ffffff;
+  --base-black: #000000;
+  --base-overlay: #1515178c;
+
+  --info-default: #2f6fed;
+  --info-light: #e3ecfd;
+  --success-default: #1f9d55;
+  --success-light: #e2f5ea;
+  --warning-default: #d98a00;
+  --warning-light: #fdf1dc;
+  --error-default: #d6343c;
+  --error-light: #fbe5e6;
+}

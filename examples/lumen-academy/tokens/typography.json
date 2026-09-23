@@ -1,0 +1,151 @@
+{
+  "typography": {
+    "size": {
+      "xs": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        }
+      },
+      "s": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        }
+      },
+      "m": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "l": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        }
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        }
+      },
+      "display": {
+        "$type": "dimension",
+        "$value": {
+          "value": 3,
+          "unit": "rem"
+        }
+      }
+    },
+    "leading": {
+      "xs": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "s": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        }
+      },
+      "m": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        }
+      },
+      "l": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        }
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2.5,
+          "unit": "rem"
+        }
+      },
+      "display": {
+        "$type": "dimension",
+        "$value": {
+          "value": 3.6,
+          "unit": "rem"
+        }
+      }
+    },
+    "weight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700
+      },
+      "title": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.bold}"
+      }
+    },
+    "family": {
+      "body": {
+        "$type": "fontFamily",
+        "$value": [
+          "Inter",
+          "sans-serif"
+        ]
+      },
+      "title": {
+        "$type": "fontFamily",
+        "$value": [
+          "Fraunces",
+          "serif"
+        ]
+      },
+      "legend": {
+        "$type": "fontFamily",
+        "$value": [
+          "JetBrains Mono",
+          "monospace"
+        ]
+      },
+      "heading": {
+        "$type": "fontFamily",
+        "$value": "{typography.family.title}"
+      }
+    }
+  }
+}

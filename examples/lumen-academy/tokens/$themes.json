@@ -1,0 +1,42 @@
+[
+  {
+    "name": "nova",
+    "group": "Brand",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "semantic/brand/nova": "enabled"
+    }
+  },
+  {
+    "name": "orbit",
+    "group": "Brand",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "semantic/brand/orbit": "enabled"
+    }
+  },
+  {
+    "name": "ember",
+    "group": "Brand",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "semantic/brand/ember": "enabled"
+    }
+  },
+  {
+    "name": "light",
+    "group": "Theme",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "semantic/theme/light": "enabled"
+    }
+  },
+  {
+    "name": "dark",
+    "group": "Theme",
+    "selectedTokenSets": {
+      "primitives": "source",
+      "semantic/theme/dark": "enabled"
+    }
+  }
+]

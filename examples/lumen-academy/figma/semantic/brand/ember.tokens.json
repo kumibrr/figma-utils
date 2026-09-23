@@ -1,0 +1,227 @@
+{
+  "brand": {
+    "100": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.9647058823529412,
+          0.8980392156862745
+        ],
+        "alpha": 1,
+        "hex": "#FFF6E5"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/100",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "200": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.9098039215686274,
+          0.7490196078431373
+        ],
+        "alpha": 1,
+        "hex": "#FFE8BF"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/200",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "300": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.8313725490196079,
+          0.5411764705882353
+        ],
+        "alpha": 1,
+        "hex": "#FFD48A"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/300",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "400": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.7333333333333333,
+          0.30196078431372547
+        ],
+        "alpha": 1,
+        "hex": "#FFBB4D"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/400",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "500": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9686274509803922,
+          0.6274509803921569,
+          0.12156862745098039
+        ],
+        "alpha": 1,
+        "hex": "#F7A01F"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/500",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "600": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8784313725490196,
+          0.5215686274509804,
+          0.043137254901960784
+        ],
+        "alpha": 1,
+        "hex": "#E0850B"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/600",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "700": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7215686274509804,
+          0.40784313725490196,
+          0.023529411764705882
+        ],
+        "alpha": 1,
+        "hex": "#B86806"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/700",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "800": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5607843137254902,
+          0.30980392156862746,
+          0.023529411764705882
+        ],
+        "alpha": 1,
+        "hex": "#8F4F06"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/800",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "900": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4,
+          0.2196078431372549,
+          0.023529411764705882
+        ],
+        "alpha": 1,
+        "hex": "#663806"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/900",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    },
+    "1000": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.25098039215686274,
+          0.13725490196078433,
+          0.01568627450980392
+        ],
+        "alpha": 1,
+        "hex": "#402304"
+      },
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableName": "ember/1000",
+          "targetVariableSetName": "primitives"
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "ember"
+  }
+}

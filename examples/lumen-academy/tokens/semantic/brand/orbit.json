@@ -1,0 +1,46 @@
+{
+  "semantic": {
+    "brand": {
+      "100": {
+        "$type": "color",
+        "$value": "{primitives.orbit.100}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{primitives.orbit.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{primitives.orbit.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{primitives.orbit.400}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{primitives.orbit.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{primitives.orbit.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{primitives.orbit.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{primitives.orbit.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{primitives.orbit.900}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{primitives.orbit.1000}"
+      }
+    }
+  }
+}

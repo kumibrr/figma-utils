@@ -1,0 +1,72 @@
+{
+  "semantic": {
+    "surface": {
+      "default": {
+        "$type": "color",
+        "$value": "{primitives.base.white}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitives.gray.100}"
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "{primitives.base.overlay}"
+      }
+    },
+    "text": {
+      "default": {
+        "$type": "color",
+        "$value": "{primitives.gray.1000}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitives.gray.600}"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{primitives.base.white}"
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{primitives.gray.200}"
+      }
+    },
+    "primary": {
+      "default": {
+        "$type": "color",
+        "$value": "{semantic.brand.700}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{semantic.brand.800}"
+      },
+      "contrast": {
+        "$type": "color",
+        "$value": "{primitives.base.white}"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{semantic.brand.100}"
+      }
+    },
+    "danger": {
+      "default": {
+        "$type": "color",
+        "$value": "{primitives.error.default}"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{primitives.error.light}"
+      }
+    },
+    "ring": {
+      "default": {
+        "$type": "color",
+        "$value": "{semantic.brand.500}"
+      }
+    }
+  }
+}
