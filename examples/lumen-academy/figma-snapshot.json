@@ -1,0 +1,1938 @@
+{
+  "fileName": "Lumen Academy",
+  "userName": null,
+  "collections": [
+    {
+      "id": "VariableCollectionId:primitives",
+      "name": "primitives",
+      "modes": [
+        {
+          "id": "primitives:default",
+          "name": "default"
+        }
+      ],
+      "variableIds": [
+        "VariableID:primitives/nova/100",
+        "VariableID:primitives/nova/200",
+        "VariableID:primitives/nova/300",
+        "VariableID:primitives/nova/400",
+        "VariableID:primitives/nova/500",
+        "VariableID:primitives/nova/600",
+        "VariableID:primitives/nova/700",
+        "VariableID:primitives/nova/800",
+        "VariableID:primitives/nova/900",
+        "VariableID:primitives/nova/1000",
+        "VariableID:primitives/orbit/100",
+        "VariableID:primitives/orbit/200",
+        "VariableID:primitives/orbit/300",
+        "VariableID:primitives/orbit/400",
+        "VariableID:primitives/orbit/500",
+        "VariableID:primitives/orbit/600",
+        "VariableID:primitives/orbit/700",
+        "VariableID:primitives/orbit/800",
+        "VariableID:primitives/orbit/900",
+        "VariableID:primitives/orbit/1000",
+        "VariableID:primitives/ember/100",
+        "VariableID:primitives/ember/200",
+        "VariableID:primitives/ember/300",
+        "VariableID:primitives/ember/400",
+        "VariableID:primitives/ember/500",
+        "VariableID:primitives/ember/600",
+        "VariableID:primitives/ember/700",
+        "VariableID:primitives/ember/800",
+        "VariableID:primitives/ember/900",
+        "VariableID:primitives/ember/1000",
+        "VariableID:primitives/gray/100",
+        "VariableID:primitives/gray/200",
+        "VariableID:primitives/gray/300",
+        "VariableID:primitives/gray/400",
+        "VariableID:primitives/gray/500",
+        "VariableID:primitives/gray/600",
+        "VariableID:primitives/gray/700",
+        "VariableID:primitives/gray/800",
+        "VariableID:primitives/gray/900",
+        "VariableID:primitives/gray/1000",
+        "VariableID:primitives/base/white",
+        "VariableID:primitives/base/black",
+        "VariableID:primitives/base/overlay",
+        "VariableID:primitives/info/default",
+        "VariableID:primitives/info/light",
+        "VariableID:primitives/success/default",
+        "VariableID:primitives/success/light",
+        "VariableID:primitives/warning/default",
+        "VariableID:primitives/warning/light",
+        "VariableID:primitives/error/default",
+        "VariableID:primitives/error/light"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:semantic/brand",
+      "name": "semantic/brand",
+      "modes": [
+        {
+          "id": "semantic/brand:nova",
+          "name": "nova"
+        },
+        {
+          "id": "semantic/brand:orbit",
+          "name": "orbit"
+        },
+        {
+          "id": "semantic/brand:ember",
+          "name": "ember"
+        }
+      ],
+      "variableIds": [
+        "VariableID:semantic/brand/brand/100",
+        "VariableID:semantic/brand/brand/200",
+        "VariableID:semantic/brand/brand/300",
+        "VariableID:semantic/brand/brand/400",
+        "VariableID:semantic/brand/brand/500",
+        "VariableID:semantic/brand/brand/600",
+        "VariableID:semantic/brand/brand/700",
+        "VariableID:semantic/brand/brand/800",
+        "VariableID:semantic/brand/brand/900",
+        "VariableID:semantic/brand/brand/1000"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:semantic/theme",
+      "name": "semantic/theme",
+      "modes": [
+        {
+          "id": "semantic/theme:light",
+          "name": "light"
+        },
+        {
+          "id": "semantic/theme:dark",
+          "name": "dark"
+        }
+      ],
+      "variableIds": [
+        "VariableID:semantic/theme/surface/default",
+        "VariableID:semantic/theme/surface/muted",
+        "VariableID:semantic/theme/surface/overlay",
+        "VariableID:semantic/theme/text/default",
+        "VariableID:semantic/theme/text/muted",
+        "VariableID:semantic/theme/text/inverse",
+        "VariableID:semantic/theme/border/default",
+        "VariableID:semantic/theme/primary/default",
+        "VariableID:semantic/theme/primary/hover",
+        "VariableID:semantic/theme/primary/contrast",
+        "VariableID:semantic/theme/primary/subtle",
+        "VariableID:semantic/theme/danger/default",
+        "VariableID:semantic/theme/danger/subtle",
+        "VariableID:semantic/theme/ring/default"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:typography",
+      "name": "typography",
+      "modes": [
+        {
+          "id": "typography:default",
+          "name": "default"
+        }
+      ],
+      "variableIds": [
+        "VariableID:typography/size/xs",
+        "VariableID:typography/size/s",
+        "VariableID:typography/size/m",
+        "VariableID:typography/size/l",
+        "VariableID:typography/size/xl",
+        "VariableID:typography/size/xxl",
+        "VariableID:typography/size/display",
+        "VariableID:typography/leading/xs",
+        "VariableID:typography/leading/s",
+        "VariableID:typography/leading/m",
+        "VariableID:typography/leading/l",
+        "VariableID:typography/leading/xl",
+        "VariableID:typography/leading/xxl",
+        "VariableID:typography/leading/display",
+        "VariableID:typography/weight/regular",
+        "VariableID:typography/weight/medium",
+        "VariableID:typography/weight/bold",
+        "VariableID:typography/weight/title",
+        "VariableID:typography/family/body",
+        "VariableID:typography/family/title",
+        "VariableID:typography/family/legend",
+        "VariableID:typography/family/heading"
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "id": "VariableID:primitives/nova/100",
+      "name": "nova/100",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9529411792755127,
+          "g": 0.9411764740943909,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/200",
+      "name": "nova/200",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.8941176533699036,
+          "g": 0.8627451062202454,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/300",
+      "name": "nova/300",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.7960784435272217,
+          "g": 0.7372549176216125,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/400",
+      "name": "nova/400",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.6705882549285889,
+          "g": 0.5803921818733215,
+          "b": 0.9843137264251709,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/500",
+      "name": "nova/500",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.5607843399047852,
+          "g": 0.4313725531101227,
+          "b": 0.9490196108818054,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/600",
+      "name": "nova/600",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.4627451002597809,
+          "g": 0.3137255012989044,
+          "b": 0.8784313797950745,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/700",
+      "name": "nova/700",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.3764705955982208,
+          "g": 0.21960784494876862,
+          "b": 0.7686274647712708,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/800",
+      "name": "nova/800",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.29411765933036804,
+          "g": 0.16470588743686676,
+          "b": 0.6117647290229797,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/900",
+      "name": "nova/900",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.21176470816135406,
+          "g": 0.11764705926179886,
+          "b": 0.4470588266849518,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/nova/1000",
+      "name": "nova/1000",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.13333334028720856,
+          "g": 0.07058823853731155,
+          "b": 0.29019609093666077,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/100",
+      "name": "orbit/100",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9019607901573181,
+          "g": 0.9843137264251709,
+          "b": 0.9725490212440491,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/200",
+      "name": "orbit/200",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.7607843279838562,
+          "g": 0.9529411792755127,
+          "b": 0.9254902005195618,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/300",
+      "name": "orbit/300",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.5607843399047852,
+          "g": 0.9019607901573181,
+          "b": 0.8549019694328308,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/400",
+      "name": "orbit/400",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.33725491166114807,
+          "g": 0.8274509906768799,
+          "b": 0.7647058963775635,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/500",
+      "name": "orbit/500",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.16862745583057404,
+          "g": 0.7215686440467834,
+          "b": 0.658823549747467,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/600",
+      "name": "orbit/600",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.09019608050584793,
+          "g": 0.6000000238418579,
+          "b": 0.5490196347236633,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/700",
+      "name": "orbit/700",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.05882352963089943,
+          "g": 0.47843137383461,
+          "b": 0.4431372582912445,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/800",
+      "name": "orbit/800",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.0470588244497776,
+          "g": 0.3686274588108063,
+          "b": 0.34117648005485535,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/900",
+      "name": "orbit/900",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.03529411926865578,
+          "g": 0.26274511218070984,
+          "b": 0.24313725531101227,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/orbit/1000",
+      "name": "orbit/1000",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.019607843831181526,
+          "g": 0.16470588743686676,
+          "b": 0.15294118225574493,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/100",
+      "name": "ember/100",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 1,
+          "g": 0.9647058844566345,
+          "b": 0.8980392217636108,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/200",
+      "name": "ember/200",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 1,
+          "g": 0.9098039269447327,
+          "b": 0.7490196228027344,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/300",
+      "name": "ember/300",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 1,
+          "g": 0.8313725590705872,
+          "b": 0.5411764979362488,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/400",
+      "name": "ember/400",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 1,
+          "g": 0.7333333492279053,
+          "b": 0.3019607961177826,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/500",
+      "name": "ember/500",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9686274528503418,
+          "g": 0.6274510025978088,
+          "b": 0.12156862765550613,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/600",
+      "name": "ember/600",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.8784313797950745,
+          "g": 0.5215686559677124,
+          "b": 0.04313725605607033,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/700",
+      "name": "ember/700",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.7215686440467834,
+          "g": 0.40784314274787903,
+          "b": 0.0235294122248888,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/800",
+      "name": "ember/800",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.5607843399047852,
+          "g": 0.30980393290519714,
+          "b": 0.0235294122248888,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/900",
+      "name": "ember/900",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.4000000059604645,
+          "g": 0.21960784494876862,
+          "b": 0.0235294122248888,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/ember/1000",
+      "name": "ember/1000",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.250980406999588,
+          "g": 0.13725490868091583,
+          "b": 0.01568627543747425,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/100",
+      "name": "gray/100",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9686274528503418,
+          "g": 0.9686274528503418,
+          "b": 0.9725490212440491,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/200",
+      "name": "gray/200",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9254902005195618,
+          "g": 0.9254902005195618,
+          "b": 0.9372549057006836,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/300",
+      "name": "gray/300",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.8509804010391235,
+          "g": 0.8509804010391235,
+          "b": 0.8705882430076599,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/400",
+      "name": "gray/400",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.7411764860153198,
+          "g": 0.7411764860153198,
+          "b": 0.7686274647712708,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/500",
+      "name": "gray/500",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.6039215922355652,
+          "g": 0.6039215922355652,
+          "b": 0.6392157077789307,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/600",
+      "name": "gray/600",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.46666666865348816,
+          "g": 0.46666666865348816,
+          "b": 0.49803921580314636,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/700",
+      "name": "gray/700",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.3529411852359772,
+          "g": 0.3529411852359772,
+          "b": 0.3803921639919281,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/800",
+      "name": "gray/800",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.250980406999588,
+          "g": 0.250980406999588,
+          "b": 0.27450981736183167,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/900",
+      "name": "gray/900",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.16470588743686676,
+          "g": 0.16470588743686676,
+          "b": 0.18039216101169586,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/gray/1000",
+      "name": "gray/1000",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.08235294371843338,
+          "g": 0.08235294371843338,
+          "b": 0.09019608050584793,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/base/white",
+      "name": "base/white",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/base/black",
+      "name": "base/black",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/base/overlay",
+      "name": "base/overlay",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.08235294371843338,
+          "g": 0.08235294371843338,
+          "b": 0.09019608050584793,
+          "a": 0.5490196347236633
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/info/default",
+      "name": "info/default",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.18431372940540314,
+          "g": 0.43529412150382996,
+          "b": 0.929411768913269,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/info/light",
+      "name": "info/light",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.8901960849761963,
+          "g": 0.9254902005195618,
+          "b": 0.9921568632125854,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/success/default",
+      "name": "success/default",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.12156862765550613,
+          "g": 0.615686297416687,
+          "b": 0.3333333432674408,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/success/light",
+      "name": "success/light",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.886274516582489,
+          "g": 0.9607843160629272,
+          "b": 0.9176470637321472,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/warning/default",
+      "name": "warning/default",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.8509804010391235,
+          "g": 0.5411764979362488,
+          "b": 0,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/warning/light",
+      "name": "warning/light",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9921568632125854,
+          "g": 0.9450980424880981,
+          "b": 0.8627451062202454,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/error/default",
+      "name": "error/default",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.8392156958580017,
+          "g": 0.20392157137393951,
+          "b": 0.23529411852359772,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:primitives/error/light",
+      "name": "error/light",
+      "collectionId": "VariableCollectionId:primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "primitives:default": {
+          "r": 0.9843137264251709,
+          "g": 0.8980392217636108,
+          "b": 0.9019607901573181,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/100",
+      "name": "brand/100",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/100"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/100"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/100"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/200",
+      "name": "brand/200",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/200"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/200"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/200"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/300",
+      "name": "brand/300",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/300"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/300"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/300"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/400",
+      "name": "brand/400",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/400"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/400"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/400"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/500",
+      "name": "brand/500",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/500"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/500"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/500"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/600",
+      "name": "brand/600",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/600"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/600"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/600"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/700",
+      "name": "brand/700",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/700"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/700"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/700"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/800",
+      "name": "brand/800",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/800"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/800"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/800"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/900",
+      "name": "brand/900",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/900"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/900"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/900"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/brand/brand/1000",
+      "name": "brand/1000",
+      "collectionId": "VariableCollectionId:semantic/brand",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/brand:nova": {
+          "aliasId": "VariableID:primitives/nova/1000"
+        },
+        "semantic/brand:orbit": {
+          "aliasId": "VariableID:primitives/orbit/1000"
+        },
+        "semantic/brand:ember": {
+          "aliasId": "VariableID:primitives/ember/1000"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/surface/default",
+      "name": "surface/default",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/base/white"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/1000"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/surface/muted",
+      "name": "surface/muted",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/gray/100"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/900"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/surface/overlay",
+      "name": "surface/overlay",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/base/overlay"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/base/overlay"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/text/default",
+      "name": "text/default",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/gray/1000"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/100"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/text/muted",
+      "name": "text/muted",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/gray/600"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/400"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/text/inverse",
+      "name": "text/inverse",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/base/white"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/1000"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/border/default",
+      "name": "border/default",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/gray/200"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/800"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/primary/default",
+      "name": "primary/default",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:semantic/brand/brand/700"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:semantic/brand/brand/400"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/primary/hover",
+      "name": "primary/hover",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:semantic/brand/brand/800"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:semantic/brand/brand/300"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/primary/contrast",
+      "name": "primary/contrast",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/base/white"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/1000"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/primary/subtle",
+      "name": "primary/subtle",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:semantic/brand/brand/100"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:semantic/brand/brand/900"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/danger/default",
+      "name": "danger/default",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/error/default"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/error/default"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/danger/subtle",
+      "name": "danger/subtle",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:primitives/error/light"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:primitives/gray/900"
+        }
+      }
+    },
+    {
+      "id": "VariableID:semantic/theme/ring/default",
+      "name": "ring/default",
+      "collectionId": "VariableCollectionId:semantic/theme",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "semantic/theme:light": {
+          "aliasId": "VariableID:semantic/brand/brand/500"
+        },
+        "semantic/theme:dark": {
+          "aliasId": "VariableID:semantic/brand/brand/400"
+        }
+      }
+    },
+    {
+      "id": "VariableID:typography/size/xs",
+      "name": "size/xs",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 0.75
+      }
+    },
+    {
+      "id": "VariableID:typography/size/s",
+      "name": "size/s",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 0.875
+      }
+    },
+    {
+      "id": "VariableID:typography/size/m",
+      "name": "size/m",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1
+      }
+    },
+    {
+      "id": "VariableID:typography/size/l",
+      "name": "size/l",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1.25
+      }
+    },
+    {
+      "id": "VariableID:typography/size/xl",
+      "name": "size/xl",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1.5
+      }
+    },
+    {
+      "id": "VariableID:typography/size/xxl",
+      "name": "size/xxl",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 2
+      }
+    },
+    {
+      "id": "VariableID:typography/size/display",
+      "name": "size/display",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 3
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/xs",
+      "name": "leading/xs",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/s",
+      "name": "leading/s",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1.25
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/m",
+      "name": "leading/m",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1.5
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/l",
+      "name": "leading/l",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 1.75
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/xl",
+      "name": "leading/xl",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 2
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/xxl",
+      "name": "leading/xxl",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 2.5
+      }
+    },
+    {
+      "id": "VariableID:typography/leading/display",
+      "name": "leading/display",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 3.5999999046325684
+      }
+    },
+    {
+      "id": "VariableID:typography/weight/regular",
+      "name": "weight/regular",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "FONT_WEIGHT"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 400
+      }
+    },
+    {
+      "id": "VariableID:typography/weight/medium",
+      "name": "weight/medium",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "FONT_WEIGHT"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 500
+      }
+    },
+    {
+      "id": "VariableID:typography/weight/bold",
+      "name": "weight/bold",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "FONT_WEIGHT"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": 700
+      }
+    },
+    {
+      "id": "VariableID:typography/weight/title",
+      "name": "weight/title",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "FONT_WEIGHT"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": {
+          "aliasId": "VariableID:typography/weight/bold"
+        }
+      }
+    },
+    {
+      "id": "VariableID:typography/family/body",
+      "name": "family/body",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "description": "",
+      "codeSyntax": {
+        "WEB": "Inter, sans-serif"
+      },
+      "valuesByMode": {
+        "typography:default": "Inter"
+      }
+    },
+    {
+      "id": "VariableID:typography/family/title",
+      "name": "family/title",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "description": "",
+      "codeSyntax": {
+        "WEB": "Fraunces, serif"
+      },
+      "valuesByMode": {
+        "typography:default": "Fraunces"
+      }
+    },
+    {
+      "id": "VariableID:typography/family/legend",
+      "name": "family/legend",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "description": "",
+      "codeSyntax": {
+        "WEB": "'JetBrains Mono', monospace"
+      },
+      "valuesByMode": {
+        "typography:default": "JetBrains Mono"
+      }
+    },
+    {
+      "id": "VariableID:typography/family/heading",
+      "name": "family/heading",
+      "collectionId": "VariableCollectionId:typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "description": "",
+      "codeSyntax": {},
+      "valuesByMode": {
+        "typography:default": {
+          "aliasId": "VariableID:typography/family/title"
+        }
+      }
+    }
+  ]
+}

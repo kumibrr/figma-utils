@@ -2,10 +2,11 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { buildTokens } from 'css-to-dtcg';
+import { buildTokens, serialize } from 'css-to-dtcg';
 import { describe, expect, it } from 'vitest';
 
 import config from '../css-to-dtcg.config.js';
+import { makeSnapshot } from '../scripts/make-snapshot.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -82,5 +83,57 @@ describe('dtcg output', () => {
 
   it('keeps the alpha channel of the overlay', () => {
     expect(read('primitives.json').primitives.base.overlay).toEqual({ $type: 'color', $value: '#1515178c' });
+  });
+});
+
+describe('figma-snapshot.json', () => {
+  const snapshot = makeSnapshot();
+  const variable = (collection, name) => snapshot.variables.find((v) => v.id === `VariableID:${collection}/${name}`);
+
+  it('matches a fresh simulation (run "pnpm tokens" if this fails)', () => {
+    expect(readFileSync(join(root, 'figma-snapshot.json'), 'utf8')).toBe(serialize(snapshot));
+  });
+
+  it('creates collections in import order with their modes', () => {
+    expect(snapshot.collections.map((c) => [c.name, c.modes.map((m) => m.name)])).toEqual([
+      ['primitives', ['default']],
+      ['semantic/brand', ['nova', 'orbit', 'ember']],
+      ['semantic/theme', ['light', 'dark']],
+      ['typography', ['default']],
+    ]);
+  });
+
+  it('stores numbers and colours at Figma precision', () => {
+    const leading = variable('typography', 'leading/display');
+
+    expect(leading.resolvedType).toBe('FLOAT');
+    expect(leading.valuesByMode['typography:default']).toBe(Math.fround(3.6));
+    expect(leading.valuesByMode['typography:default']).not.toBe(3.6);
+    expect(variable('primitives', 'base/overlay').valuesByMode['primitives:default']).toEqual({
+      r: Math.fround(0x15 / 255),
+      g: Math.fround(0x15 / 255),
+      b: Math.fround(0x17 / 255),
+      a: Math.fround(0x8c / 255),
+    });
+  });
+
+  it('turns aliasData and same-collection references into aliases', () => {
+    expect(variable('semantic/theme', 'primary/default').valuesByMode['semantic/theme:light']).toEqual({
+      aliasId: 'VariableID:semantic/brand/brand/700',
+    });
+    expect(variable('typography', 'weight/title').valuesByMode['typography:default']).toEqual({
+      aliasId: 'VariableID:typography/weight/bold',
+    });
+  });
+
+  it('carries scopes and the Web code syntax a designer adds after import', () => {
+    expect(variable('typography', 'weight/bold').scopes).toEqual(['FONT_WEIGHT']);
+    expect(variable('typography', 'family/legend')).toMatchObject({
+      resolvedType: 'STRING',
+      scopes: ['FONT_FAMILY'],
+      codeSyntax: { WEB: "'JetBrains Mono', monospace" },
+      valuesByMode: { 'typography:default': 'JetBrains Mono' },
+    });
+    expect(variable('typography', 'family/heading').codeSyntax).toEqual({});
   });
 });
