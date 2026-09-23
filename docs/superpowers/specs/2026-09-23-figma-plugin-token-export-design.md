@@ -1,13 +1,17 @@
-# Magpie — Figma design-token export plugin
+# Export Design Tokens — Figma plugin
+
+Repository: `figma-utils` · Package: `packages/figma-plugin`
+Companion spec: `2026-09-23-css-to-dtcg-and-example-design.md`
 
 Date: 2026-09-23
 Status: Draft for review
 
 ## Purpose
 
-Magpie is a Figma plugin that exports a file's local variables as W3C DTCG design
-tokens, in the same shape the existing `scripts/design-tokens` script produces from
-the CSS atoms. Figma is the source of truth; the export goes either to the user's
+"Export Design Tokens" is a Figma plugin that exports a file's local variables as
+W3C DTCG design tokens, in the same shape the `css-to-dtcg` package (companion spec,
+derived from the team's original `scripts/design-tokens` script) produces from CSS
+custom properties. Figma is the source of truth; the export goes either to the user's
 computer or, as a pull request, to a GitHub repository where a separate Action
 (out of scope) imports it into the UI components project.
 
@@ -28,32 +32,35 @@ editable commit/PR text, oklch output (designed for, not built), the import Acti
 ## Architecture
 
 ```
-manifest.json            editorType ["figma","dev"], capabilities ["inspect"],
-                         permissions ["currentuser"], documentAccess "dynamic-page",
-                         networkAccess.allowedDomains ["https://api.github.com"]
-src/
-  plugin/                Figma main thread — the only code that touches figma.*
-    main.ts              opens UI, answers messages, clientStorage get/set,
-                         figma.openExternal, closePlugin
-    snapshot.ts          local collections + variables → Snapshot (plain JSON)
-  core/                  pure, no Figma, no DOM
-    build-export.ts      buildExport(snapshot) → { files, errors }
-    sets.ts              collection/mode → set path; variable name → token path
-    tokens.ts            one variable value → DTCG token
-    color.ts             Figma RGBA → JSON colour value (hex now, oklch later)
-    numbers.ts           recover the typed decimal from Figma's float
-    font-stack.ts        parse a Web code syntax font stack
-    themes.ts            $themes.json derivation
-    single-file.ts       sets + themes → one tokens.json object
-  github/
-    client.ts            thin fetch wrapper over api.github.com, error mapping
-    publish.ts           base → tree → commit → branch → compare → PR
-  ui/                    Preact, runs in the plugin iframe
-    App.tsx, ExportDialog, FileList, ExportButton (split + menu),
-    GitHubSettings, ErrorList, ResultBanner
-    state.ts             screen logic as plain functions (tested)
-    download.ts          Blob downloads, zip via fflate
-  shared/messages.ts     typed main ↔ UI message protocol
+packages/figma-plugin/
+  manifest.json            name "Export Design Tokens", editorType ["figma","dev"],
+                           capabilities ["inspect"],
+                           permissions ["currentuser"], documentAccess "dynamic-page",
+                           networkAccess.allowedDomains ["https://api.github.com"]
+  src/
+    plugin/                Figma main thread — the only code that touches figma.*
+      main.ts              opens UI, answers messages, clientStorage get/set,
+                           figma.openExternal, closePlugin
+      snapshot.ts          local collections + variables → Snapshot (plain JSON)
+    core/                  pure, no Figma, no DOM
+      build-export.ts      buildExport(snapshot) → { files, errors }
+      sets.ts              collection/mode → set path; variable name → token path
+      tokens.ts            one variable value → DTCG token
+      color.ts             Figma RGBA → JSON colour value (hex now, oklch later)
+      numbers.ts           recover the typed decimal from Figma's float
+      font-stack.ts        parse a Web code syntax font stack
+      themes.ts            maps collections to deriveThemes() from css-to-dtcg
+      single-file.ts       sets + themes → one tokens.json object
+                         (JSON text via serialize() from css-to-dtcg)
+    github/
+      client.ts            thin fetch wrapper over api.github.com, error mapping
+      publish.ts           base → tree → commit → branch → compare → PR
+    ui/                    Preact, runs in the plugin iframe
+      App.tsx, ExportDialog, FileList, ExportButton (split + menu),
+      GitHubSettings, ErrorList, ResultBanner
+      state.ts             screen logic as plain functions (tested)
+      download.ts          Blob downloads, zip via fflate
+    shared/messages.ts     typed main ↔ UI message protocol
 ```
 
 Tooling: TypeScript (strict), Preact, Vite with `vite-plugin-singlefile` for the UI
@@ -139,12 +146,13 @@ change to that module and its tests alone.
 
 **Numbers.** Values are never parsed or computed on; the goal is to emit exactly the
 decimal the designer typed. Figma returns `FLOAT` values as JS numbers at reduced
-(32-bit) precision, so `0.85` may arrive as `0.8500000238418579`. `numbers.ts`
+(32-bit) precision — confirmed by a native Figma export, where a typed `0.2` reads
+back as `0.20000000298023224` and `0.06` as `0.05999999865889549`. `numbers.ts`
 returns the shortest decimal `d` (trying `toPrecision(1..17)`) that maps back to
 `x`: when `x` is exactly representable as a float32 (`Math.fround(x) === x`), the
 test is `Math.fround(Number(d)) === x`; otherwise it is `Number(d) === x`. So a
 float32 value recovers what was typed, and a full double is left untouched.
-Values are emitted as JSON numbers, matching the existing script and DTCG.
+Values are emitted as JSON numbers, matching `css-to-dtcg` and DTCG.
 
 ### Font family
 
@@ -172,15 +180,16 @@ syntax; the fallback stays on the target.
   never listed — the other theme group selects them.
 - No multi-mode collections → `[]`.
 
-This deliberately differs from the sample, where `light`/`dark` omit
-`primitives: "source"`; one rule has to hold for every theme.
+This deliberately differs from the team's original script output, where
+`light`/`dark` omit `primitives: "source"`; one rule has to hold for every theme.
+`css-to-dtcg` uses the same rule, so both tools produce identical files.
 
 No `$metadata.json` is produced: only Tokens Studio reads it, and the code project
 does not need it.
 
 ### Output files
 
-- JSON text: `JSON.stringify(value, null, 2) + "\n"`, identical to the script.
+- JSON text: `JSON.stringify(value, null, 2) + "\n"`, identical to `css-to-dtcg`.
 - **Multiple files**: `<setPath>.json` per set, then `$themes.json`.
 - **Single file**: `tokens.json` = `{ [setPath]: tree, …, "$themes": [...] }`.
 
@@ -295,12 +304,14 @@ message names it. The plugin never deletes anything remotely.
 
 - **core/** — TDD with Vitest; one test file per module (tokens, color, numbers,
   font-stack, sets, themes, errors).
-- **Golden test** — a fixture `Snapshot` reconstructed from the sample `tokens.zip`
-  (numbers passed through `Math.fround`, colours as 0..1 floats, font families with
-  Web code syntax stacks). Expected output: the sample files verbatim, except
-  `$themes.json` where `light`/`dark` gain `primitives: "source"`.
-- **Real-data fixture** — a hidden development command logs the real `Snapshot` as
-  JSON so the fixture can be replaced with the team's actual file.
+- **Golden / round-trip test** — input: `examples/lumen-academy/figma-snapshot.json`
+  (made-up data; numbers passed through `Math.fround`, colours as 0..1 floats,
+  `FONT_WEIGHT`/`FONT_FAMILY` scopes, font families with Web code syntax stacks).
+  Expected output: `examples/lumen-academy/tokens/` as generated by `css-to-dtcg`,
+  byte for byte. No real team data is committed to the repository.
+- **Real-data check** — a hidden development command logs the real `Snapshot` as
+  JSON, so the team can run the build against their own file locally without
+  committing it.
 - **github/** — Vitest with a mocked `fetch`: call sequence, deletion entries,
   no-change path, error mapping, branch-created-but-PR-failed message.
 - **ui/state.ts** — plain-function tests: destination menu and persistence, token
@@ -313,7 +324,7 @@ message names it. The plugin never deletes anything remotely.
 
 | # | Decision |
 |---|---|
-| Source format | Output of the existing `scripts/design-tokens` script is the reference |
+| Source format | Same output as `css-to-dtcg` (derived from the team's original script) |
 | Units | Figma numbers are already rem; unit `rem` is appended |
 | Types | From variable scopes |
 | Themes | Uniform `source` rule; light/dark gain `primitives: "source"` |
@@ -327,4 +338,5 @@ message names it. The plugin never deletes anything remotely.
 | GitHub output | Always multiple files; whole folder replaced; branch `styles/figma-export-<UTC timestamp>` |
 | Settings storage | `clientStorage`, per user |
 | Destination | Split Export button + menu, GitHub default, remembered per user |
-| License / distribution | MIT open-source repo; plugin private to the Figma organization |
+| License / distribution | MIT open-source repo `figma-utils`; plugin private to the Figma organization |
+| Test data | Made-up example app only; no real palettes in the repo |
