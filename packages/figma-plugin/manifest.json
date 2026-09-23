@@ -1,0 +1,14 @@
+{
+  "name": "Export Design Tokens",
+  "id": "export-design-tokens-dev",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/index.html",
+  "editorType": ["figma", "dev"],
+  "capabilities": ["inspect"],
+  "permissions": ["currentuser"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["https://api.github.com"]
+  }
+}

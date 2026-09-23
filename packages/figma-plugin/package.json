@@ -1,0 +1,26 @@
+{
+  "name": "export-design-tokens",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build && esbuild src/plugin/main.ts --bundle --outfile=dist/code.js --target=es2017",
+    "watch": "vite build --watch & esbuild src/plugin/main.ts --bundle --outfile=dist/code.js --target=es2017 --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "css-to-dtcg": "workspace:*",
+    "fflate": "^0.8.3",
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.138.0",
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^26.6.2",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vitest": "^5.0.1"
+  }
+}
