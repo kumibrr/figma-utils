@@ -1,0 +1,50 @@
+{
+  "name": "css-to-dtcg",
+  "version": "0.1.0",
+  "description": "Turn CSS custom properties into W3C DTCG design tokens, including files Figma can import.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "css-to-dtcg": "./bin/css-to-dtcg.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./themes": {
+      "types": "./types/themes.d.ts",
+      "default": "./src/themes.js"
+    },
+    "./serialize": {
+      "types": "./types/serialize.d.ts",
+      "default": "./src/serialize.js"
+    }
+  },
+  "files": [
+    "bin",
+    "src",
+    "types",
+    "README.md"
+  ],
+  "keywords": [
+    "design-tokens",
+    "dtcg",
+    "figma",
+    "css",
+    "custom-properties"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}
