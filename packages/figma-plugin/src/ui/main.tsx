@@ -1,3 +1,7 @@
+import './styles.css';
+
 import { render } from 'preact';
 
-render(<p>Export Design Tokens</p>, document.getElementById('root')!);
+import { App } from './App';
+
+render(<App />, document.getElementById('root')!);
