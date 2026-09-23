@@ -11,6 +11,10 @@ export type Banner = { kind: 'success'; text: string; url: string } | { kind: 'i
 export const previewFiles = (result: BuildResult, format: Format): ExportFile[] =>
   format === 'single' ? [singleFile(result)] : multipleFiles(result);
 
+/** The file with this path in a freshly built result, or null if it is no longer exported. */
+export const freshFile = (result: BuildResult, format: Format, path: string): ExportFile | null =>
+  previewFiles(result, format).find((file) => file.path === path) ?? null;
+
 export type Blocker = 'loading' | 'failed' | 'errors' | 'empty' | 'publishing';
 
 export function exportBlocker(build: Build, publishing: boolean): Blocker | null {

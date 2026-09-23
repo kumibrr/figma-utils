@@ -138,4 +138,15 @@ describe('buildExport', () => {
       },
     ]);
   });
+
+  it('reports two multi-mode collections that would share a theme group', () => {
+    const result = buildExport(snapshot([collection('web/theme', ['light', 'dark']), collection('mobile/theme', ['light', 'dark'])], []));
+
+    expect(result.errors).toEqual([
+      {
+        collection: 'mobile/theme',
+        reason: 'would share the theme group "Theme" with collection "web/theme"; rename one of them',
+      },
+    ]);
+  });
 });

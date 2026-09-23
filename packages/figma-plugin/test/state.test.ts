@@ -7,6 +7,7 @@ import {
   errorBanner,
   exportAction,
   exportBlocker,
+  freshFile,
   groupErrors,
   initialTokenField,
   previewFiles,
@@ -112,5 +113,16 @@ describe('token field', () => {
     expect(tokenToSave({ mode: 'saved' })).toBeNull();
     expect(tokenToSave({ mode: 'entering', draft: '   ', canCancel: true })).toBeNull();
     expect(tokenToSave({ mode: 'entering', draft: ' github_pat_x ', canCancel: true })).toBe('github_pat_x');
+  });
+});
+
+describe('freshFile', () => {
+  it('finds the file by path in a freshly built result', () => {
+    expect(freshFile(result, 'multiple', 'primitives.json')?.json).toBe(previewFiles(result, 'multiple')[0].json);
+    expect(freshFile(result, 'single', 'tokens.json')?.path).toBe('tokens.json');
+  });
+
+  it('returns null when the file is no longer exported', () => {
+    expect(freshFile(result, 'multiple', 'semantic/theme/light.json')).toBeNull();
   });
 });

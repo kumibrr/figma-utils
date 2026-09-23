@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 
 import type { BuildResult } from '../core/build-export';
+import type { ExportFile } from '../core/files';
 import type { Snapshot } from '../core/snapshot';
 import { createClient } from '../github/client';
 import { publish, type PublishStep } from '../github/publish';
@@ -16,6 +17,7 @@ import {
   errorBanner,
   exportAction,
   exportBlocker,
+  freshFile,
   previewFiles,
   resultBanner,
   STEP_TEXT,
@@ -79,6 +81,21 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
     }
   }
 
+  /** Row downloads re-read the variables too, so an open window never exports stale data. */
+  async function onDownloadRow(file: ExportFile) {
+    setBanner(null);
+    const fresh = await refresh();
+    if (!fresh || exportBlocker({ status: 'ready', result: fresh.result }, false)) {
+      return;
+    }
+    const current = freshFile(fresh.result, format, file.path);
+    if (current) {
+      downloadFile(current);
+    } else {
+      setBanner({ kind: 'error', text: `${file.path} is no longer part of the export.` });
+    }
+  }
+
   function onDestination(destination: Destination) {
     onPrefs({ ...prefs, destination });
     void call('saveDestination', destination);
@@ -126,7 +143,7 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
           <p class="muted">No local variables in this file.</p>
         )}
         {build.status === 'ready' && build.result.errors.length === 0 && build.result.sets.length > 0 && (
-          <FileList files={previewFiles(build.result, format)} onDownload={downloadFile} />
+          <FileList files={previewFiles(build.result, format)} onDownload={(file) => void onDownloadRow(file)} />
         )}
       </div>
 

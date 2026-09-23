@@ -40,9 +40,23 @@ export function buildExport(snapshot: Snapshot): BuildResult {
   const sets: BuildResult['sets'] = [];
   const themeInputs: { name: string; group?: string; themeName: string; references: string[] }[] = [];
   const producedBy = new Map<string, string>();
+  const groupOwner = new Map<string, string>();
 
   for (const collection of snapshot.collections) {
     const multiMode = collection.modes.length > 1;
+    const group = multiMode ? capitalize(lastSegment(collection.name)) : undefined;
+
+    if (group) {
+      const owner = groupOwner.get(group);
+      if (owner) {
+        errors.push({
+          collection: collection.name,
+          reason: `would share the theme group "${group}" with collection "${owner}"; rename one of them`,
+        });
+      } else {
+        groupOwner.set(group, collection.name);
+      }
+    }
 
     for (const mode of collection.modes) {
       const name = setPath(collection, mode.name);
@@ -118,7 +132,7 @@ export function buildExport(snapshot: Snapshot): BuildResult {
       sets.push({ name, tree });
       themeInputs.push({
         name,
-        group: multiMode ? capitalize(lastSegment(collection.name)) : undefined,
+        group,
         themeName: mode.name,
         references: [...references],
       });
