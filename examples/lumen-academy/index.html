@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumen Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700&family=Inter:wght@400;500;700&family=JetBrains+Mono&display=swap"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <span class="logo">Lumen Academy</span>
+      <label class="switch">
+        Brand
+        <select id="brand">
+          <option value="nova">Nova</option>
+          <option value="orbit">Orbit</option>
+          <option value="ember">Ember</option>
+        </select>
+      </label>
+      <label class="switch">
+        Theme
+        <select id="mode">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="page">
+      <section>
+        <h1 class="display">Learn something bright</h1>
+        <p class="lead">Every colour, size and font on this page comes from a design token.</p>
+        <div class="actions">
+          <button class="button button--primary">Start a course</button>
+          <button class="button button--subtle">Browse catalogue</button>
+          <button class="button button--danger">Leave class</button>
+        </div>
+      </section>
+
+      <section class="cards">
+        <article class="card">
+          <span class="legend">Course · 12 lessons</span>
+          <h2 class="title">Colour theory</h2>
+          <p>How hue, value and contrast shape an interface.</p>
+        </article>
+        <article class="card">
+          <span class="legend">Course · 8 lessons</span>
+          <h2 class="title">Type on screen</h2>
+          <p>Scales, leading and weights that stay readable.</p>
+        </article>
+        <article class="card">
+          <span class="legend">Workshop · 1 day</span>
+          <h2 class="title">Tokens in practice</h2>
+          <p>From CSS custom properties to Figma variables and back.</p>
+        </article>
+      </section>
+
+      <section class="scale">
+        <p style="font-size: var(--size-display); line-height: var(--leading-display)">Display</p>
+        <p style="font-size: var(--size-xxl); line-height: var(--leading-xxl)">Extra extra large</p>
+        <p style="font-size: var(--size-xl); line-height: var(--leading-xl)">Extra large</p>
+        <p style="font-size: var(--size-l); line-height: var(--leading-l)">Large</p>
+        <p style="font-size: var(--size-m); line-height: var(--leading-m)">Medium</p>
+        <p style="font-size: var(--size-s); line-height: var(--leading-s)">Small</p>
+        <p style="font-size: var(--size-xs); line-height: var(--leading-xs)">Extra small</p>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

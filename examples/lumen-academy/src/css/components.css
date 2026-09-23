@@ -1,0 +1,134 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--family-body);
+  font-size: var(--size-m);
+  line-height: var(--leading-m);
+  font-weight: var(--weight-regular);
+  color: var(--text-default);
+  background: var(--surface-default);
+}
+
+.header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-muted);
+}
+
+.logo {
+  margin-right: auto;
+  font-family: var(--family-heading);
+  font-weight: var(--weight-title);
+  font-size: var(--size-l);
+  color: var(--primary-default);
+}
+
+.switch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: var(--size-s);
+  color: var(--text-muted);
+}
+
+.page {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: grid;
+  gap: 3rem;
+}
+
+.display {
+  margin: 0;
+  font-family: var(--family-title);
+  font-size: var(--size-display);
+  line-height: var(--leading-display);
+  font-weight: var(--weight-title);
+}
+
+.lead {
+  color: var(--text-muted);
+  font-size: var(--size-l);
+  line-height: var(--leading-l);
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  font: inherit;
+  font-weight: var(--weight-medium);
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--ring-default);
+  outline-offset: 2px;
+}
+
+.button--primary {
+  background: var(--primary-default);
+  color: var(--primary-contrast);
+}
+
+.button--primary:hover {
+  background: var(--primary-hover);
+}
+
+.button--subtle {
+  background: var(--primary-subtle);
+  color: var(--primary-default);
+}
+
+.button--danger {
+  background: var(--danger-subtle);
+  color: var(--danger-default);
+  border-color: var(--danger-default);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-default);
+  background: var(--surface-muted);
+}
+
+.legend {
+  font-family: var(--family-legend);
+  font-size: var(--size-xs);
+  line-height: var(--leading-xs);
+  color: var(--text-muted);
+}
+
+.title {
+  margin: 0.5rem 0;
+  font-family: var(--family-title);
+  font-size: var(--size-xl);
+  line-height: var(--leading-xl);
+  font-weight: var(--weight-bold);
+}
+
+.scale p {
+  margin: 0;
+}
