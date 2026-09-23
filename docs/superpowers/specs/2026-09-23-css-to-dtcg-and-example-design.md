@@ -308,7 +308,7 @@ examples/lumen-academy/
 
 | Topic | Decision |
 |---|---|
-| Repo | `figma-utils` pnpm monorepo; no "magpie" naming |
+| Repo | `figma-utils` pnpm monorepo |
 | Package | `css-to-dtcg`, unscoped, CLI + API, JS + JSDoc, ESM, Node ≥ 20 |
 | Genericity | Config-driven sets `(file, selector)`, theme groups, overrides/path, customSets hook |
 | Brands | Explicit selector blocks; hook keeps the team's current CSS working |
