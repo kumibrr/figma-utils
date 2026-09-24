@@ -28,10 +28,20 @@ from `packages/figma-plugin/manifest.json`.
 ## GitHub
 
 - [ ] With GitHub selected and nothing configured, Export opens GitHub settings.
-- [ ] A wrong repository shows "Repository or branch not found." inline; nothing suggests replacing the token.
-- [ ] Valid settings + a fine-grained token (Contents + Pull requests read/write) return to the export view.
-- [ ] Settings now show "Token saved" and "Replace token"; the token is not visible anywhere.
-- [ ] "Replace token" shows an empty field; "Keep the saved token" restores "Token saved"; exporting still works.
+- [ ] Only the token step is enabled. A wrong token + Continue shows "GitHub rejected the token." under the
+      field; nothing is saved and the other steps stay disabled.
+- [ ] A fine-grained token (Contents + Pull requests read/write) + Continue (or Enter) shows "Token saved" and
+      fills Owner. With a single-owner token that owner is already selected.
+- [ ] Owner lists only repositories the token can push to; an owner with just one is selected automatically.
+- [ ] Picking a repository fills Base branch with its default branch and suggests its branches.
+- [ ] Typing a name that isn't a branch shows "New branch — will be created from <default>". Save creates it on
+      GitHub from the default branch and returns to the export view.
+- [ ] Picking an existing branch and saving returns to the export view without creating anything.
+- [ ] Reopening settings pre-selects the saved owner, repository and base branch; the token is not visible anywhere.
+- [ ] With a saved repository the token can no longer reach, the owner stays selected and the flow says
+      "<owner/repo> isn't available with this token — pick a repository."
+- [ ] "Replace token" shows an empty field and disables the other steps; "Keep the saved token" restores
+      "Token saved" and the previous choices; exporting still works.
 - [ ] Export: the button shows the steps, then "PR #N opened" with Open. The PR is on
       `styles/figma-export-<UTC timestamp>`, titled `chore(tokens): export from Figma`, the target folder
       contains exactly the exported files (stale files deleted), and the body names the file and you.
