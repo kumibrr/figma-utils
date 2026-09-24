@@ -1622,7 +1622,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1636,7 +1645,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1650,7 +1668,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1664,7 +1691,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1678,7 +1714,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1692,7 +1737,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1706,7 +1760,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1720,7 +1783,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1734,7 +1806,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1748,7 +1829,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1762,7 +1852,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1776,7 +1875,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1790,7 +1898,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},
@@ -1804,7 +1921,16 @@
       "collectionId": "VariableCollectionId:typography",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "STROKE_FLOAT",
+        "EFFECT_FLOAT",
+        "FONT_SIZE",
+        "LINE_HEIGHT",
+        "LETTER_SPACING",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
       ],
       "description": "",
       "codeSyntax": {},

@@ -8,8 +8,10 @@ in Dev Mode. Output is byte-identical to [`css-to-dtcg`](../css-to-dtcg).
 
 - One set per collection (single mode) or per mode (`<collection>/<mode>.json`), plus
   `$themes.json` (one theme per mode of every multi-mode collection).
-- Token types come from variable scopes: colours → `color`; numbers → `dimension` (rem)
-  or `fontWeight` (Font weight scope); strings with the Font family scope → `fontFamily`.
+- Token types come from variable scopes: colours → `color`; numbers with the Font weight
+  scope → `fontWeight`, numbers with any other scope → `dimension` (rem); strings with the
+  Font family scope → `fontFamily`. A number left on "All scopes" (or none) is an error,
+  because Figma's Import mode drops the Font weight scope and it could be a weight.
   The fallback stack comes from the variable's **Web code syntax**, e.g. `'Roboto Slab', serif`.
 - Aliases stay references (`{primitives.gray.900}`). Aliases to library variables are errors.
 - Any problem blocks the export and every problem is listed.

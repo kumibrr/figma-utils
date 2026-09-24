@@ -39,7 +39,9 @@ between CSS and Figma using [`css-to-dtcg`](../../packages/css-to-dtcg) and the
    Right-click each mode → **Import mode** and pick the matching
    `figma/<collection>/<mode>.tokens.json`. Then set the **Web code syntax** of the
    three font families: `family/body` → `Inter, sans-serif`, `family/title` →
-   `Fraunces, serif`, `family/legend` → `'JetBrains Mono', monospace`.
+   `Fraunces, serif`, `family/legend` → `'JetBrains Mono', monospace`. Finally set the
+   scope of `weight/regular`, `weight/medium`, `weight/bold` and `weight/title` to
+   **Font weight**: Import mode drops that scope, and the plugin refuses unscoped numbers.
 3. **Figma → tokens.** Run **Export Design Tokens** and download the files, or open a
    pull request. The result equals `tokens/` byte for byte.
 

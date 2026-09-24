@@ -56,4 +56,23 @@ Figma version (desktop/browser):
 Import `docs/verification/figma-import/scope-probe/default.tokens.json` into the only mode of a new
 collection named `scope-probe`, then paste its **Export modes** output here.
 
-Export:
+Result (2026-09-24):
+
+| Probe | Import | Re-export |
+| --- | --- | --- |
+| `a` number, `["FONT_WEIGHT"]` | imported | `["ALL_SCOPES"]` |
+| `b` `$type: fontWeight` | **skipped, no warning** | — |
+| `c` `$type: fontWeight` + `["FONT_WEIGHT"]` | **skipped, no warning** | — |
+| `d` number, `["FONT_SIZE"]` | imported | `["FONT_SIZE"]` |
+| `e` number, `["FONT_WEIGHT", "OPACITY"]` | imported | `["OPACITY"]` |
+| `f` string, `["FONT_FAMILY"]` | imported | `["FONT_FAMILY"]` |
+| `g` `$type: fontFamily` | imported as string | `["ALL_SCOPES"]` |
+
+Import mode keeps every scope except `FONT_WEIGHT`, which it always drops, and it skips DTCG
+`fontWeight` tokens. No import file can mark a number as a font weight; that scope has to be set in
+Figma after importing.
+
+Decision: the `figma` target gives sizes every size scope (everything but Opacity and Font weight)
+and keeps `["FONT_WEIGHT"]` on weights in case Figma starts honouring it. The plugin refuses a number
+variable with no scopes or `ALL_SCOPES`, so an imported weight whose scope was not set by hand blocks
+the export instead of becoming a rem dimension.

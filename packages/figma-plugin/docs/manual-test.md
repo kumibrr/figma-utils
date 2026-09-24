@@ -6,7 +6,9 @@ from `packages/figma-plugin/manifest.json`.
 ## Setup
 
 - [ ] Import the Lumen Academy collections as described in `examples/lumen-academy/README.md`
-      (including Web code syntax for the three font families and the Font weight / Font family scopes).
+      (including Web code syntax for the three font families and the Font weight scope of the four weights).
+- [ ] Before setting the Font weight scopes, the export is blocked and lists `typography`
+      `weight/regular`, `weight/medium`, `weight/bold` and `weight/title` ("number variables need a scope").
 
 ## Normal editor
 

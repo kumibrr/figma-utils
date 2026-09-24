@@ -79,9 +79,15 @@ contain any source CSS file, and `outDir` and `figmaOutDir` must not be inside e
 
 `--target figma` writes `<collection>/<mode>.tokens.json` and prints the order to import
 collections in. In Figma, create each collection with its modes **in that order**, then
-right-click each mode → **Import mode**. Afterwards, for every font-family variable, set
-its **Web code syntax** to the full stack (e.g. `'Roboto Slab', serif`) — Figma's format
-has no field for fallbacks.
+right-click each mode → **Import mode**. Afterwards:
+
+- for every font-family variable, set its **Web code syntax** to the full stack
+  (e.g. `'Roboto Slab', serif`) — Figma's format has no field for fallbacks;
+- for every font-weight variable, set its scope to **Font weight** — the files include it,
+  but Import mode drops that one scope.
+
+Colours import with all scopes and sizes with every size scope (radius, width/height, gap,
+stroke, effects, font size, line height, letter and paragraph spacing).
 
 ## API
 
