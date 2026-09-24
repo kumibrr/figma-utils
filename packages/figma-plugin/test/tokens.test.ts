@@ -9,8 +9,8 @@ describe('tokenType', () => {
   it('derives the type from resolvedType and scopes only', () => {
     expect(tokenType(variable('p', 'c', 'COLOR', {}))).toEqual({ type: 'color' });
     expect(tokenType(variable('p', 'w', 'FLOAT', {}, { scopes: ['FONT_WEIGHT'] }))).toEqual({ type: 'fontWeight' });
-    expect(tokenType(variable('p', 'size', 'FLOAT', {}))).toEqual({ type: 'dimension' });
-    expect(tokenType(variable('p', 'font-weight', 'FLOAT', {}))).toEqual({ type: 'dimension' });
+    expect(tokenType(variable('p', 'size', 'FLOAT', {}, { scopes: ['GAP'] }))).toEqual({ type: 'dimension' });
+    expect(tokenType(variable('p', 'font-weight', 'FLOAT', {}, { scopes: ['FONT_SIZE'] }))).toEqual({ type: 'dimension' });
     expect(tokenType(variable('p', 'f', 'STRING', {}, { scopes: ['FONT_FAMILY'] }))).toEqual({ type: 'fontFamily' });
   });
 
@@ -18,6 +18,11 @@ describe('tokenType', () => {
     expect(tokenType(variable('p', 'b', 'BOOLEAN', {}))).toEqual({ reason: 'boolean variables are not supported' });
     expect(tokenType(variable('p', 'e', 'EASING', {}))).toEqual({ reason: 'easing variables are not supported' });
     expect(tokenType(variable('p', 's', 'STRING', {}))).toEqual({ reason: 'string variables need the Font family scope' });
+    const numberReason = {
+      reason: 'number variables need a scope: Font weight for a weight, or a size scope such as Gap or Font size for a size',
+    };
+    expect(tokenType(variable('p', 'n', 'FLOAT', {}))).toEqual(numberReason);
+    expect(tokenType(variable('p', 'n', 'FLOAT', {}, { scopes: [] }))).toEqual(numberReason);
     expect(tokenType(variable('p', 's', 'STRING', {}, { scopes: ['FONT_STYLE'] }))).toEqual({
       reason: 'font style strings are not supported; use a number variable with the Font weight scope',
     });
@@ -30,7 +35,7 @@ describe('toToken', () => {
       ok: true,
       token: { $type: 'color', $value: '#ffffff' },
     });
-    expect(toToken(variable('p', 's', 'FLOAT', {}), Math.fround(0.85), noAliases)).toEqual({
+    expect(toToken(variable('p', 's', 'FLOAT', {}, { scopes: ['GAP'] }), Math.fround(0.85), noAliases)).toEqual({
       ok: true,
       token: { $type: 'dimension', $value: { value: 0.85, unit: 'rem' } },
     });

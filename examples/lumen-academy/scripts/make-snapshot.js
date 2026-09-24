@@ -2,7 +2,8 @@
  * Simulates what Figma's "Import mode" does with figma/, producing the Snapshot
  * the Export Design Tokens plugin reads. Numbers and colours pass through
  * Math.fround because Figma stores them as 32-bit floats. Web code syntax for
- * font stacks is the manual step the README asks designers to do after import.
+ * font stacks and the Font weight scope, which Import mode drops, are the manual
+ * steps the README asks designers to do after import; both are applied here.
  */
 import { writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';

@@ -11,7 +11,16 @@ export function tokenType(variable: SnapshotVariable): { type: TokenType } | { r
     case 'COLOR':
       return { type: 'color' };
     case 'FLOAT':
-      return { type: variable.scopes.includes('FONT_WEIGHT') ? 'fontWeight' : 'dimension' };
+      if (variable.scopes.includes('FONT_WEIGHT')) {
+        return { type: 'fontWeight' };
+      }
+      // Figma's Import mode drops the Font weight scope, so an unscoped number may be a weight.
+      if (variable.scopes.length === 0 || variable.scopes.includes('ALL_SCOPES')) {
+        return {
+          reason: 'number variables need a scope: Font weight for a weight, or a size scope such as Gap or Font size for a size',
+        };
+      }
+      return { type: 'dimension' };
     case 'STRING':
       if (variable.scopes.includes('FONT_FAMILY')) {
         return { type: 'fontFamily' };

@@ -133,6 +133,7 @@ Evaluated per variable per mode. Aliases are checked first.
 | Alias to a local variable | `$value: "{target.token.path}"`; `$type` from the aliasing variable's own type/scopes (rows below) |
 | `COLOR` | `$type: "color"`, `$value` lowercase `#rrggbb`, or `#rrggbbaa` when alpha < 1 (channels `round(c × 255)`) |
 | `FLOAT`, scopes include `FONT_WEIGHT` | `$type: "fontWeight"`, `$value: <number>` |
+| `FLOAT` with no scopes or `ALL_SCOPES` | error: it may be a weight whose scope Import mode dropped (see `docs/verification/figma-import-results.md`) |
 | any other `FLOAT` | `$type: "dimension"`, `$value: { value: <number>, unit: "rem" }` |
 | `STRING`, scopes include `FONT_FAMILY` | `$type: "fontFamily"`, `$value: string[]` (see Font family) |
 | anything else | error |

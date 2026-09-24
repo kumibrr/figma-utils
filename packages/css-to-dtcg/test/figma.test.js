@@ -71,7 +71,24 @@ describe('toFigmaFiles', () => {
   it('maps dimensions, weights and families with scopes', () => {
     const typography = fileAt('typography/default.tokens.json');
 
-    expect(typography.size.s).toEqual({ $type: 'number', $value: 0.875, $extensions: { 'com.figma.scopes': ['ALL_SCOPES'] } });
+    expect(typography.size.s).toEqual({
+      $type: 'number',
+      $value: 0.875,
+      $extensions: {
+        'com.figma.scopes': [
+          'CORNER_RADIUS',
+          'WIDTH_HEIGHT',
+          'GAP',
+          'STROKE_FLOAT',
+          'EFFECT_FLOAT',
+          'FONT_SIZE',
+          'LINE_HEIGHT',
+          'LETTER_SPACING',
+          'PARAGRAPH_SPACING',
+          'PARAGRAPH_INDENT',
+        ],
+      },
+    });
     expect(typography.weight.bold).toEqual({ $type: 'number', $value: 700, $extensions: { 'com.figma.scopes': ['FONT_WEIGHT'] } });
     expect(typography.family.title).toEqual({
       $type: 'string',

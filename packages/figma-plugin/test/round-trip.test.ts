@@ -43,4 +43,20 @@ describe('CSS → css-to-dtcg → Figma → plugin', () => {
       expect(actual.get(path), path).toBe(json);
     }
   });
+
+  it('blocks the export until the weights imported without their Font weight scope are fixed', () => {
+    const asImported: Snapshot = {
+      ...snapshot,
+      variables: snapshot.variables.map((variable) =>
+        variable.scopes.includes('FONT_WEIGHT') ? { ...variable, scopes: ['ALL_SCOPES'] } : variable,
+      ),
+    };
+
+    expect(buildExport(asImported).errors.map((error) => `${error.collection} ${error.variable}`)).toEqual([
+      'typography weight/regular',
+      'typography weight/medium',
+      'typography weight/bold',
+      'typography weight/title',
+    ]);
+  });
 });

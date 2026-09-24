@@ -96,7 +96,7 @@ describe('buildExport', () => {
   });
 
   it('reports names that would break references', () => {
-    const result = buildExport(snapshot([primitives], [variable('primitives', 'spacing/1.5', 'FLOAT', { 'Mode 1': 1.5 })]));
+    const result = buildExport(snapshot([primitives], [variable('primitives', 'spacing/1.5', 'FLOAT', { 'Mode 1': 1.5 }, { scopes: ['GAP'] })]));
 
     expect(result.errors).toEqual([
       { collection: 'primitives', variable: 'spacing/1.5', reason: 'name segment "1.5" contains one of . { }' },

@@ -1,0 +1,10 @@
+{
+  "a-number-font-weight": { "$type": "number", "$value": 700, "$extensions": { "com.figma.scopes": ["FONT_WEIGHT"] } },
+  "b-fontweight-type": { "$type": "fontWeight", "$value": 700 },
+  "c-fontweight-type-and-scope": { "$type": "fontWeight", "$value": 700, "$extensions": { "com.figma.scopes": ["FONT_WEIGHT"] } },
+  "d-number-font-size": { "$type": "number", "$value": 1, "$extensions": { "com.figma.scopes": ["FONT_SIZE"] } },
+  "e-number-two-scopes": { "$type": "number", "$value": 700, "$extensions": { "com.figma.scopes": ["FONT_WEIGHT", "OPACITY"] } },
+  "f-string-font-family": { "$type": "string", "$value": "Fraunces", "$extensions": { "com.figma.scopes": ["FONT_FAMILY"], "com.figma.type": "string" } },
+  "g-fontfamily-type": { "$type": "fontFamily", "$value": "Fraunces" },
+  "$extensions": { "com.figma.modeName": "default" }
+}

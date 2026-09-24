@@ -5,7 +5,16 @@
       "$value": 0.75,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -14,7 +23,16 @@
       "$value": 0.875,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -23,7 +41,16 @@
       "$value": 1,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -32,7 +59,16 @@
       "$value": 1.25,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -41,7 +77,16 @@
       "$value": 1.5,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -50,7 +95,16 @@
       "$value": 2,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -59,7 +113,16 @@
       "$value": 3,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     }
@@ -70,7 +133,16 @@
       "$value": 1,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -79,7 +151,16 @@
       "$value": 1.25,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -88,7 +169,16 @@
       "$value": 1.5,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -97,7 +187,16 @@
       "$value": 1.75,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -106,7 +205,16 @@
       "$value": 2,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -115,7 +223,16 @@
       "$value": 2.5,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     },
@@ -124,7 +241,16 @@
       "$value": 3.6,
       "$extensions": {
         "com.figma.scopes": [
-          "ALL_SCOPES"
+          "CORNER_RADIUS",
+          "WIDTH_HEIGHT",
+          "GAP",
+          "STROKE_FLOAT",
+          "EFFECT_FLOAT",
+          "FONT_SIZE",
+          "LINE_HEIGHT",
+          "LETTER_SPACING",
+          "PARAGRAPH_SPACING",
+          "PARAGRAPH_INDENT"
         ]
       }
     }

@@ -8,7 +8,21 @@ import { nest } from '../tree.js';
  */
 
 const FIGMA_TYPE = { color: 'color', dimension: 'number', fontWeight: 'number', fontFamily: 'string' };
-const SCOPES = { fontWeight: ['FONT_WEIGHT'], fontFamily: ['FONT_FAMILY'] };
+// Every number scope except Opacity and Font weight. Import mode keeps these but drops
+// FONT_WEIGHT, so weights still need their scope set by hand after importing.
+const SIZE_SCOPES = [
+  'CORNER_RADIUS',
+  'WIDTH_HEIGHT',
+  'GAP',
+  'STROKE_FLOAT',
+  'EFFECT_FLOAT',
+  'FONT_SIZE',
+  'LINE_HEIGHT',
+  'LETTER_SPACING',
+  'PARAGRAPH_SPACING',
+  'PARAGRAPH_INDENT',
+];
+const SCOPES = { dimension: SIZE_SCOPES, fontWeight: ['FONT_WEIGHT'], fontFamily: ['FONT_FAMILY'] };
 
 /**
  * The colour object Figma's own "Export modes" writes.
