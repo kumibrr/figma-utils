@@ -76,3 +76,12 @@ Decision: the `figma` target gives sizes every size scope (everything but Opacit
 and keeps `["FONT_WEIGHT"]` on weights in case Figma starts honouring it. The plugin refuses a number
 variable with no scopes or `ALL_SCOPES`, so an imported weight whose scope was not set by hand blocks
 the export instead of becoming a rem dimension.
+
+## End-to-end check (2026-09-24)
+
+The regenerated `examples/lumen-academy/figma/` files imported with every size scope on `size/*`.
+Before the four weights were given the Font weight scope, the plugin blocked the export and listed
+exactly `weight/regular`, `weight/medium`, `weight/bold` and `weight/title`. After setting those scopes
+and the three Web code syntaxes, **Export to this computer** produced files identical to
+`examples/lumen-academy/tokens/`, except that `$themes.json` lists themes in the file's mode order
+(the modes had been created alphabetically), as intended.
