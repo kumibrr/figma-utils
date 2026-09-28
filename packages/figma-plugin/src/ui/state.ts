@@ -1,12 +1,19 @@
+import { SIZE_SCOPES } from 'css-to-dtcg/scopes';
+
 import type { BuildResult, ExportError } from '../core/build-export';
 import { multipleFiles, singleFile, type ExportFile } from '../core/files';
+import type { ScopeFix } from '../core/infer-scopes';
+import { NUMBER_SCOPE_REASON, STRING_SCOPE_REASON } from '../core/tokens';
 import { ownersOf, reposOf, type Repo } from '../github/browse';
 import type { PublishResult, PublishStep } from '../github/publish';
 import { parseRepository, type RepoSettings } from '../github/settings';
 import type { Destination } from '../shared/messages';
 
 export type Format = 'multiple' | 'single';
-export type Build = { status: 'loading' } | { status: 'ready'; result: BuildResult } | { status: 'failed'; message: string };
+export type Build =
+  | { status: 'loading' }
+  | { status: 'ready'; result: BuildResult; fixes: ScopeFix[] }
+  | { status: 'failed'; message: string };
 export type Banner = { kind: 'success'; text: string; url: string } | { kind: 'info'; text: string } | { kind: 'error'; text: string };
 
 export const previewFiles = (result: BuildResult, format: Format): ExportFile[] =>
@@ -73,6 +80,48 @@ export const resultBanner = (result: PublishResult): Banner =>
 export const errorBanner = (error: unknown): Banner => ({
   kind: 'error',
   text: error instanceof Error ? error.message : String(error),
+});
+
+const SCOPE_REASONS = [NUMBER_SCOPE_REASON, STRING_SCOPE_REASON];
+
+/** The errors not already listed as a scope fix, so each problem is shown once. */
+export const uncoveredErrors = (errors: ExportError[], fixes: ScopeFix[]): ExportError[] =>
+  errors.filter(
+    (error) =>
+      !SCOPE_REASONS.includes(error.reason) ||
+      !fixes.some((fix) => fix.collection === error.collection && fix.variable === error.variable),
+  );
+
+/** Figma's own names for the scopes the plugin suggests. */
+const SCOPE_TEXT: Record<string, string> = {
+  CORNER_RADIUS: 'Corner radius',
+  WIDTH_HEIGHT: 'Width and height',
+  GAP: 'Gap',
+  OPACITY: 'Opacity',
+  STROKE_FLOAT: 'Stroke',
+  EFFECT_FLOAT: 'Effects',
+  FONT_WEIGHT: 'Font weight',
+  FONT_SIZE: 'Font size',
+  LINE_HEIGHT: 'Line height',
+  LETTER_SPACING: 'Letter spacing',
+  PARAGRAPH_SPACING: 'Paragraph spacing',
+  PARAGRAPH_INDENT: 'Paragraph indent',
+  FONT_FAMILY: 'Font family',
+  FONT_STYLE: 'Font style',
+  TEXT_CONTENT: 'Text content',
+};
+
+const scopesText = (scopes: string[]) =>
+  scopes.length === SIZE_SCOPES.length && SIZE_SCOPES.every((scope) => scopes.includes(scope))
+    ? 'All size scopes'
+    : scopes.map((scope) => SCOPE_TEXT[scope] ?? scope).join(', ');
+
+export const fixText = (fix: ScopeFix): string =>
+  `${fix.variable} → ${scopesText(fix.scopes)} (${fix.because}${fix.stillBlocked ? "; can't be exported" : ''})`;
+
+export const appliedBanner = (count: number): Banner => ({
+  kind: 'info',
+  text: `Set the ${count === 1 ? 'scope of 1 variable' : `scopes of ${count} variables`}. Undo in Figma to revert.`,
 });
 
 export function groupErrors(errors: ExportError[]): { collection: string; items: string[] }[] {

@@ -154,6 +154,48 @@ button {
   padding-left: 16px;
 }
 
+.fixes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 4px 8px;
+  border-bottom: 1px solid var(--figma-color-border);
+}
+
+.fixes__title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.fixes__collection {
+  margin: 4px 0;
+  font-size: 11px;
+}
+
+.fixes ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fixes__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+.fixes__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fixes__actions .button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .muted {
   color: var(--figma-color-text-secondary);
 }

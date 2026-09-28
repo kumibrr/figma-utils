@@ -19,6 +19,10 @@
       "types": "./types/themes.d.ts",
       "default": "./src/themes.js"
     },
+    "./scopes": {
+      "types": "./types/scopes.d.ts",
+      "default": "./src/scopes.js"
+    },
     "./serialize": {
       "types": "./types/serialize.d.ts",
       "default": "./src/serialize.js"

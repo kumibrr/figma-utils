@@ -6,6 +6,10 @@ import { isAlias, type RGBA, type SnapshotValue, type SnapshotVariable } from '.
 
 export type TokenType = 'color' | 'fontWeight' | 'dimension' | 'fontFamily';
 
+export const NUMBER_SCOPE_REASON =
+  'number variables need a scope: Font weight for a weight, or a size scope such as Gap or Font size for a size';
+export const STRING_SCOPE_REASON = 'string variables need the Font family scope';
+
 export function tokenType(variable: SnapshotVariable): { type: TokenType } | { reason: string } {
   switch (variable.resolvedType) {
     case 'COLOR':
@@ -16,9 +20,11 @@ export function tokenType(variable: SnapshotVariable): { type: TokenType } | { r
       }
       // Figma's Import mode drops the Font weight scope, so an unscoped number may be a weight.
       if (variable.scopes.length === 0 || variable.scopes.includes('ALL_SCOPES')) {
-        return {
-          reason: 'number variables need a scope: Font weight for a weight, or a size scope such as Gap or Font size for a size',
-        };
+        return { reason: NUMBER_SCOPE_REASON };
+      }
+      // A unitless opacity is not a size, and css-to-dtcg has no token type for it either.
+      if (variable.scopes.every((scope) => scope === 'OPACITY')) {
+        return { reason: 'opacity variables are not supported' };
       }
       return { type: 'dimension' };
     case 'STRING':
@@ -28,7 +34,7 @@ export function tokenType(variable: SnapshotVariable): { type: TokenType } | { r
       if (variable.scopes.includes('FONT_STYLE')) {
         return { reason: 'font style strings are not supported; use a number variable with the Font weight scope' };
       }
-      return { reason: 'string variables need the Font family scope' };
+      return { reason: STRING_SCOPE_REASON };
     default:
       return { reason: `${variable.resolvedType.toLowerCase()} variables are not supported` };
   }

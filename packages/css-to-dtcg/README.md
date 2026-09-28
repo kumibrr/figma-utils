@@ -84,7 +84,8 @@ right-click each mode → **Import mode**. Afterwards:
 - for every font-family variable, set its **Web code syntax** to the full stack
   (e.g. `'Roboto Slab', serif`) — Figma's format has no field for fallbacks;
 - for every font-weight variable, set its scope to **Font weight** — the files include it,
-  but Import mode drops that one scope.
+  but Import mode drops that one scope. The Export Design Tokens plugin suggests it and can
+  set it for you.
 
 Colours import with all scopes and sizes with every size scope (radius, width/height, gap,
 stroke, effects, font size, line height, letter and paragraph spacing).

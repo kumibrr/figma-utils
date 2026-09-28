@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 
 import { buildExport } from '../src/core/build-export';
 import { multipleFiles } from '../src/core/files';
+import { inferScopes } from '../src/core/infer-scopes';
 import type { Snapshot } from '../src/core/snapshot';
 
 const example = fileURLToPath(new URL('../../../examples/lumen-academy/', import.meta.url));
@@ -34,14 +35,42 @@ describe('CSS → css-to-dtcg → Figma → plugin', () => {
     expect(result.errors).toEqual([]);
   });
 
-  it('reproduces examples/lumen-academy/tokens byte for byte', () => {
+  const expectExample = (built: ReturnType<typeof buildExport>) => {
     const expected = readTree(join(example, 'tokens'));
-    const actual = new Map(multipleFiles(result).map((file) => [file.path, file.json]));
+    const actual = new Map(multipleFiles(built).map((file) => [file.path, file.json]));
 
     expect([...actual.keys()].sort()).toEqual([...expected.keys()].sort());
     for (const [path, json] of expected) {
       expect(actual.get(path), path).toBe(json);
     }
+  };
+
+  it('reproduces examples/lumen-academy/tokens byte for byte', () => {
+    expectExample(result);
+  });
+
+  it('reproduces the example after the plugin sets every number and string scope', () => {
+    const unscoped: Snapshot = {
+      ...snapshot,
+      variables: snapshot.variables.map((variable) =>
+        variable.resolvedType === 'COLOR' ? variable : { ...variable, scopes: ['ALL_SCOPES'] },
+      ),
+    };
+    const fixes = new Map(inferScopes(unscoped).map((fix) => [fix.variableId, fix.scopes]));
+    const fixed: Snapshot = {
+      ...unscoped,
+      variables: unscoped.variables.map((variable) => ({ ...variable, scopes: fixes.get(variable.id) ?? variable.scopes })),
+    };
+
+    expect(fixes.size).toBe(unscoped.variables.filter((variable) => variable.resolvedType !== 'COLOR').length);
+    const scopesOf = (name: string) => fixes.get(snapshot.variables.find((variable) => variable.name === name)!.id);
+    expect(scopesOf('size/m')).toEqual(['FONT_SIZE']);
+    expect(scopesOf('leading/display')).toEqual(['LINE_HEIGHT']);
+    expect(scopesOf('weight/title')).toEqual(['FONT_WEIGHT']);
+    expect(scopesOf('family/heading')).toEqual(['FONT_FAMILY']);
+    expect(inferScopes(fixed)).toEqual([]);
+    expect(buildExport(fixed).errors).toEqual([]);
+    expectExample(buildExport(fixed));
   });
 
   it('blocks the export until the weights imported without their Font weight scope are fixed', () => {

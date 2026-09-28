@@ -1,4 +1,5 @@
 import type { Methods, RpcRequest, RpcResponse } from '../shared/messages';
+import { applyScopes, canEdit } from './scopes';
 import { readSnapshot } from './snapshot';
 import { loadPrefs, loadToken, saveDestination, saveSettings, saveToken } from './storage';
 
@@ -8,7 +9,8 @@ type Handlers = {
 
 const handlers: Handlers = {
   getSnapshot: () => readSnapshot(),
-  getPrefs: () => loadPrefs(),
+  applyScopes: (changes) => applyScopes(changes),
+  getPrefs: async () => ({ ...(await loadPrefs()), canEdit: canEdit() }),
   saveSettings: (settings) => saveSettings(settings),
   saveToken: (token) => saveToken(token),
   getToken: () => loadToken(),
