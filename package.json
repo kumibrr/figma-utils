@@ -9,8 +9,7 @@
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
-    "changeset": "changeset",
-    "release": "pnpm build && changeset publish"
+    "changeset": "changeset"
   },
   "packageManager": "pnpm@11.22.0",
   "devDependencies": {
