@@ -15,11 +15,18 @@ Tools for keeping design tokens in sync between code and Figma.
     pnpm typecheck
     pnpm test
 
-## Releasing `css-to-dtcg`
+## Releasing
 
-1. Add a changeset: `pnpm changeset`.
-2. Merge to `main`; the Release workflow opens a "Version Packages" PR.
-3. Merging that PR publishes to npm with provenance via npm trusted publishing.
+1. Add a changeset with each change: `pnpm changeset`.
+2. When ready to release, run `pnpm changeset version` to bump `css-to-dtcg` and update its
+   `CHANGELOG.md`, then commit that to `main`.
+3. Tag the commit with the new version and push the tag:
+   `git tag v0.1.0 && git push origin v0.1.0`.
+
+The Release workflow checks that the tag matches the `css-to-dtcg` version, publishes it to
+npm with provenance via npm trusted publishing, and creates a GitHub Release with the
+changelog entry and the Figma plugin zipped (`manifest.json` + `dist/`, ready for Figma's
+"Import plugin from manifest…").
 
 The very first publish must be done by a maintainer (`cd packages/css-to-dtcg && npm publish`),
 because npm only lets you configure a trusted publisher for a package that exists. Then, on
