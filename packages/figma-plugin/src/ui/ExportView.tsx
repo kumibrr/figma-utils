@@ -2,6 +2,7 @@ import { useState } from 'preact/hooks';
 
 import type { BuildResult } from '../core/build-export';
 import type { ExportFile } from '../core/files';
+import type { ScopeFix } from '../core/infer-scopes';
 import type { Snapshot } from '../core/snapshot';
 import { createClient } from '../github/client';
 import { publish, type PublishStep } from '../github/publish';
@@ -13,7 +14,9 @@ import { FileList } from './FileList';
 import { GearIcon, RefreshIcon, Spinner } from './icons';
 import { ResultBanner } from './ResultBanner';
 import { call } from './rpc';
+import { ScopeFixes } from './ScopeFixes';
 import {
+  appliedBanner,
   errorBanner,
   exportAction,
   exportBlocker,
@@ -21,6 +24,7 @@ import {
   previewFiles,
   resultBanner,
   STEP_TEXT,
+  uncoveredErrors,
   type Banner,
   type Build,
   type Format,
@@ -29,7 +33,7 @@ import {
 type Props = {
   build: Build;
   prefs: Prefs;
-  refresh: () => Promise<{ snapshot: Snapshot; result: BuildResult } | null>;
+  refresh: () => Promise<{ snapshot: Snapshot; result: BuildResult; fixes: ScopeFix[] } | null>;
   onPrefs: (prefs: Prefs) => void;
   openSettings: () => void;
 };
@@ -38,13 +42,16 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
   const [format, setFormat] = useState<Format>('multiple');
   const [step, setStep] = useState<PublishStep | null>(null);
   const [banner, setBanner] = useState<Banner | null>(null);
+  const [applying, setApplying] = useState(false);
+  const [unticked, setUnticked] = useState<Set<string>>(new Set());
 
   const blocker = exportBlocker(build, step !== null);
+  const errors = build.status === 'ready' ? uncoveredErrors(build.result.errors, build.fixes) : [];
 
   async function onExport() {
     setBanner(null);
     const fresh = await refresh();
-    if (!fresh || exportBlocker({ status: 'ready', result: fresh.result }, false)) {
+    if (!fresh || exportBlocker({ status: 'ready', ...fresh }, false)) {
       return;
     }
 
@@ -85,7 +92,7 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
   async function onDownloadRow(file: ExportFile) {
     setBanner(null);
     const fresh = await refresh();
-    if (!fresh || exportBlocker({ status: 'ready', result: fresh.result }, false)) {
+    if (!fresh || exportBlocker({ status: 'ready', ...fresh }, false)) {
       return;
     }
     const current = freshFile(fresh.result, format, file.path);
@@ -94,6 +101,26 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
     } else {
       setBanner({ kind: 'error', text: `${file.path} is no longer part of the export.` });
     }
+  }
+
+  async function onApplyScopes(fixes: ScopeFix[]) {
+    setBanner(null);
+    setApplying(true);
+    try {
+      const count = await call('applyScopes', fixes.map(({ variableId, scopes }) => ({ variableId, scopes })));
+      await refresh();
+      setBanner(appliedBanner(count));
+    } catch (error) {
+      setBanner(errorBanner(error));
+    } finally {
+      setApplying(false);
+    }
+  }
+
+  function onToggleFix(variableId: string) {
+    const next = new Set(unticked);
+    if (!next.delete(variableId)) next.add(variableId);
+    setUnticked(next);
   }
 
   function onDestination(destination: Destination) {
@@ -138,7 +165,17 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
           </p>
         )}
         {build.status === 'failed' && <p class="danger">Couldn't read variables: {build.message}</p>}
-        {build.status === 'ready' && build.result.errors.length > 0 && <ErrorList errors={build.result.errors} />}
+        {build.status === 'ready' && build.fixes.length > 0 && (
+          <ScopeFixes
+            fixes={build.fixes}
+            unticked={unticked}
+            canEdit={prefs.canEdit}
+            applying={applying}
+            onToggle={onToggleFix}
+            onApply={(fixes) => void onApplyScopes(fixes)}
+          />
+        )}
+        {errors.length > 0 && <ErrorList errors={errors} />}
         {build.status === 'ready' && build.result.errors.length === 0 && build.result.sets.length === 0 && (
           <p class="muted">No local variables in this file.</p>
         )}

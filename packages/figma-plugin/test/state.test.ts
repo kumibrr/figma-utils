@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
 import { buildExport } from '../src/core/build-export';
+import { inferScopes } from '../src/core/infer-scopes';
 import {
+  appliedBanner,
   cancelReplace,
   destinationLabel,
   errorBanner,
@@ -14,7 +16,9 @@ import {
   resultBanner,
   startReplace,
   STEP_TEXT,
+  fixText,
   tokenToSave,
+  uncoveredErrors,
 } from '../src/ui/state';
 import { collection, rgba, snapshot, variable } from './helpers';
 
@@ -34,10 +38,10 @@ describe('exportBlocker', () => {
   it('blocks while loading, publishing, on errors and when empty', () => {
     expect(exportBlocker({ status: 'loading' }, false)).toBe('loading');
     expect(exportBlocker({ status: 'failed', message: 'x' }, false)).toBe('failed');
-    expect(exportBlocker({ status: 'ready', result }, true)).toBe('publishing');
-    expect(exportBlocker({ status: 'ready', result: { ...result, errors: [{ collection: 'a', reason: 'b' }] } }, false)).toBe('errors');
-    expect(exportBlocker({ status: 'ready', result: { sets: [], themes: [], errors: [] } }, false)).toBe('empty');
-    expect(exportBlocker({ status: 'ready', result }, false)).toBeNull();
+    expect(exportBlocker({ status: 'ready', result, fixes: [] }, true)).toBe('publishing');
+    expect(exportBlocker({ status: 'ready', result: { ...result, errors: [{ collection: 'a', reason: 'b' }] }, fixes: [] }, false)).toBe('errors');
+    expect(exportBlocker({ status: 'ready', result: { sets: [], themes: [], errors: [] }, fixes: [] }, false)).toBe('empty');
+    expect(exportBlocker({ status: 'ready', result, fixes: [] }, false)).toBeNull();
   });
 });
 
@@ -83,6 +87,41 @@ describe('labels and banners', () => {
     expect(resultBanner({ kind: 'opened', number: 42, url: 'u', branch: 'b' })).toEqual({ kind: 'success', text: 'PR #42 opened', url: 'u' });
     expect(resultBanner({ kind: 'no-changes', base: 'main' })).toEqual({ kind: 'info', text: 'No changes vs main' });
     expect(errorBanner(new Error('GitHub rejected the token.'))).toEqual({ kind: 'error', text: 'GitHub rejected the token.' });
+  });
+});
+
+describe('scope fixes', () => {
+  const unscoped = snapshot(
+    [collection('typography', ['Mode 1'])],
+    [
+      variable('typography', 'weight/bold', 'FLOAT', { 'Mode 1': 700 }),
+      variable('typography', 'size/m', 'FLOAT', { 'Mode 1': 1 }),
+      variable('typography', 'family/body', 'STRING', { 'Mode 1': 'Inter' }),
+      variable('typography', 'label', 'STRING', { 'Mode 1': 'Hi' }),
+      variable('typography', 'bad.name', 'FLOAT', { 'Mode 1': 1 }),
+    ],
+  );
+  const fixes = inferScopes(unscoped);
+
+  it('hides the scope errors a fix covers and keeps every other error', () => {
+    expect(uncoveredErrors(buildExport(unscoped).errors, fixes).map((error) => `${error.variable} — ${error.reason}`)).toEqual([
+      'label — string variables need the Font family scope',
+      'bad.name — name segment "bad.name" contains one of . { }',
+    ]);
+  });
+
+  it('describes each fix', () => {
+    expect(fixes.map(fixText)).toEqual([
+      'weight/bold → Font weight (name)',
+      'size/m → Size scopes (no weight hint)',
+      'family/body → Font family (name)',
+      'bad.name → Size scopes (no weight hint)',
+    ]);
+  });
+
+  it('reports how many variables were changed', () => {
+    expect(appliedBanner(1)).toEqual({ kind: 'info', text: 'Set the scope of 1 variable. Undo in Figma to revert.' });
+    expect(appliedBanner(3)).toEqual({ kind: 'info', text: 'Set the scopes of 3 variables. Undo in Figma to revert.' });
   });
 });
 

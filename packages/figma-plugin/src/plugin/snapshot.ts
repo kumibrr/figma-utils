@@ -12,7 +12,7 @@ export function toSnapshotValue(value: VariableValue): SnapshotValue {
   return value as SnapshotValue;
 }
 
-/** Reads the current file's local variables. The only place that reads figma.variables. */
+/** Reads the current file's local variables. Only scopes.ts changes them. */
 export async function readSnapshot(): Promise<Snapshot> {
   const [collections, variables] = await Promise.all([
     figma.variables.getLocalVariableCollectionsAsync(),

@@ -1,11 +1,16 @@
 import type { BuildResult, ExportError } from '../core/build-export';
 import { multipleFiles, singleFile, type ExportFile } from '../core/files';
+import type { ScopeFix, ScopeKind } from '../core/infer-scopes';
+import { NUMBER_SCOPE_REASON, STRING_SCOPE_REASON } from '../core/tokens';
 import type { PublishResult, PublishStep } from '../github/publish';
 import type { RepoSettings } from '../github/settings';
 import type { Destination } from '../shared/messages';
 
 export type Format = 'multiple' | 'single';
-export type Build = { status: 'loading' } | { status: 'ready'; result: BuildResult } | { status: 'failed'; message: string };
+export type Build =
+  | { status: 'loading' }
+  | { status: 'ready'; result: BuildResult; fixes: ScopeFix[] }
+  | { status: 'failed'; message: string };
 export type Banner = { kind: 'success'; text: string; url: string } | { kind: 'info'; text: string } | { kind: 'error'; text: string };
 
 export const previewFiles = (result: BuildResult, format: Format): ExportFile[] =>
@@ -72,6 +77,25 @@ export const resultBanner = (result: PublishResult): Banner =>
 export const errorBanner = (error: unknown): Banner => ({
   kind: 'error',
   text: error instanceof Error ? error.message : String(error),
+});
+
+const SCOPE_REASONS = [NUMBER_SCOPE_REASON, STRING_SCOPE_REASON];
+
+/** The errors not already listed as a scope fix, so each problem is shown once. */
+export const uncoveredErrors = (errors: ExportError[], fixes: ScopeFix[]): ExportError[] =>
+  errors.filter(
+    (error) =>
+      !SCOPE_REASONS.includes(error.reason) ||
+      !fixes.some((fix) => fix.collection === error.collection && fix.variable === error.variable),
+  );
+
+const KIND_TEXT: Record<ScopeKind, string> = { fontWeight: 'Font weight', size: 'Size scopes', fontFamily: 'Font family' };
+
+export const fixText = (fix: ScopeFix): string => `${fix.variable} → ${KIND_TEXT[fix.kind]} (${fix.because})`;
+
+export const appliedBanner = (count: number): Banner => ({
+  kind: 'info',
+  text: `Set the ${count === 1 ? 'scope of 1 variable' : `scopes of ${count} variables`}. Undo in Figma to revert.`,
 });
 
 export function groupErrors(errors: ExportError[]): { collection: string; items: string[] }[] {

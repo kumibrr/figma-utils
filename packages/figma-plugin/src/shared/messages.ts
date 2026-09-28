@@ -3,11 +3,16 @@ import type { RepoSettings } from '../github/settings';
 
 export type Destination = 'github' | 'computer';
 
-export type Prefs = { settings: RepoSettings | null; hasToken: boolean; destination: Destination };
+export type ScopeChange = { variableId: string; scopes: string[] };
+
+/** `canEdit` is false in Dev Mode, where the plugin can read the file but not change it. */
+export type Prefs = { settings: RepoSettings | null; hasToken: boolean; destination: Destination; canEdit: boolean };
 
 /** Everything the UI can ask the main thread to do. */
 export interface Methods {
   getSnapshot(): Snapshot;
+  /** Returns how many variables were changed. */
+  applyScopes(changes: ScopeChange[]): number;
   getPrefs(): Prefs;
   saveSettings(settings: RepoSettings): void;
   saveToken(token: string): void;

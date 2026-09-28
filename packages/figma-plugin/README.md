@@ -13,6 +13,18 @@ in Dev Mode. Output is byte-identical to [`css-to-dtcg`](../css-to-dtcg).
   Font family scope → `fontFamily`. A number left on "All scopes" (or none) is an error,
   because Figma's Import mode drops the Font weight scope and it could be a weight.
   The fallback stack comes from the variable's **Web code syntax**, e.g. `'Roboto Slab', serif`.
+- Missing scopes don't have to be set by hand. For every number or string the export
+  refuses for its scope, the plugin suggests one and **Apply scopes** writes the ticked ones
+  to Figma as a single undo step:
+  - a number becomes **Font weight** if its name or Web code syntax mentions "weight",
+    it aliases a weight, or every mode's value is 100–900 in steps of 100; otherwise it gets
+    every size scope (the same ones `css-to-dtcg --target figma` writes);
+  - a string becomes **Font family** if its name or Web code syntax mentions "font" or
+    "family", its Web code syntax is a font stack, or it aliases a font family. Other strings
+    stay errors.
+
+  The export stays blocked until the scopes are in Figma. Dev Mode can't change the file, so
+  there the suggestions are shown but can't be applied.
 - Aliases stay references (`{primitives.gray.900}`). Aliases to library variables are errors.
 - Any problem blocks the export and every problem is listed.
 

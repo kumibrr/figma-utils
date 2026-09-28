@@ -2,6 +2,7 @@ import { serialize } from 'css-to-dtcg/serialize';
 import { useCallback, useEffect, useState } from 'preact/hooks';
 
 import { buildExport } from '../core/build-export';
+import { inferScopes } from '../core/infer-scopes';
 import type { Prefs } from '../shared/messages';
 import { downloadText } from './download';
 import { ExportView } from './ExportView';
@@ -19,8 +20,9 @@ export function App() {
     try {
       const snapshot = await call('getSnapshot');
       const result = buildExport(snapshot);
-      setBuild({ status: 'ready', result });
-      return { snapshot, result };
+      const fixes = inferScopes(snapshot);
+      setBuild({ status: 'ready', result, fixes });
+      return { snapshot, result, fixes };
     } catch (error) {
       setBuild({ status: 'failed', message: error instanceof Error ? error.message : String(error) });
       return null;
