@@ -1,6 +1,6 @@
 {
   "name": "css-to-dtcg",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn CSS custom properties into W3C DTCG design tokens, including files Figma can import.",
   "license": "MIT",
   "type": "module",
