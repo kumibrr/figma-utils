@@ -19,7 +19,7 @@ Tools for keeping design tokens in sync between code and Figma.
 
 `css-to-dtcg` (npm) and the Figma plugin (`export-design-tokens`) have separate versions,
 changelogs and releases. Each release has a `<package>@<version>` tag, e.g.
-`css-to-dtcg@0.2.0` or `export-design-tokens@0.1.0`.
+`css-to-dtcg@0.2.0` or `export-design-tokens@1.0.0`.
 
 1. Add a changeset with each change: `pnpm changeset`, and pick the package(s) it affects.
    A `css-to-dtcg` release also gives the plugin a patch release, because the plugin bundles it.
