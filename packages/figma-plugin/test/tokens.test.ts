@@ -11,6 +11,7 @@ describe('tokenType', () => {
     expect(tokenType(variable('p', 'w', 'FLOAT', {}, { scopes: ['FONT_WEIGHT'] }))).toEqual({ type: 'fontWeight' });
     expect(tokenType(variable('p', 'size', 'FLOAT', {}, { scopes: ['GAP'] }))).toEqual({ type: 'dimension' });
     expect(tokenType(variable('p', 'font-weight', 'FLOAT', {}, { scopes: ['FONT_SIZE'] }))).toEqual({ type: 'dimension' });
+    expect(tokenType(variable('p', 'fade', 'FLOAT', {}, { scopes: ['OPACITY', 'GAP'] }))).toEqual({ type: 'dimension' });
     expect(tokenType(variable('p', 'f', 'STRING', {}, { scopes: ['FONT_FAMILY'] }))).toEqual({ type: 'fontFamily' });
   });
 
@@ -23,6 +24,7 @@ describe('tokenType', () => {
     };
     expect(tokenType(variable('p', 'n', 'FLOAT', {}))).toEqual(numberReason);
     expect(tokenType(variable('p', 'n', 'FLOAT', {}, { scopes: [] }))).toEqual(numberReason);
+    expect(tokenType(variable('p', 'o', 'FLOAT', {}, { scopes: ['OPACITY'] }))).toEqual({ reason: 'opacity variables are not supported' });
     expect(tokenType(variable('p', 's', 'STRING', {}, { scopes: ['FONT_STYLE'] }))).toEqual({
       reason: 'font style strings are not supported; use a number variable with the Font weight scope',
     });

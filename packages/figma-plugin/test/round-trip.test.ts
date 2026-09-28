@@ -63,6 +63,11 @@ describe('CSS → css-to-dtcg → Figma → plugin', () => {
     };
 
     expect(fixes.size).toBe(unscoped.variables.filter((variable) => variable.resolvedType !== 'COLOR').length);
+    const scopesOf = (name: string) => fixes.get(snapshot.variables.find((variable) => variable.name === name)!.id);
+    expect(scopesOf('size/m')).toEqual(['FONT_SIZE']);
+    expect(scopesOf('leading/display')).toEqual(['LINE_HEIGHT']);
+    expect(scopesOf('weight/title')).toEqual(['FONT_WEIGHT']);
+    expect(scopesOf('family/heading')).toEqual(['FONT_FAMILY']);
     expect(inferScopes(fixed)).toEqual([]);
     expect(buildExport(fixed).errors).toEqual([]);
     expectExample(buildExport(fixed));

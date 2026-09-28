@@ -98,6 +98,7 @@ describe('scope fixes', () => {
       variable('typography', 'size/m', 'FLOAT', { 'Mode 1': 1 }),
       variable('typography', 'family/body', 'STRING', { 'Mode 1': 'Inter' }),
       variable('typography', 'label', 'STRING', { 'Mode 1': 'Hi' }),
+      variable('typography', 'greeting', 'STRING', { 'Mode 1': 'Hi' }, { scopes: ['TEXT_CONTENT'] }),
       variable('typography', 'bad.name', 'FLOAT', { 'Mode 1': 1 }),
     ],
   );
@@ -105,7 +106,7 @@ describe('scope fixes', () => {
 
   it('hides the scope errors a fix covers and keeps every other error', () => {
     expect(uncoveredErrors(buildExport(unscoped).errors, fixes).map((error) => `${error.variable} — ${error.reason}`)).toEqual([
-      'label — string variables need the Font family scope',
+      'greeting — string variables need the Font family scope',
       'bad.name — name segment "bad.name" contains one of . { }',
     ]);
   });
@@ -113,10 +114,14 @@ describe('scope fixes', () => {
   it('describes each fix', () => {
     expect(fixes.map(fixText)).toEqual([
       'weight/bold → Font weight (name)',
-      'size/m → Size scopes (no weight hint)',
+      'size/m → Font size (name)',
       'family/body → Font family (name)',
-      'bad.name → Size scopes (no weight hint)',
+      "label → Text content (name; can't be exported)",
+      'bad.name → All size scopes (no hint)',
     ]);
+    expect(
+      fixText({ ...fixes[0], variable: 'mixed', scopes: ['GAP', 'CORNER_RADIUS'], because: 'aliases gap', stillBlocked: null }),
+    ).toBe('mixed → Gap, Corner radius (aliases gap)');
   });
 
   it('reports how many variables were changed', () => {

@@ -1,6 +1,8 @@
 import type { BuildResult, ExportError } from '../core/build-export';
 import { multipleFiles, singleFile, type ExportFile } from '../core/files';
-import type { ScopeFix, ScopeKind } from '../core/infer-scopes';
+import { SIZE_SCOPES } from 'css-to-dtcg/scopes';
+
+import type { ScopeFix } from '../core/infer-scopes';
 import { NUMBER_SCOPE_REASON, STRING_SCOPE_REASON } from '../core/tokens';
 import type { PublishResult, PublishStep } from '../github/publish';
 import type { RepoSettings } from '../github/settings';
@@ -89,9 +91,32 @@ export const uncoveredErrors = (errors: ExportError[], fixes: ScopeFix[]): Expor
       !fixes.some((fix) => fix.collection === error.collection && fix.variable === error.variable),
   );
 
-const KIND_TEXT: Record<ScopeKind, string> = { fontWeight: 'Font weight', size: 'Size scopes', fontFamily: 'Font family' };
+/** Figma's own names for the scopes the plugin suggests. */
+const SCOPE_TEXT: Record<string, string> = {
+  CORNER_RADIUS: 'Corner radius',
+  WIDTH_HEIGHT: 'Width and height',
+  GAP: 'Gap',
+  OPACITY: 'Opacity',
+  STROKE_FLOAT: 'Stroke',
+  EFFECT_FLOAT: 'Effects',
+  FONT_WEIGHT: 'Font weight',
+  FONT_SIZE: 'Font size',
+  LINE_HEIGHT: 'Line height',
+  LETTER_SPACING: 'Letter spacing',
+  PARAGRAPH_SPACING: 'Paragraph spacing',
+  PARAGRAPH_INDENT: 'Paragraph indent',
+  FONT_FAMILY: 'Font family',
+  FONT_STYLE: 'Font style',
+  TEXT_CONTENT: 'Text content',
+};
 
-export const fixText = (fix: ScopeFix): string => `${fix.variable} → ${KIND_TEXT[fix.kind]} (${fix.because})`;
+const scopesText = (scopes: string[]) =>
+  scopes.length === SIZE_SCOPES.length && SIZE_SCOPES.every((scope) => scopes.includes(scope))
+    ? 'All size scopes'
+    : scopes.map((scope) => SCOPE_TEXT[scope] ?? scope).join(', ');
+
+export const fixText = (fix: ScopeFix): string =>
+  `${fix.variable} → ${scopesText(fix.scopes)} (${fix.because}${fix.stillBlocked ? "; can't be exported" : ''})`;
 
 export const appliedBanner = (count: number): Banner => ({
   kind: 'info',

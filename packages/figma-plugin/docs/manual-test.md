@@ -14,8 +14,11 @@ from `packages/figma-plugin/manifest.json`.
       shows only "Font weight" for the four weights.
 - [ ] ⌘Z / Ctrl+Z in Figma puts all four back on "All scopes"; refresh shows the suggestions again.
       Apply them again.
-- [ ] Set a size (e.g. `size/m`) to "All scopes", refresh: it is suggested "Size scopes (no weight hint)".
-      Applying it restores every size scope.
+- [ ] Set `size/m` and `leading/m` to "All scopes", refresh: they are suggested "Font size (name)" and
+      "Line height (name)". After applying, they show only that scope and the export still equals `tokens/`.
+- [ ] Add a number `opacity/50` = 0.5 on "All scopes", refresh: it is suggested
+      "Opacity (name; can't be exported)". After applying, the error list shows "opacity variables are
+      not supported". Delete it.
 
 ## Normal editor
 

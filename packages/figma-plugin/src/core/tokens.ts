@@ -22,6 +22,10 @@ export function tokenType(variable: SnapshotVariable): { type: TokenType } | { r
       if (variable.scopes.length === 0 || variable.scopes.includes('ALL_SCOPES')) {
         return { reason: NUMBER_SCOPE_REASON };
       }
+      // A unitless opacity is not a size, and css-to-dtcg has no token type for it either.
+      if (variable.scopes.every((scope) => scope === 'OPACITY')) {
+        return { reason: 'opacity variables are not supported' };
+      }
       return { type: 'dimension' };
     case 'STRING':
       if (variable.scopes.includes('FONT_FAMILY')) {
