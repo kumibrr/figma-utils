@@ -17,16 +17,23 @@ Tools for keeping design tokens in sync between code and Figma.
 
 ## Releasing
 
-1. Add a changeset with each change: `pnpm changeset`.
-2. When ready to release, run `pnpm changeset version` to bump `css-to-dtcg` and update its
-   `CHANGELOG.md`, then commit that to `main`.
-3. Tag the commit with the new version and push the tag:
-   `git tag v0.1.0 && git push origin v0.1.0`.
+`css-to-dtcg` (npm) and the Figma plugin (`export-design-tokens`) have separate versions,
+changelogs and releases. Each release has a `<package>@<version>` tag, e.g.
+`css-to-dtcg@0.2.0` or `export-design-tokens@0.1.0`.
 
-The Release workflow checks that the tag matches the `css-to-dtcg` version, publishes it to
-npm with provenance via npm trusted publishing, and creates a GitHub Release with the
-changelog entry and the Figma plugin zipped (`manifest.json` + `dist/`, ready for Figma's
-"Import plugin from manifest…").
+1. Add a changeset with each change: `pnpm changeset`, and pick the package(s) it affects.
+   A `css-to-dtcg` release also gives the plugin a patch release, because the plugin bundles it.
+2. When ready to release, run `pnpm changeset version` to bump the versions and update the
+   `CHANGELOG.md` files, then commit that to `main`.
+3. On that commit, run `pnpm changeset tag` to tag every package whose new version isn't
+   tagged yet, then push the tags: `git push --follow-tags`.
+
+For each tag, the Release workflow checks that the tag matches the package version and creates
+a GitHub Release with the changelog entry:
+
+- `css-to-dtcg@…` publishes to npm with provenance via npm trusted publishing.
+- `export-design-tokens@…` attaches the zipped plugin (`manifest.json` + `dist/`, ready for
+  Figma's "Import plugin from manifest…") and becomes the repository's latest release.
 
 The very first publish must be done by a maintainer (`cd packages/css-to-dtcg && npm publish`),
 because npm only lets you configure a trusted publisher for a package that exists. Then, on

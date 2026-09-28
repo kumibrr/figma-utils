@@ -2,7 +2,9 @@ name: Release
 
 on:
   push:
-    tags: ['v*.*.*']
+    tags:
+      - 'css-to-dtcg@*'
+      - 'export-design-tokens@*'
 
 permissions:
   contents: write
@@ -22,25 +24,34 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
       - run: npm install -g npm@latest
+
+      - name: Check tag matches package version
+        run: |
+          PACKAGE="${TAG%@*}"
+          VERSION="${TAG##*@}"
+          case "$PACKAGE" in
+            css-to-dtcg) DIR=packages/css-to-dtcg ;;
+            export-design-tokens) DIR=packages/figma-plugin ;;
+            *) echo "::error::Unknown package in tag $TAG"; exit 1 ;;
+          esac
+          ACTUAL=$(node -p "require('./$DIR/package.json').version")
+          if [ "$VERSION" != "$ACTUAL" ]; then
+            echo "::error::Tag $TAG does not match $PACKAGE version $ACTUAL"
+            exit 1
+          fi
+          {
+            echo "PACKAGE=$PACKAGE"
+            echo "VERSION=$VERSION"
+            echo "DIR=$DIR"
+          } >> "$GITHUB_ENV"
+
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm typecheck
       - run: pnpm test
 
-      - name: Check tag matches package version
-        run: |
-          VERSION=$(node -p "require('./packages/css-to-dtcg/package.json').version")
-          if [ "$TAG" != "v$VERSION" ]; then
-            echo "::error::Tag $TAG does not match css-to-dtcg version $VERSION"
-            exit 1
-          fi
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-
-      - name: Package Figma plugin
-        working-directory: packages/figma-plugin
-        run: zip -r "$GITHUB_WORKSPACE/export-design-tokens-$TAG.zip" manifest.json dist
-
       - name: Publish to npm
+        if: env.PACKAGE == 'css-to-dtcg'
         working-directory: packages/css-to-dtcg
         run: |
           if npm view "css-to-dtcg@$VERSION" version > /dev/null 2>&1; then
@@ -48,6 +59,11 @@ jobs:
           else
             npm publish --provenance --access public
           fi
+
+      - name: Package Figma plugin
+        if: env.PACKAGE == 'export-design-tokens'
+        working-directory: packages/figma-plugin
+        run: zip -r "$GITHUB_WORKSPACE/export-design-tokens-$VERSION.zip" manifest.json dist
 
       - name: Create GitHub Release
         env:
@@ -57,9 +73,17 @@ jobs:
             $0 == heading { found = 1; next }
             found && /^## / { exit }
             found { print }
-          ' packages/css-to-dtcg/CHANGELOG.md > release-notes.md
-          if gh release view "$TAG" > /dev/null 2>&1; then
-            gh release upload "$TAG" "export-design-tokens-$TAG.zip" --clobber
+          ' "$DIR/CHANGELOG.md" > release-notes.md
+          # Keep "Latest release" pointing at the plugin download.
+          if [ "$PACKAGE" = export-design-tokens ]; then
+            ASSETS="export-design-tokens-$VERSION.zip"
+            LATEST=true
           else
-            gh release create "$TAG" "export-design-tokens-$TAG.zip" --title "$TAG" --notes-file release-notes.md
+            ASSETS=""
+            LATEST=false
+          fi
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            if [ -n "$ASSETS" ]; then gh release upload "$TAG" $ASSETS --clobber; fi
+          else
+            gh release create "$TAG" $ASSETS --title "$TAG" --notes-file release-notes.md --latest=$LATEST
           fi
