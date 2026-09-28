@@ -18,11 +18,16 @@ in Dev Mode. Output is byte-identical to [`css-to-dtcg`](../css-to-dtcg).
 
 ## GitHub
 
-Settings (gear icon): repository `owner/repo`, base branch, folder, and a fine-grained
-personal access token with **Contents** and **Pull requests** read/write on that
-repository. The token is stored with `figma.clientStorage` on your machine and is never
-shown again. Each export creates `styles/figma-export-<UTC timestamp>`, replaces the
-folder in one commit, and opens a pull request. Nothing changed → nothing is created.
+Settings (gear icon) walk through the destination step by step: paste a fine-grained
+personal access token with **Contents** and **Pull requests** read/write, then pick the
+owner, the repository and the base branch from what the token can reach, and the folder.
+A fine-grained token belongs to one owner, so create it with the organization as the
+resource owner to reach an organization's repositories. Typing a base branch that doesn't
+exist creates it from the repository's default branch on Save.
+
+The token is stored with `figma.clientStorage` on your machine and is never shown again.
+Each export creates `styles/figma-export-<UTC timestamp>` from the base branch, replaces
+the folder in one commit, and opens a pull request. Nothing changed → nothing is created.
 
 ## Develop
 

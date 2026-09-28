@@ -1,7 +1,8 @@
 import type { BuildResult, ExportError } from '../core/build-export';
 import { multipleFiles, singleFile, type ExportFile } from '../core/files';
+import { ownersOf, reposOf, type Repo } from '../github/browse';
 import type { PublishResult, PublishStep } from '../github/publish';
-import type { RepoSettings } from '../github/settings';
+import { parseRepository, type RepoSettings } from '../github/settings';
 import type { Destination } from '../shared/messages';
 
 export type Format = 'multiple' | 'single';
@@ -99,3 +100,31 @@ export const cancelReplace = (): TokenField => ({ mode: 'saved' });
 
 export const tokenToSave = (field: TokenField): string | null =>
   field.mode === 'entering' && field.draft.trim() !== '' ? field.draft.trim() : null;
+
+export const isNewBranch = (branches: string[], input: string): boolean =>
+  input.trim() !== '' && !branches.includes(input.trim());
+
+export type Pick = { owner: string | null; repo: string | null; missing: string | null };
+
+/**
+ * What the pickers start with: the saved repository when the token still reaches it,
+ * otherwise whatever is the only choice. A saved repository that is gone keeps its
+ * owner (when listed) and leaves the repository for the user to pick.
+ */
+export function initialPick(repos: Repo[], saved: RepoSettings | null): Pick {
+  const owners = ownersOf(repos);
+  const only = <T>(items: T[]) => (items.length === 1 ? items[0] : null);
+
+  if (saved) {
+    const parsed = parseRepository(saved.repository);
+    const hit = parsed && reposOf(repos, parsed.owner).find((repo) => repo.name === parsed.repo);
+    if (hit) {
+      return { owner: hit.owner, repo: hit.name, missing: null };
+    }
+    const owner = parsed && owners.includes(parsed.owner) ? parsed.owner : only(owners);
+    return { owner, repo: null, missing: saved.repository.trim() };
+  }
+
+  const owner = only(owners);
+  return { owner, repo: owner ? (only(reposOf(repos, owner))?.name ?? null) : null, missing: null };
+}

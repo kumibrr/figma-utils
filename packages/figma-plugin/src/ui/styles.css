@@ -309,13 +309,41 @@ button {
   gap: 4px;
 }
 
-.field input {
+.field input,
+.field select {
   padding: 6px 8px;
   border: 1px solid var(--figma-color-border);
   border-radius: 4px;
   background: var(--figma-color-bg);
   color: var(--figma-color-text);
   font: inherit;
+}
+
+.field input:disabled,
+.field select:disabled {
+  opacity: 0.5;
+}
+
+.field__row {
+  display: flex;
+  gap: 8px;
+}
+
+.field__row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.field__link {
+  align-self: flex-start;
+}
+
+.settings {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  overflow: auto;
 }
 
 .hint {

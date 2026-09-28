@@ -9,13 +9,16 @@ import {
   exportBlocker,
   freshFile,
   groupErrors,
+  initialPick,
   initialTokenField,
+  isNewBranch,
   previewFiles,
   resultBanner,
   startReplace,
   STEP_TEXT,
   tokenToSave,
 } from '../src/ui/state';
+import type { Repo } from '../src/github/browse';
 import { collection, rgba, snapshot, variable } from './helpers';
 
 const result = buildExport(
@@ -124,5 +127,44 @@ describe('freshFile', () => {
 
   it('returns null when the file is no longer exported', () => {
     expect(freshFile(result, 'multiple', 'semantic/theme/light.json')).toBeNull();
+  });
+});
+
+describe('isNewBranch', () => {
+  it('is true only for a non-empty name that is not an existing branch', () => {
+    expect(isNewBranch(['main', 'dev'], ' main ')).toBe(false);
+    expect(isNewBranch(['main', 'dev'], '   ')).toBe(false);
+    expect(isNewBranch(['main', 'dev'], 'release')).toBe(true);
+  });
+});
+
+describe('initialPick', () => {
+  const repo = (owner: string, name: string, canPush = true): Repo => ({
+    owner,
+    name,
+    fullName: `${owner}/${name}`,
+    defaultBranch: 'main',
+    canPush,
+  });
+  const repos = [repo('acme', 'ui'), repo('acme', 'web'), repo('ada', 'site'), repo('ada', 'old', false)];
+
+  it('pre-selects the saved repository', () => {
+    expect(initialPick(repos, settings)).toEqual({ owner: 'acme', repo: 'ui', missing: null });
+  });
+
+  it('keeps the owner and reports a saved repository that is not available', () => {
+    expect(initialPick(repos, { ...settings, repository: 'acme/gone' })).toEqual({ owner: 'acme', repo: null, missing: 'acme/gone' });
+    expect(initialPick(repos, { ...settings, repository: 'ada/old' })).toEqual({ owner: 'ada', repo: null, missing: 'ada/old' });
+    expect(initialPick(repos, { ...settings, repository: 'zed/x' })).toEqual({ owner: null, repo: null, missing: 'zed/x' });
+  });
+
+  it('auto-selects a single owner and a single pushable repository', () => {
+    expect(initialPick([repo('ada', 'site'), repo('ada', 'old', false)], null)).toEqual({ owner: 'ada', repo: 'site', missing: null });
+    expect(initialPick([repo('acme', 'ui'), repo('acme', 'web')], null)).toEqual({ owner: 'acme', repo: null, missing: null });
+  });
+
+  it('selects nothing when there is a choice to make', () => {
+    expect(initialPick(repos, null)).toEqual({ owner: null, repo: null, missing: null });
+    expect(initialPick([], null)).toEqual({ owner: null, repo: null, missing: null });
   });
 });
