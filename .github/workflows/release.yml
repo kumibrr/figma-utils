@@ -53,6 +53,9 @@ jobs:
       - name: Publish to npm
         if: env.PACKAGE == 'css-to-dtcg'
         working-directory: packages/css-to-dtcg
+        env:
+          # Falls back to npm trusted publishing (OIDC) when the secret isn't set.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if npm view "css-to-dtcg@$VERSION" version > /dev/null 2>&1; then
             echo "css-to-dtcg@$VERSION is already on npm, skipping"
