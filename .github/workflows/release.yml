@@ -50,17 +50,18 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
 
-      - name: Publish to npm
+      # Stages the version on npm; a maintainer publishes it with
+      # `npm stage approve <stage-id>`, which asks for 2FA.
+      - name: Stage on npm
         if: env.PACKAGE == 'css-to-dtcg'
         working-directory: packages/css-to-dtcg
         env:
-          # Falls back to npm trusted publishing (OIDC) when the secret isn't set.
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if npm view "css-to-dtcg@$VERSION" version > /dev/null 2>&1; then
             echo "css-to-dtcg@$VERSION is already on npm, skipping"
           else
-            npm publish --provenance --access public
+            npm stage publish --provenance --access public
           fi
 
       - name: Package Figma plugin
