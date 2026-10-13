@@ -188,7 +188,7 @@ describe('prBody', () => {
       ]),
     ).toBe(
       [
-        'Exported from the Figma file **Design System** by Ada with Export Design Tokens.',
+        'Exported from the Figma file **Design System** by Ada with TokenSync.',
         '',
         '**Added**',
         '- `tokens/a.json`',
@@ -205,7 +205,7 @@ describe('prBody', () => {
 
   it('handles an unknown exporter', () => {
     expect(prBody({ ...input, userName: null }, [])).toBe(
-      'Exported from the Figma file **Design System** by an unknown user with Export Design Tokens.\n',
+      'Exported from the Figma file **Design System** by an unknown user with TokenSync.\n',
     );
   });
 });

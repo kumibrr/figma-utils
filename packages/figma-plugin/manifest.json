@@ -1,5 +1,5 @@
 {
-  "name": "Export Design Tokens",
+  "name": "TokenSync",
   "id": "export-design-tokens-dev",
   "api": "1.0.0",
   "main": "dist/code.js",

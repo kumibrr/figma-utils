@@ -1,5 +1,5 @@
 {
-  "name": "export-design-tokens",
+  "name": "tokensync",
   "version": "2.0.0",
   "private": true,
   "type": "module",

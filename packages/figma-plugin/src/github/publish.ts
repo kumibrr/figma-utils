@@ -21,7 +21,7 @@ export function branchName(now: Date): string {
 
 export function prBody(input: Pick<PublishInput, 'fileName' | 'userName'>, files: { filename: string; status: string }[]): string {
   const lines = [
-    `Exported from the Figma file **${input.fileName}** by ${input.userName ?? 'an unknown user'} with Export Design Tokens.`,
+    `Exported from the Figma file **${input.fileName}** by ${input.userName ?? 'an unknown user'} with TokenSync.`,
     '',
   ];
   const section = (label: string, statuses: string[]) => {

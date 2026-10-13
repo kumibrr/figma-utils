@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - 'css-to-dtcg@*'
-      - 'export-design-tokens@*'
+      - 'tokensync@*'
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
           VERSION="${TAG##*@}"
           case "$PACKAGE" in
             css-to-dtcg) DIR=packages/css-to-dtcg ;;
-            export-design-tokens) DIR=packages/figma-plugin ;;
+            tokensync) DIR=packages/figma-plugin ;;
             *) echo "::error::Unknown package in tag $TAG"; exit 1 ;;
           esac
           ACTUAL=$(node -p "require('./$DIR/package.json').version")
@@ -65,9 +65,9 @@ jobs:
           fi
 
       - name: Package Figma plugin
-        if: env.PACKAGE == 'export-design-tokens'
+        if: env.PACKAGE == 'tokensync'
         working-directory: packages/figma-plugin
-        run: zip -r "$GITHUB_WORKSPACE/export-design-tokens-$VERSION.zip" manifest.json dist
+        run: zip -r "$GITHUB_WORKSPACE/tokensync-$VERSION.zip" manifest.json dist
 
       - name: Create GitHub Release
         env:
@@ -79,8 +79,8 @@ jobs:
             found { print }
           ' "$DIR/CHANGELOG.md" > release-notes.md
           # Keep "Latest release" pointing at the plugin download.
-          if [ "$PACKAGE" = export-design-tokens ]; then
-            ASSETS="export-design-tokens-$VERSION.zip"
+          if [ "$PACKAGE" = tokensync ]; then
+            ASSETS="tokensync-$VERSION.zip"
             LATEST=true
           else
             ASSETS=""
