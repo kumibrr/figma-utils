@@ -9,7 +9,7 @@ in Dev Mode. Output is byte-identical to [`css-to-dtcg`](../css-to-dtcg).
 - One set per collection (single mode) or per mode (`<collection>/<mode>.json`), plus
   `$themes.json` (one theme per mode of every multi-mode collection).
 - Token types come from variable scopes: colours → `color`; numbers with the Font weight
-  scope → `fontWeight`, numbers with any other scope → `dimension` (rem), except numbers
+  scope → `fontWeight`, numbers with any other scope → `dimension` (rem, see below), except numbers
   scoped only to Opacity, which are unsupported; strings with the Font family scope → `fontFamily`. A number left on "All scopes" (or none) is an error,
   because Figma's Import mode drops the Font weight scope and it could be a weight.
   The fallback stack comes from the variable's **Web code syntax**, e.g. `'Roboto Slab', serif`.
@@ -41,12 +41,15 @@ in Dev Mode. Output is byte-identical to [`css-to-dtcg`](../css-to-dtcg).
   The export stays blocked until the scopes are in Figma. Opacity, Font style and Text content
   are marked "can't be exported": applying them fixes Figma, but the export still refuses them.
   Dev Mode can't change the file, so there the suggestions are shown but can't be applied.
+- Sizes are pixels in Figma and rem in the export: the value is divided by the **base font
+  size** in settings (default 16, so 14 → `0.875rem`). It is saved in the Figma file, so
+  everyone exporting that file gets the same rem; Dev Mode shows it but can't change it. Use the same value as `css-to-dtcg --base-font-size` so a round trip is exact.
 - Aliases stay references (`{primitives.gray.900}`). Aliases to library variables are errors.
 - Any problem blocks the export and every problem is listed.
 
 ## GitHub
 
-Settings (gear icon) walk through the destination step by step: paste a fine-grained
+Settings (gear icon) hold the base font size and walk through the destination step by step: paste a fine-grained
 personal access token with **Contents** and **Pull requests** read/write, then pick the
 owner, the repository and the base branch from what the token can reach, and the folder.
 A fine-grained token belongs to one owner, so create it with the organization as the

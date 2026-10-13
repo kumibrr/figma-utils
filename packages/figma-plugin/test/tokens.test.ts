@@ -37,13 +37,23 @@ describe('toToken', () => {
       ok: true,
       token: { $type: 'color', $value: '#ffffff' },
     });
-    expect(toToken(variable('p', 's', 'FLOAT', {}, { scopes: ['GAP'] }), Math.fround(0.85), noAliases)).toEqual({
+    expect(toToken(variable('p', 's', 'FLOAT', {}, { scopes: ['GAP'] }), Math.fround(13.6), noAliases)).toEqual({
       ok: true,
       token: { $type: 'dimension', $value: { value: 0.85, unit: 'rem' } },
     });
     expect(toToken(variable('p', 'w', 'FLOAT', {}, { scopes: ['FONT_WEIGHT'] }), 700, noAliases)).toEqual({
       ok: true,
       token: { $type: 'fontWeight', $value: 700 },
+    });
+  });
+
+  it('converts px to rem with the base font size', () => {
+    const size = variable('p', 's', 'FLOAT', {}, { scopes: ['FONT_SIZE'] });
+
+    expect(toToken(size, 14, noAliases, 10)).toEqual({ ok: true, token: { $type: 'dimension', $value: { value: 1.4, unit: 'rem' } } });
+    expect(toToken(size, Math.fround(57.6), noAliases)).toEqual({
+      ok: true,
+      token: { $type: 'dimension', $value: { value: 3.6, unit: 'rem' } },
     });
   });
 

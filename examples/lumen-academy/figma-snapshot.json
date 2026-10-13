@@ -1636,7 +1636,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 0.75
+        "typography:default": 12
       }
     },
     {
@@ -1659,7 +1659,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 0.875
+        "typography:default": 14
       }
     },
     {
@@ -1682,7 +1682,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1
+        "typography:default": 16
       }
     },
     {
@@ -1705,7 +1705,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1.25
+        "typography:default": 20
       }
     },
     {
@@ -1728,7 +1728,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1.5
+        "typography:default": 24
       }
     },
     {
@@ -1751,7 +1751,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 2
+        "typography:default": 32
       }
     },
     {
@@ -1774,7 +1774,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 3
+        "typography:default": 48
       }
     },
     {
@@ -1797,7 +1797,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1
+        "typography:default": 16
       }
     },
     {
@@ -1820,7 +1820,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1.25
+        "typography:default": 20
       }
     },
     {
@@ -1843,7 +1843,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1.5
+        "typography:default": 24
       }
     },
     {
@@ -1866,7 +1866,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 1.75
+        "typography:default": 28
       }
     },
     {
@@ -1889,7 +1889,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 2
+        "typography:default": 32
       }
     },
     {
@@ -1912,7 +1912,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 2.5
+        "typography:default": 40
       }
     },
     {
@@ -1935,7 +1935,7 @@
       "description": "",
       "codeSyntax": {},
       "valuesByMode": {
-        "typography:default": 3.5999999046325684
+        "typography:default": 57.599998474121094
       }
     },
     {

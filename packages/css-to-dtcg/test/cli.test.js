@@ -35,6 +35,13 @@ describe('buildTokens', () => {
     expect(() => buildTokens({ sets: [{ name: 'a', file: 'x', selector: ':root' }] }, { target: 'css' })).toThrow(TokenBuildError);
   });
 
+  it('rejects a base font size that is not a positive number', () => {
+    const config = { sets: [{ name: 'a', file: 'x', selector: ':root' }] };
+
+    expect(() => buildTokens(config, { target: 'figma', baseFontSize: 0 })).toThrow(/positive number of pixels, not 0/);
+    expect(() => buildTokens(config, { target: 'figma', baseFontSize: NaN })).toThrow(/not NaN/);
+  });
+
   it('reports config shape errors as a TokenBuildError', () => {
     expect(() => buildTokens({ sets: [] })).toThrow(/config.sets must be a non-empty array/);
   });
@@ -65,7 +72,32 @@ describe('run', () => {
 
     expect(code).toBe(0);
     expect(existsSync(join(dir, 'figma', 'primitives', 'default.tokens.json'))).toBe(true);
-    expect(logs[1]).toBe('Import collections in this order: primitives');
+    expect(logs[1]).toBe('Sizes in px at 16px per rem');
+    expect(logs[2]).toBe('Import collections in this order: primitives');
+  });
+
+  it('writes sizes in px with --base-font-size', async () => {
+    writeFileSync(join(dir, 'typography.css'), ':root { --size-s: 0.875rem; }\n');
+    writeFileSync(
+      join(dir, 'css-to-dtcg.config.mjs'),
+      `export default ${JSON.stringify({ sets: [{ name: 'typography', file: 'typography.css', selector: ':root' }] })};\n`,
+    );
+
+    const code = await run(['--config', join(dir, 'css-to-dtcg.config.mjs'), '--target', 'figma', '--base-font-size', '10'], io);
+
+    expect(code).toBe(0);
+    expect(logs[1]).toBe('Sizes in px at 10px per rem');
+    expect(JSON.parse(readFileSync(join(dir, 'figma', 'typography', 'default.tokens.json'), 'utf8')).size.s.$value).toBe(8.75);
+  });
+
+  it('refuses a --base-font-size that is not a positive number', async () => {
+    writeProject(config);
+
+    const code = await run(['--config', join(dir, 'css-to-dtcg.config.mjs'), '--target', 'figma', '--base-font-size', 'abc'], io);
+
+    expect(code).toBe(1);
+    expect(errors[0]).toMatch(/^--base-font-size must be a positive number of pixels, not "abc"/);
+    expect(existsSync(join(dir, 'figma'))).toBe(false);
   });
 
   it('refuses an output directory that is the project root', async () => {

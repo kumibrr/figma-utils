@@ -50,6 +50,16 @@ describe('buildExport', () => {
     });
   });
 
+  it('exports px sizes as rem with the base font size', () => {
+    const sizes = snapshot([collection('typography', ['Mode 1'])], [variable('typography', 'size/s', 'FLOAT', { 'Mode 1': 14 }, { scopes: ['FONT_SIZE'] })]);
+    const sizeOf = (result: ReturnType<typeof buildExport>) => result.sets[0].tree;
+
+    expect(sizeOf(buildExport(sizes))).toEqual({ typography: { size: { s: { $type: 'dimension', $value: { value: 0.875, unit: 'rem' } } } } });
+    expect(sizeOf(buildExport(sizes, { baseFontSize: 10 }))).toEqual({
+      typography: { size: { s: { $type: 'dimension', $value: { value: 1.4, unit: 'rem' } } } },
+    });
+  });
+
   it('derives themes with the shared rule', () => {
     expect(buildExport(good).themes).toEqual([
       { name: 'nova', group: 'Brand', selectedTokenSets: { primitives: 'source', 'semantic/brand/nova': 'enabled' } },

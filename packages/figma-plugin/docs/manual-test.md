@@ -34,10 +34,13 @@ from `packages/figma-plugin/manifest.json`.
 - [ ] Add a BOOLEAN variable to `semantic/theme`, refresh: the error list shows it once, Export is disabled.
       Delete it, refresh: the file list is back.
 - [ ] A file with no local variables shows "No local variables in this file." and Export is disabled.
+- [ ] Settings → Base font size shows 16 on first run. Set it to 10: the preview rebuilds and
+      `typography.size.s` (14 in Figma) exports as `1.4rem`. `0` or an empty field shows an error and isn't saved.
+      Close and reopen the plugin: 10 is kept. Another file still shows 16. Set it back to 16.
 
 ## GitHub
 
-- [ ] With GitHub selected and nothing configured, Export opens GitHub settings.
+- [ ] With GitHub selected and nothing configured, Export opens settings.
 - [ ] Only the token step is enabled. A wrong token + Continue shows "GitHub rejected the token." under the
       field; nothing is saved and the other steps stay disabled.
 - [ ] A fine-grained token (Contents + Pull requests read/write) + Continue (or Enter) shows "Token saved" and
@@ -63,6 +66,7 @@ from `packages/figma-plugin/manifest.json`.
 - [ ] Publishing a PR from Dev Mode works.
 - [ ] With a weight back on "All scopes", Dev Mode lists the suggestion but its checkbox and
       "Apply" are disabled, with a note to open the file in the editor.
+- [ ] Settings in Dev Mode show the file's base font size, disabled, with "Dev Mode can't change it."
 
 ## Developer shortcut
 

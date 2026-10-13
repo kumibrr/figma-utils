@@ -1,4 +1,5 @@
 import { deriveThemes } from 'css-to-dtcg/themes';
+import { DEFAULT_BASE_FONT_SIZE } from 'css-to-dtcg/units';
 
 import { invalidNameReason, invalidSetPathReason, nest, setPath, tokenPath, type Tree } from './sets';
 import { isAlias, type Snapshot, type SnapshotCollection } from './snapshot';
@@ -25,7 +26,7 @@ function dedupe(errors: ExportError[]): ExportError[] {
   });
 }
 
-export function buildExport(snapshot: Snapshot): BuildResult {
+export function buildExport(snapshot: Snapshot, { baseFontSize = DEFAULT_BASE_FONT_SIZE } = {}): BuildResult {
   const errors: ExportError[] = [];
   const collections = new Map(snapshot.collections.map((collection) => [collection.id, collection]));
   const variables = new Map(snapshot.variables.map((variable) => [variable.id, variable]));
@@ -98,7 +99,7 @@ export function buildExport(snapshot: Snapshot): BuildResult {
           continue;
         }
 
-        const result = toToken(variable, value, pathOf);
+        const result = toToken(variable, value, pathOf, baseFontSize);
         if (!result.ok) {
           errors.push({
             collection: collection.name,

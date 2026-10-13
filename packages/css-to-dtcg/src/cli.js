@@ -4,8 +4,9 @@ import { parseArgs } from 'node:util';
 
 import { loadConfig } from './config.js';
 import { buildTokens, TokenBuildError } from './index.js';
+import { DEFAULT_BASE_FONT_SIZE, isBaseFontSize } from './units.js';
 
-const USAGE = 'Usage: css-to-dtcg [--config css-to-dtcg.config.js] [--target dtcg|figma]';
+const USAGE = 'Usage: css-to-dtcg [--config css-to-dtcg.config.js] [--target dtcg|figma] [--base-font-size 16]';
 
 /**
  * @param {string[]} argv
@@ -20,6 +21,7 @@ export async function run(argv, { log = console.log, error = console.error } = {
       options: {
         config: { type: 'string', default: 'css-to-dtcg.config.js' },
         target: { type: 'string', default: 'dtcg' },
+        'base-font-size': { type: 'string', default: String(DEFAULT_BASE_FONT_SIZE) },
       },
     }));
   } catch (problem) {
@@ -27,10 +29,16 @@ export async function run(argv, { log = console.log, error = console.error } = {
     return 1;
   }
 
+  const baseFontSize = Number(values['base-font-size']);
+  if (!isBaseFontSize(baseFontSize)) {
+    error(`--base-font-size must be a positive number of pixels, not "${values['base-font-size']}"\n${USAGE}`);
+    return 1;
+  }
+
   try {
     const { config, root } = await loadConfig(values.config);
     const target = /** @type {'dtcg' | 'figma'} */ (values.target);
-    const { files, importOrder } = buildTokens(config, { target, root });
+    const { files, importOrder } = buildTokens(config, { target, root, baseFontSize });
 
     const outDir = resolve(root, target === 'figma' ? (config.figmaOutDir ?? 'figma') : (config.outDir ?? 'tokens'));
     const fromRoot = relative(root, outDir);
@@ -60,6 +68,7 @@ export async function run(argv, { log = console.log, error = console.error } = {
 
     log(`Wrote ${files.length} files to ${relative(process.cwd(), outDir) || '.'}`);
     if (target === 'figma') {
+      log(`Sizes in px at ${baseFontSize}px per rem`);
       log(`Import collections in this order: ${importOrder.join(', ')}`);
     }
     return 0;

@@ -103,12 +103,12 @@ describe('figma-snapshot.json', () => {
     ]);
   });
 
-  it('stores numbers and colours at Figma precision', () => {
+  it('stores sizes in px, and numbers and colours at Figma precision', () => {
     const leading = variable('typography', 'leading/display');
 
     expect(leading.resolvedType).toBe('FLOAT');
-    expect(leading.valuesByMode['typography:default']).toBe(Math.fround(3.6));
-    expect(leading.valuesByMode['typography:default']).not.toBe(3.6);
+    expect(leading.valuesByMode['typography:default']).toBe(Math.fround(57.6));
+    expect(leading.valuesByMode['typography:default']).not.toBe(57.6);
     expect(variable('primitives', 'base/overlay').valuesByMode['primitives:default']).toEqual({
       r: Math.fround(0x15 / 255),
       g: Math.fround(0x15 / 255),

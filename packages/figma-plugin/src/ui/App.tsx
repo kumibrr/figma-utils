@@ -15,11 +15,13 @@ export function App() {
   const [prefs, setPrefs] = useState<Prefs | null>(null);
   const [view, setView] = useState<'export' | 'settings'>('export');
 
+  const baseFontSize = prefs?.baseFontSize;
+
   const refresh = useCallback(async () => {
     setBuild({ status: 'loading' });
     try {
       const snapshot = await call('getSnapshot');
-      const result = buildExport(snapshot);
+      const result = buildExport(snapshot, { baseFontSize });
       const fixes = inferScopes(snapshot);
       setBuild({ status: 'ready', result, fixes });
       return { snapshot, result, fixes };
@@ -27,11 +29,15 @@ export function App() {
       setBuild({ status: 'failed', message: error instanceof Error ? error.message : String(error) });
       return null;
     }
-  }, []);
+  }, [baseFontSize]);
 
   useEffect(() => {
-    void refresh();
     void call('getPrefs').then(setPrefs);
+  }, []);
+
+  // Builds once the base font size is known, and again whenever it changes.
+  useEffect(() => {
+    if (baseFontSize !== undefined) void refresh();
   }, [refresh]);
 
   // Hidden developer shortcut: Alt+Shift+S downloads the raw snapshot, so a

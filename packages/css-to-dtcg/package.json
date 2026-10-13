@@ -23,6 +23,10 @@
       "types": "./types/scopes.d.ts",
       "default": "./src/scopes.js"
     },
+    "./units": {
+      "types": "./types/units.d.ts",
+      "default": "./src/units.js"
+    },
     "./serialize": {
       "types": "./types/serialize.d.ts",
       "default": "./src/serialize.js"

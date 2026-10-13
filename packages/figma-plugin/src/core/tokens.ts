@@ -1,3 +1,5 @@
+import { DEFAULT_BASE_FONT_SIZE, pxToRem } from 'css-to-dtcg/units';
+
 import { toHex } from './color';
 import { fontFamilyValue } from './font-stack';
 import { recoverNumber } from './numbers';
@@ -42,10 +44,12 @@ export function tokenType(variable: SnapshotVariable): { type: TokenType } | { r
 
 export type TokenResult = { ok: true; token: Token } | { ok: false; reason: string; perMode: boolean };
 
+/** Sizes are px in Figma and rem in the export, `baseFontSize` px to the rem. */
 export function toToken(
   variable: SnapshotVariable,
   value: SnapshotValue,
   pathOf: (variableId: string) => string[] | undefined,
+  baseFontSize = DEFAULT_BASE_FONT_SIZE,
 ): TokenResult {
   const type = tokenType(variable);
   if ('reason' in type) {
@@ -69,7 +73,7 @@ export function toToken(
         $value = recoverNumber(value as number);
         break;
       case 'dimension':
-        $value = { value: recoverNumber(value as number), unit: 'rem' };
+        $value = { value: pxToRem(recoverNumber(value as number), baseFontSize), unit: 'rem' };
         break;
       case 'fontFamily': {
         const family = fontFamilyValue(value as string, variable.codeSyntax.WEB);
