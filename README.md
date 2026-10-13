@@ -31,13 +31,18 @@ changelogs and releases. Each release has a `<package>@<version>` tag, e.g.
 For each tag, the Release workflow checks that the tag matches the package version and creates
 a GitHub Release with the changelog entry:
 
-- `css-to-dtcg@…` publishes to npm with provenance via npm trusted publishing.
+- `css-to-dtcg@…` publishes to npm with provenance, using the `NPM_TOKEN` repository secret
+  if it's set, or npm trusted publishing otherwise.
 - `export-design-tokens@…` attaches the zipped plugin (`manifest.json` + `dist/`, ready for
   Figma's "Import plugin from manifest…") and becomes the repository's latest release.
 
-The very first publish must be done by a maintainer (`cd packages/css-to-dtcg && npm publish`),
-because npm only lets you configure a trusted publisher for a package that exists. Then, on
-npmjs.com → css-to-dtcg → Settings → Trusted publishing, add this repository and the
-`release.yml` workflow.
+To publish with a token, create a granular access token on npmjs.com with read and write
+access to `css-to-dtcg` (and "Bypass 2FA" if your account requires 2FA for publishing), then
+add it under GitHub → Settings → Secrets and variables → Actions as `NPM_TOKEN`.
+
+To use trusted publishing instead, leave `NPM_TOKEN` unset and, on npmjs.com → css-to-dtcg →
+Settings → Trusted publishing, add this repository and the `release.yml` workflow. npm only
+lets you configure a trusted publisher for a package that exists, so the very first publish
+must be done by a maintainer (`cd packages/css-to-dtcg && npm publish`) or with a token.
 
 Licensed under MIT.
