@@ -1,4 +1,4 @@
-# Export Design Tokens (Figma plugin)
+# TokenSync (Figma plugin)
 
 Exports the current file's local Figma variables as W3C DTCG design tokens — downloaded
 to your computer or opened as a pull request on GitHub. Works in the normal editor and
@@ -64,8 +64,8 @@ the folder in one commit, and opens a pull request. Nothing changed → nothing 
 
     pnpm install
     pnpm --filter css-to-dtcg build
-    pnpm --filter export-design-tokens build      # dist/code.js + dist/index.html
-    pnpm --filter export-design-tokens test
+    pnpm --filter tokensync build   # dist/code.js + dist/index.html
+    pnpm --filter tokensync test
 
 Import `manifest.json` in Figma desktop (Plugins → Development → Import plugin from
 manifest…). See `docs/manual-test.md` before publishing.

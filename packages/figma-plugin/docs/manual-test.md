@@ -1,6 +1,6 @@
-# Manual test — Export Design Tokens
+# Manual test — TokenSync
 
-Run in Figma desktop after `pnpm --filter export-design-tokens build`, with the plugin imported
+Run in Figma desktop after `pnpm --filter tokensync build`, with the plugin imported
 from `packages/figma-plugin/manifest.json`.
 
 ## Setup

@@ -21,7 +21,7 @@ const handlers: Handlers = {
   close: () => figma.closePlugin(),
 };
 
-figma.showUI(__html__, { width: 360, height: 440, themeColors: true, title: 'Export tokens' });
+figma.showUI(__html__, { width: 360, height: 440, themeColors: true, title: 'TokenSync' });
 
 figma.ui.onmessage = async (message: RpcRequest) => {
   if (message?.rpc !== 'request') {

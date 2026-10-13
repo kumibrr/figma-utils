@@ -3,7 +3,7 @@
 A made-up academy with three brands — **nova** (violet), **orbit** (teal) and
 **ember** (amber) — and light/dark themes. It shows the full design-token loop
 between CSS and Figma using [`css-to-dtcg`](../../packages/css-to-dtcg) and the
-[Export Design Tokens](../../packages/figma-plugin) Figma plugin.
+[TokenSync](../../packages/figma-plugin) Figma plugin.
 
 ## Run the page
 
@@ -43,7 +43,7 @@ between CSS and Figma using [`css-to-dtcg`](../../packages/css-to-dtcg) and the
    the **Font weight** scope of `weight/regular`, `weight/medium`, `weight/bold` and
    `weight/title`. The plugin suggests it for all four, so click **Apply 4 scopes** (or set it
    in Figma yourself).
-3. **Figma → tokens.** Run **Export Design Tokens** and download the files, or open a
+3. **Figma → tokens.** Run **TokenSync** and download the files, or open a
    pull request. The result equals `tokens/` byte for byte.
 
 ## Tests

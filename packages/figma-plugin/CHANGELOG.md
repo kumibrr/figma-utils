@@ -1,4 +1,4 @@
-# export-design-tokens
+# tokensync
 
 ## 2.0.0
 

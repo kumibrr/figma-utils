@@ -3,7 +3,7 @@
 Turn CSS custom properties into [W3C DTCG](https://www.designtokens.org/) design tokens —
 and into files Figma can import mode by mode.
 
-The default output is byte-identical to what the **Export Design Tokens** Figma plugin
+The default output is byte-identical to what the **TokenSync** Figma plugin
 exports, so you can seed Figma from your CSS, let Figma become the source of truth, and
 export back without noise.
 
@@ -89,7 +89,7 @@ right-click each mode → **Import mode**. Afterwards:
 - for every font-family variable, set its **Web code syntax** to the full stack
   (e.g. `'Roboto Slab', serif`) — Figma's format has no field for fallbacks;
 - for every font-weight variable, set its scope to **Font weight** — the files include it,
-  but Import mode drops that one scope. The Export Design Tokens plugin suggests it and can
+  but Import mode drops that one scope. The TokenSync plugin suggests it and can
   set it for you.
 
 Colours import with all scopes and sizes, in px, with every size scope (radius,
