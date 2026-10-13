@@ -1,5 +1,11 @@
 # tokensync
 
+## 2.0.1
+
+### Patch Changes
+
+- c46d032: Rename the plugin to TokenSync. Releases are now tagged `tokensync@<version>`.
+
 ## 2.0.0
 
 ### Major Changes
