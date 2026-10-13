@@ -31,12 +31,12 @@ export const CheckIcon = () => (
 
 export const GearIcon = () => (
   <Svg>
-    <circle cx="8" cy="8" r="2" stroke="currentColor" />
     <path
-      d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"
+      d="M6.93 3.22 6.88 1.6h2.24l-.05 1.62 1.56.64 1.11-1.18 1.58 1.58-1.18 1.11.64 1.56 1.62-.05v2.24l-1.62-.05-.64 1.56 1.18 1.11-1.58 1.58-1.11-1.18-1.56.64.05 1.62H6.88l.05-1.62-1.56-.64-1.11 1.18-1.58-1.58 1.18-1.11-.64-1.56-1.62.05V6.88l1.62.05.64-1.56-1.18-1.11 1.58-1.58 1.11 1.18z"
       stroke="currentColor"
-      stroke-linecap="round"
+      stroke-linejoin="round"
     />
+    <circle cx="8" cy="8" r="2" stroke="currentColor" />
   </Svg>
 );
 
