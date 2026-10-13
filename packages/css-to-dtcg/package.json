@@ -3,12 +3,17 @@
   "version": "0.3.0",
   "description": "Turn CSS custom properties into W3C DTCG design tokens, including files Figma can import.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumibrr/figma-utils.git",
+    "directory": "packages/css-to-dtcg"
+  },
   "type": "module",
   "engines": {
     "node": ">=20"
   },
   "bin": {
-    "css-to-dtcg": "./bin/css-to-dtcg.js"
+    "css-to-dtcg": "bin/css-to-dtcg.js"
   },
   "exports": {
     ".": {
