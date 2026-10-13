@@ -1,4 +1,5 @@
 import { SIZE_SCOPES } from 'css-to-dtcg/scopes';
+import { isBaseFontSize, pxToRem } from 'css-to-dtcg/units';
 
 import type { BuildResult, ExportError } from '../core/build-export';
 import { multipleFiles, singleFile, type ExportFile } from '../core/files';
@@ -136,6 +137,15 @@ export function groupErrors(errors: ExportError[]): { collection: string; items:
   }
   return [...groups].map(([collection, items]) => ({ collection, items }));
 }
+
+/** The base font size typed in settings, or null when it isn't a positive number. */
+export function parseBaseFontSize(text: string): number | null {
+  const value = text.trim() === '' ? NaN : Number(text);
+  return isBaseFontSize(value) ? value : null;
+}
+
+export const baseFontSizeExample = (baseFontSize: number): string =>
+  `A 14px font size exports as ${pxToRem(14, baseFontSize)}rem.`;
 
 export type TokenField = { mode: 'saved' } | { mode: 'entering'; draft: string; canCancel: boolean };
 

@@ -7,11 +7,13 @@ import type { Prefs } from '../shared/messages';
 import { Spinner } from './icons';
 import { call } from './rpc';
 import {
+  baseFontSizeExample,
   cancelReplace,
   errorBanner,
   initialPick,
   initialTokenField,
   isNewBranch,
+  parseBaseFontSize,
   startReplace,
   tokenToSave,
   type TokenField,
@@ -35,6 +37,7 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
   const [base, setBase] = useState(prefs.settings?.base ?? '');
   const [folder, setFolder] = useState(prefs.settings?.folder ?? 'tokens');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
+  const [fontSize, setFontSize] = useState(String(prefs.baseFontSize));
 
   const client = useRef<GitHubClient | null>(null);
   // Only the latest branch request may update the list.
@@ -46,6 +49,20 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
   const selected = ownerRepos.find((candidate) => candidate.name === repo) ?? null;
   const branchNames = branches.kind === 'ready' ? branches.items : [];
   const locked = token.mode === 'entering' || repos.kind !== 'ready';
+
+  /** Saved on its own, so exporting to this computer doesn't need GitHub set up. */
+  async function onBaseFontSize() {
+    const value = parseBaseFontSize(fontSize);
+    if (value === null || value === prefs.baseFontSize) {
+      return;
+    }
+    try {
+      await call('saveBaseFontSize', value);
+      onPrefs({ ...prefs, baseFontSize: value });
+    } catch (error) {
+      setStatus({ kind: 'error', messages: [message(error)] });
+    }
+  }
 
   function onRepo(name: string) {
     setRepo(name);
@@ -173,10 +190,44 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
   return (
     <form class="view" onSubmit={(event) => void onSave(event)}>
       <header class="header">
-        <h1 class="header__title">GitHub settings</h1>
+        <h1 class="header__title">Settings</h1>
       </header>
 
       <div class="settings">
+        <h2 class="settings__title">Export</h2>
+
+        <div class="field">
+          <label class="field">
+            <span>Base font size (px per rem)</span>
+            <input
+              type="number"
+              min="0"
+              step="any"
+              inputMode="decimal"
+              value={fontSize}
+              disabled={!prefs.canEdit}
+              onInput={(event) => setFontSize((event.currentTarget as HTMLInputElement).value)}
+              onChange={() => void onBaseFontSize()}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                  void onBaseFontSize();
+                }
+              }}
+            />
+          </label>
+          {parseBaseFontSize(fontSize) === null ? (
+            <p class="danger">Enter a number of pixels greater than 0.</p>
+          ) : (
+            <p class="hint">
+              Sizes are pixels in Figma and rem in the export. {baseFontSizeExample(parseBaseFontSize(fontSize)!)}{' '}
+              {prefs.canEdit ? 'Saved in this file for everyone who exports it.' : "Saved in this file; Dev Mode can't change it."}
+            </p>
+          )}
+        </div>
+
+        <h2 class="settings__title">GitHub</h2>
+
         <div class="field">
           <span>Token</span>
           {token.mode === 'saved' ? (

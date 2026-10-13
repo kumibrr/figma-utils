@@ -1,6 +1,7 @@
 import { SIZE_SCOPES } from '../scopes.js';
 import { serialize } from '../serialize.js';
 import { nest } from '../tree.js';
+import { DEFAULT_BASE_FONT_SIZE, remToPx } from '../units.js';
 
 /**
  * @typedef {import('../model.js').Model} Model
@@ -27,13 +28,16 @@ export function figmaColor(hex) {
   };
 }
 
-/** @param {Token} token */
-function figmaValue(token) {
+/**
+ * @param {Token} token
+ * @param {number} baseFontSize
+ */
+function figmaValue(token, baseFontSize) {
   switch (token.$type) {
     case 'color':
       return figmaColor(/** @type {string} */ (token.$value));
     case 'dimension':
-      return /** @type {{ value: number }} */ (token.$value).value;
+      return remToPx(/** @type {{ value: number }} */ (token.$value).value, baseFontSize);
     case 'fontWeight':
       return token.$value;
     case 'fontFamily':
@@ -44,11 +48,13 @@ function figmaValue(token) {
 }
 
 /**
- * One file per collection mode, shaped for Figma's "Import mode".
+ * One file per collection mode, shaped for Figma's "Import mode". Sizes are
+ * written in px, `baseFontSize` px to the rem.
  * @param {Model} model
+ * @param {{ baseFontSize?: number }} [options]
  * @returns {OutputFile[]}
  */
-export function toFigmaFiles(model) {
+export function toFigmaFiles(model, { baseFontSize = DEFAULT_BASE_FONT_SIZE } = {}) {
   const files = [];
 
   for (const collection of model.importOrder) {
@@ -64,11 +70,11 @@ export function toFigmaFiles(model) {
 
         let $value;
         if (!modelToken.target) {
-          $value = figmaValue(modelToken.token);
+          $value = figmaValue(modelToken.token, baseFontSize);
         } else if (model.collectionOf(modelToken.target) === set.collection) {
           $value = `{${model.pathOf(modelToken.target).slice(1).join('.')}}`;
         } else {
-          $value = figmaValue(model.resolveLiteral(modelToken.target));
+          $value = figmaValue(model.resolveLiteral(modelToken.target), baseFontSize);
           extensions['com.figma.aliasData'] = {
             targetVariableName: model.pathOf(modelToken.target).slice(1).join('/'),
             targetVariableSetName: model.collectionOf(modelToken.target),

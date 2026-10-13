@@ -71,6 +71,11 @@ groups. Nothing is silently dropped.
 
     npx css-to-dtcg                    # DTCG files into outDir
     npx css-to-dtcg --target figma     # Figma Import-mode files into figmaOutDir
+    npx css-to-dtcg --target figma --base-font-size 10
+
+Figma has no rem, so `--target figma` writes sizes in px: `0.875rem` → `14` with the
+default `--base-font-size` of 16 (px per rem). Use the same value as the Export Design
+Tokens plugin's base font size so sizes export back to the same rem.
 
 The output directory is replaced on every run. It must be inside the project, must not
 contain any source CSS file, and `outDir` and `figmaOutDir` must not be inside each other.
@@ -87,19 +92,19 @@ right-click each mode → **Import mode**. Afterwards:
   but Import mode drops that one scope. The Export Design Tokens plugin suggests it and can
   set it for you.
 
-Colours import with all scopes and sizes with every size scope (radius, width/height, gap,
-stroke, effects, font size, line height, letter and paragraph spacing).
+Colours import with all scopes and sizes, in px, with every size scope (radius,
+width/height, gap, stroke, effects, font size, line height, letter and paragraph spacing).
 
 ## API
 
 ```js
 import { buildTokens } from 'css-to-dtcg';
 
-const { files, importOrder } = buildTokens(config, { target: 'dtcg', root: process.cwd() });
+const { files, importOrder } = buildTokens(config, { target: 'figma', root: process.cwd(), baseFontSize: 16 });
 ```
 
-`css-to-dtcg/themes` (`deriveThemes`) and `css-to-dtcg/serialize` (`serialize`) are
-browser-safe and shared with the Figma plugin.
+`css-to-dtcg/themes` (`deriveThemes`), `css-to-dtcg/serialize` (`serialize`) and
+`css-to-dtcg/units` (`remToPx`, `pxToRem`) are browser-safe and shared with the Figma plugin.
 
 ## License
 

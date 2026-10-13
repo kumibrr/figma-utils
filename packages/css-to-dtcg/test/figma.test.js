@@ -73,7 +73,7 @@ describe('toFigmaFiles', () => {
 
     expect(typography.size.s).toEqual({
       $type: 'number',
-      $value: 0.875,
+      $value: 14,
       $extensions: {
         'com.figma.scopes': [
           'CORNER_RADIUS',
@@ -95,6 +95,12 @@ describe('toFigmaFiles', () => {
       $value: 'Fraunces',
       $extensions: { 'com.figma.scopes': ['FONT_FAMILY'], 'com.figma.type': 'string' },
     });
+  });
+
+  it('writes sizes in px with the configured base font size', () => {
+    const typography = JSON.parse(toFigmaFiles(model, { baseFontSize: 10 }).find((file) => file.path === 'typography/default.tokens.json').json);
+
+    expect(typography.size.s.$value).toBe(8.75);
   });
 
   it('writes same-collection aliases as references without the root', () => {

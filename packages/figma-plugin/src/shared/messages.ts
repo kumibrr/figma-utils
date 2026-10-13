@@ -5,8 +5,18 @@ export type Destination = 'github' | 'computer';
 
 export type ScopeChange = { variableId: string; scopes: string[] };
 
-/** `canEdit` is false in Dev Mode, where the plugin can read the file but not change it. */
-export type Prefs = { settings: RepoSettings | null; hasToken: boolean; destination: Destination; canEdit: boolean };
+/**
+ * `canEdit` is false in Dev Mode, where the plugin can read the file but not change it.
+ * `baseFontSize` is how many px make a rem when sizes are exported; it is stored in the
+ * Figma file, so it can't be changed in Dev Mode either.
+ */
+export type Prefs = {
+  settings: RepoSettings | null;
+  hasToken: boolean;
+  destination: Destination;
+  baseFontSize: number;
+  canEdit: boolean;
+};
 
 /** Everything the UI can ask the main thread to do. */
 export interface Methods {
@@ -18,6 +28,7 @@ export interface Methods {
   saveToken(token: string): void;
   getToken(): string | null;
   saveDestination(destination: Destination): void;
+  saveBaseFontSize(baseFontSize: number): void;
   openUrl(url: string): void;
   close(): void;
 }

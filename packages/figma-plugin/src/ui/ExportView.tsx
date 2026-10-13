@@ -132,7 +132,7 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
     <div class="view">
       <header class="header">
         <h1 class="header__title">Export tokens</h1>
-        <button class="icon-button" aria-label="GitHub settings" title="GitHub settings" onClick={openSettings}>
+        <button class="icon-button" aria-label="Settings" title="Settings" onClick={openSettings}>
           <GearIcon />
         </button>
       </header>

@@ -4,6 +4,7 @@ import { buildExport } from '../src/core/build-export';
 import { inferScopes } from '../src/core/infer-scopes';
 import {
   appliedBanner,
+  baseFontSizeExample,
   cancelReplace,
   destinationLabel,
   errorBanner,
@@ -14,6 +15,7 @@ import {
   initialPick,
   initialTokenField,
   isNewBranch,
+  parseBaseFontSize,
   previewFiles,
   resultBanner,
   startReplace,
@@ -34,6 +36,22 @@ describe('previewFiles', () => {
   it('lists the files of the chosen format', () => {
     expect(previewFiles(result, 'multiple').map((file) => file.path)).toEqual(['primitives.json', '$themes.json']);
     expect(previewFiles(result, 'single').map((file) => file.path)).toEqual(['tokens.json']);
+  });
+});
+
+describe('parseBaseFontSize', () => {
+  it('accepts positive numbers of pixels', () => {
+    expect(parseBaseFontSize('16')).toBe(16);
+    expect(parseBaseFontSize(' 10.5 ')).toBe(10.5);
+  });
+
+  it('rejects anything else', () => {
+    expect(['', ' ', '0', '-4', 'abc', 'Infinity'].map(parseBaseFontSize)).toEqual([null, null, null, null, null, null]);
+  });
+
+  it('explains the conversion with an example', () => {
+    expect(baseFontSizeExample(16)).toBe('A 14px font size exports as 0.875rem.');
+    expect(baseFontSizeExample(10)).toBe('A 14px font size exports as 1.4rem.');
   });
 });
 
