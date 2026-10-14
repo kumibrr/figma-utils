@@ -7,7 +7,6 @@ import type { Snapshot } from '../core/snapshot';
 import { createClient } from '../github/client';
 import { publish, type PublishStep } from '../github/publish';
 import type { Destination, Prefs } from '../shared/messages';
-import logo from '../../assets/icon.svg';
 import { downloadFile, downloadZip } from './download';
 import { ErrorList } from './ErrorList';
 import { ExportButton } from './ExportButton';
@@ -131,28 +130,23 @@ export function ExportView({ build, prefs, refresh, onPrefs, openSettings }: Pro
 
   return (
     <div class="view">
-      <header class="header">
-        <h1 class="header__title">
-          <img class="header__logo" src={logo} alt="" width={16} height={16} />
-          TokenSync
-        </h1>
+      <div class="header">
+        <div class="segmented" role="radiogroup" aria-label="Format">
+          {(['single', 'multiple'] as const).map((value) => (
+            <button
+              key={value}
+              role="radio"
+              aria-checked={format === value}
+              class={`segmented__option ${format === value ? 'is-selected' : ''}`}
+              onClick={() => setFormat(value)}
+            >
+              {value === 'single' ? 'Single file' : 'Multiple files'}
+            </button>
+          ))}
+        </div>
         <button class="icon-button" aria-label="Settings" title="Settings" onClick={openSettings}>
           <GearIcon />
         </button>
-      </header>
-
-      <div class="segmented" role="radiogroup" aria-label="Format">
-        {(['single', 'multiple'] as const).map((value) => (
-          <button
-            key={value}
-            role="radio"
-            aria-checked={format === value}
-            class={`segmented__option ${format === value ? 'is-selected' : ''}`}
-            onClick={() => setFormat(value)}
-          >
-            {value === 'single' ? 'Single file' : 'Multiple files'}
-          </button>
-        ))}
       </div>
 
       <div class="preview-header">
