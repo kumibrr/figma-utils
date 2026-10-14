@@ -1,4 +1,4 @@
-# TokenSync (Figma plugin)
+# <img src="assets/icon.svg" alt="" width="32" height="32"> TokenSync (Figma plugin)
 
 Exports the current file's local Figma variables as W3C DTCG design tokens — downloaded
 to your computer or opened as a pull request on GitHub. Works in the normal editor and
@@ -75,3 +75,5 @@ manifest…). See `docs/manual-test.md` before publishing.
 1. In Figma, Plugins → Development → the plugin → **Publish**. Figma assigns a plugin id;
    put it in `manifest.json` `"id"` (replacing `export-design-tokens-dev`) and commit.
 2. Choose your organization as the audience (not Community).
+3. Upload `assets/icon-128.png` as the plugin icon (Figma asks for 128 × 128). It's
+   rendered from `assets/icon.svg`, the source the plugin UI uses.
