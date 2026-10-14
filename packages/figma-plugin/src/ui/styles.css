@@ -25,6 +25,8 @@ button {
   flex-direction: column;
   gap: 8px;
   height: 100vh;
+  /* The settings view is a <form>, which gets a bottom margin in quirks mode. */
+  margin: 0;
   padding: 12px;
 }
 
