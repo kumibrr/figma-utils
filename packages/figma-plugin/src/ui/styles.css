@@ -43,16 +43,6 @@ button {
   font-weight: 600;
 }
 
-.header__title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.header__logo {
-  border-radius: 3px;
-}
-
 .icon-button {
   display: grid;
   place-items: center;
