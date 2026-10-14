@@ -1,5 +1,11 @@
 # tokensync
 
+## 2.0.2
+
+### Patch Changes
+
+- e19cb03: Fix the settings view showing two scrollbars.
+
 ## 2.0.1
 
 ### Patch Changes
