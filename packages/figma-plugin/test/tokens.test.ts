@@ -57,6 +57,15 @@ describe('toToken', () => {
     });
   });
 
+  it('keeps px sizes as px when the size unit is px', () => {
+    const size = variable('p', 's', 'FLOAT', {}, { scopes: ['FONT_SIZE'] });
+
+    expect(toToken(size, Math.fround(13.6), noAliases, 10, 'px')).toEqual({
+      ok: true,
+      token: { $type: 'dimension', $value: { value: 13.6, unit: 'px' } },
+    });
+  });
+
   it('reads the font stack from Web code syntax', () => {
     const family = variable('p', 'f', 'STRING', {}, { scopes: ['FONT_FAMILY'], codeSyntax: { WEB: "'Roboto Slab', serif" } });
 

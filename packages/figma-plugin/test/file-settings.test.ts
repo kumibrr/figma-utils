@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { loadBaseFontSize, saveBaseFontSize } from '../src/plugin/file-settings';
+import { loadBaseFontSize, loadSizeUnit, saveBaseFontSize, saveSizeUnit } from '../src/plugin/file-settings';
 
 function stubFigma(editorType: string, stored: Record<string, string> = {}) {
   const data = new Map(Object.entries(stored));
@@ -42,5 +42,32 @@ describe('base font size', () => {
 
     stubFigma('figma');
     expect(() => saveBaseFontSize(0)).toThrow('greater than 0');
+  });
+});
+
+describe('size unit', () => {
+  it('defaults to rem when the file has none or an invalid one', () => {
+    stubFigma('figma');
+    expect(loadSizeUnit()).toBe('rem');
+
+    stubFigma('figma', { 'export_design_tokens/size-unit': 'em' });
+    expect(loadSizeUnit()).toBe('rem');
+  });
+
+  it('is saved in the file', () => {
+    const data = stubFigma('figma');
+
+    saveSizeUnit('px');
+
+    expect(data.get('export_design_tokens/size-unit')).toBe('px');
+    expect(loadSizeUnit()).toBe('px');
+  });
+
+  it("can't be changed in Dev Mode or set to another unit", () => {
+    stubFigma('dev');
+    expect(() => saveSizeUnit('px')).toThrow('not in Dev Mode');
+
+    stubFigma('figma');
+    expect(() => saveSizeUnit('em' as 'px')).toThrow('rem or px');
   });
 });

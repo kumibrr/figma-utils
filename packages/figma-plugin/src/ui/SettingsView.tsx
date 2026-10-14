@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 
 import { createBranch, listBranches, listRepos, ownersOf, reposOf, type Repo } from '../github/browse';
+import type { SizeUnit } from '../core/tokens';
 import { createClient, type GitHubClient } from '../github/client';
 import { checkSettings, normalizeSettings, validateSettings } from '../github/settings';
 import type { Prefs } from '../shared/messages';
@@ -49,6 +50,19 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
   const selected = ownerRepos.find((candidate) => candidate.name === repo) ?? null;
   const branchNames = branches.kind === 'ready' ? branches.items : [];
   const locked = token.mode === 'entering' || repos.kind !== 'ready';
+
+  /** Saved on its own, so exporting to this computer doesn't need GitHub set up. */
+  async function onSizeUnit(value: SizeUnit) {
+    if (value === prefs.sizeUnit) {
+      return;
+    }
+    try {
+      await call('saveSizeUnit', value);
+      onPrefs({ ...prefs, sizeUnit: value });
+    } catch (error) {
+      setStatus({ kind: 'error', messages: [message(error)] });
+    }
+  }
 
   /** Saved on its own, so exporting to this computer doesn't need GitHub set up. */
   async function onBaseFontSize() {
@@ -197,6 +211,25 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
         <h2 class="settings__title">Export</h2>
 
         <div class="field">
+          <span>Size unit</span>
+          <div class="segmented" role="radiogroup" aria-label="Size unit">
+            {(['rem', 'px'] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                role="radio"
+                aria-checked={prefs.sizeUnit === value}
+                class={`segmented__option ${prefs.sizeUnit === value ? 'is-selected' : ''}`}
+                disabled={!prefs.canEdit}
+                onClick={() => void onSizeUnit(value)}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="field">
           <label class="field">
             <span>Base font size (px per rem)</span>
             <input
@@ -205,7 +238,7 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
               step="any"
               inputMode="decimal"
               value={fontSize}
-              disabled={!prefs.canEdit}
+              disabled={!prefs.canEdit || prefs.sizeUnit === 'px'}
               onInput={(event) => setFontSize((event.currentTarget as HTMLInputElement).value)}
               onChange={() => void onBaseFontSize()}
               onKeyDown={(event) => {
@@ -216,7 +249,12 @@ export function SettingsView({ prefs, onPrefs, onDone }: Props) {
               }}
             />
           </label>
-          {parseBaseFontSize(fontSize) === null ? (
+          {prefs.sizeUnit === 'px' ? (
+            <p class="hint">
+              Sizes are exported in pixels, as they are in Figma.{' '}
+              {prefs.canEdit ? 'Saved in this file for everyone who exports it.' : "Saved in this file; Dev Mode can't change it."}
+            </p>
+          ) : parseBaseFontSize(fontSize) === null ? (
             <p class="danger">Enter a number of pixels greater than 0.</p>
           ) : (
             <p class="hint">

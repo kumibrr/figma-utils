@@ -16,12 +16,13 @@ export function App() {
   const [view, setView] = useState<'export' | 'settings'>('export');
 
   const baseFontSize = prefs?.baseFontSize;
+  const sizeUnit = prefs?.sizeUnit;
 
   const refresh = useCallback(async () => {
     setBuild({ status: 'loading' });
     try {
       const snapshot = await call('getSnapshot');
-      const result = buildExport(snapshot, { baseFontSize });
+      const result = buildExport(snapshot, { baseFontSize, sizeUnit });
       const fixes = inferScopes(snapshot);
       setBuild({ status: 'ready', result, fixes });
       return { snapshot, result, fixes };
@@ -29,13 +30,13 @@ export function App() {
       setBuild({ status: 'failed', message: error instanceof Error ? error.message : String(error) });
       return null;
     }
-  }, [baseFontSize]);
+  }, [baseFontSize, sizeUnit]);
 
   useEffect(() => {
     void call('getPrefs').then(setPrefs);
   }, []);
 
-  // Builds once the base font size is known, and again whenever it changes.
+  // Builds once the export settings are known, and again whenever they change.
   useEffect(() => {
     if (baseFontSize !== undefined) void refresh();
   }, [refresh]);

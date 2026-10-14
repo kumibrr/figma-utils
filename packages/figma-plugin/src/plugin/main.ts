@@ -1,7 +1,7 @@
 import type { Methods, RpcRequest, RpcResponse } from '../shared/messages';
 import { applyScopes, canEdit } from './scopes';
 import { readSnapshot } from './snapshot';
-import { loadBaseFontSize, saveBaseFontSize } from './file-settings';
+import { loadBaseFontSize, loadSizeUnit, saveBaseFontSize, saveSizeUnit } from './file-settings';
 import { loadPrefs, loadToken, saveDestination, saveSettings, saveToken } from './storage';
 
 type Handlers = {
@@ -11,11 +11,12 @@ type Handlers = {
 const handlers: Handlers = {
   getSnapshot: () => readSnapshot(),
   applyScopes: (changes) => applyScopes(changes),
-  getPrefs: async () => ({ ...(await loadPrefs()), baseFontSize: loadBaseFontSize(), canEdit: canEdit() }),
+  getPrefs: async () => ({ ...(await loadPrefs()), sizeUnit: loadSizeUnit(), baseFontSize: loadBaseFontSize(), canEdit: canEdit() }),
   saveSettings: (settings) => saveSettings(settings),
   saveToken: (token) => saveToken(token),
   getToken: () => loadToken(),
   saveDestination: (destination) => saveDestination(destination),
+  saveSizeUnit: (sizeUnit) => saveSizeUnit(sizeUnit),
   saveBaseFontSize: (baseFontSize) => saveBaseFontSize(baseFontSize),
   openUrl: (url) => figma.openExternal(url),
   close: () => figma.closePlugin(),
