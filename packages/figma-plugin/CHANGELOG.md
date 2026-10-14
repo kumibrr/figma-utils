@@ -1,5 +1,11 @@
 # tokensync
 
+## 2.0.3
+
+### Patch Changes
+
+- 055bfe2: Show the TokenSync icon and name in the plugin header.
+
 ## 2.0.2
 
 ### Patch Changes
