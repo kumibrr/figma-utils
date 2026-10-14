@@ -3,7 +3,7 @@ import type { Destination, Prefs } from '../shared/messages';
 
 const KEYS = { settings: 'github-settings', token: 'github-token', destination: 'destination' } as const;
 
-export async function loadPrefs(): Promise<Omit<Prefs, 'canEdit' | 'baseFontSize'>> {
+export async function loadPrefs(): Promise<Omit<Prefs, 'canEdit' | 'sizeUnit' | 'baseFontSize'>> {
   const [settings, token, destination] = await Promise.all([
     figma.clientStorage.getAsync(KEYS.settings),
     figma.clientStorage.getAsync(KEYS.token),

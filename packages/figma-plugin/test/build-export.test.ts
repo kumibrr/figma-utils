@@ -58,6 +58,9 @@ describe('buildExport', () => {
     expect(sizeOf(buildExport(sizes, { baseFontSize: 10 }))).toEqual({
       typography: { size: { s: { $type: 'dimension', $value: { value: 1.4, unit: 'rem' } } } },
     });
+    expect(sizeOf(buildExport(sizes, { baseFontSize: 10, sizeUnit: 'px' }))).toEqual({
+      typography: { size: { s: { $type: 'dimension', $value: { value: 14, unit: 'px' } } } },
+    });
   });
 
   it('derives themes with the shared rule', () => {

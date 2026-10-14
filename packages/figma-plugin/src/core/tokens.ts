@@ -8,6 +8,11 @@ import { isAlias, type RGBA, type SnapshotValue, type SnapshotVariable } from '.
 
 export type TokenType = 'color' | 'fontWeight' | 'dimension' | 'fontFamily';
 
+/** The unit sizes are exported in: rem divides Figma's px by the base font size. */
+export type SizeUnit = 'rem' | 'px';
+
+export const isSizeUnit = (value: unknown): value is SizeUnit => value === 'rem' || value === 'px';
+
 export const NUMBER_SCOPE_REASON =
   'number variables need a scope: Font weight for a weight, or a size scope such as Gap or Font size for a size';
 export const STRING_SCOPE_REASON = 'string variables need the Font family scope';
@@ -44,12 +49,13 @@ export function tokenType(variable: SnapshotVariable): { type: TokenType } | { r
 
 export type TokenResult = { ok: true; token: Token } | { ok: false; reason: string; perMode: boolean };
 
-/** Sizes are px in Figma and rem in the export, `baseFontSize` px to the rem. */
+/** Sizes are px in Figma; exported as rem (`baseFontSize` px to the rem) unless `sizeUnit` is px. */
 export function toToken(
   variable: SnapshotVariable,
   value: SnapshotValue,
   pathOf: (variableId: string) => string[] | undefined,
   baseFontSize = DEFAULT_BASE_FONT_SIZE,
+  sizeUnit: SizeUnit = 'rem',
 ): TokenResult {
   const type = tokenType(variable);
   if ('reason' in type) {
@@ -72,9 +78,11 @@ export function toToken(
       case 'fontWeight':
         $value = recoverNumber(value as number);
         break;
-      case 'dimension':
-        $value = { value: pxToRem(recoverNumber(value as number), baseFontSize), unit: 'rem' };
+      case 'dimension': {
+        const px = recoverNumber(value as number);
+        $value = sizeUnit === 'px' ? { value: px, unit: 'px' } : { value: pxToRem(px, baseFontSize), unit: 'rem' };
         break;
+      }
       case 'fontFamily': {
         const family = fontFamilyValue(value as string, variable.codeSyntax.WEB);
         if (!family.ok) {

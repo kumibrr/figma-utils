@@ -82,6 +82,11 @@ button {
   color: var(--figma-color-text-brand);
 }
 
+.segmented__option:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .preview-header {
   display: flex;
   align-items: center;

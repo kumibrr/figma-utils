@@ -1,4 +1,5 @@
 import type { Snapshot } from '../core/snapshot';
+import type { SizeUnit } from '../core/tokens';
 import type { RepoSettings } from '../github/settings';
 
 export type Destination = 'github' | 'computer';
@@ -7,13 +8,14 @@ export type ScopeChange = { variableId: string; scopes: string[] };
 
 /**
  * `canEdit` is false in Dev Mode, where the plugin can read the file but not change it.
- * `baseFontSize` is how many px make a rem when sizes are exported; it is stored in the
- * Figma file, so it can't be changed in Dev Mode either.
+ * `sizeUnit` is the unit sizes are exported in, and `baseFontSize` how many px make a rem
+ * when that is rem; both are stored in the Figma file, so they can't be changed in Dev Mode either.
  */
 export type Prefs = {
   settings: RepoSettings | null;
   hasToken: boolean;
   destination: Destination;
+  sizeUnit: SizeUnit;
   baseFontSize: number;
   canEdit: boolean;
 };
@@ -28,6 +30,7 @@ export interface Methods {
   saveToken(token: string): void;
   getToken(): string | null;
   saveDestination(destination: Destination): void;
+  saveSizeUnit(sizeUnit: SizeUnit): void;
   saveBaseFontSize(baseFontSize: number): void;
   openUrl(url: string): void;
   close(): void;
