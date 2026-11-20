@@ -96,7 +96,7 @@ describe('buildExport', () => {
     );
 
     expect(result.errors).toEqual([
-      { collection: 'semantic/theme', variable: 'x', mode: 'light', reason: 'aliases a variable that is not local to this file' },
+      { collection: 'semantic/theme', variable: 'x', mode: 'light', reason: 'aliases a variable whose value could not be resolved in Figma' },
     ]);
   });
 

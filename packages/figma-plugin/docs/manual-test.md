@@ -33,6 +33,8 @@ from `packages/figma-plugin/manifest.json`.
 - [ ] Close and reopen the plugin: "Export to this computer" is still selected.
 - [ ] Add a BOOLEAN variable to `semantic/theme`, refresh: the error list shows it once, Export is disabled.
       Delete it, refresh: the file list is back.
+- [ ] Alias a local color variable to a published library color with different values in two modes.
+      Refresh and export. The local token contains the library's default-mode color.
 - [ ] A file with no local variables shows "No local variables in this file." and Export is disabled.
 - [ ] Settings → Base font size shows 16 on first run. Set it to 10: the preview rebuilds and
       `typography.size.s` (14 in Figma) exports as `1.4rem`. `0` or an empty field shows an error and isn't saved.

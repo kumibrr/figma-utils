@@ -44,7 +44,9 @@ in Dev Mode. Output is byte-identical to [`css-to-dtcg`](../css-to-dtcg).
 - Sizes are pixels in Figma and rem in the export: the value is divided by the **base font
   size** in settings (default 16, so 14 → `0.875rem`). It is saved in the Figma file, so
   everyone exporting that file gets the same rem; Dev Mode shows it but can't change it. Use the same value as `css-to-dtcg --base-font-size` so a round trip is exact.
-- Aliases stay references (`{primitives.gray.900}`). Aliases to library variables are errors.
+- Local aliases stay references (`{primitives.gray.900}`). An alias to a library variable
+  exports as a literal using the library collection's default mode. If Figma can't resolve
+  the value, TokenSync reports the affected variable and mode.
 - Any problem blocks the export and every problem is listed.
 
 ## GitHub

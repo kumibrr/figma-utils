@@ -94,11 +94,11 @@ describe('toToken', () => {
     });
   });
 
-  it('reports an alias to a variable that is not local', () => {
+  it('reports an alias whose value could not be resolved', () => {
     expect(toToken(variable('s', 't', 'COLOR', {}), { aliasId: 'VariableID:abc/-1:-1' }, noAliases)).toEqual({
       ok: false,
       perMode: true,
-      reason: 'aliases a variable that is not local to this file',
+      reason: 'aliases a variable whose value could not be resolved in Figma',
     });
   });
 

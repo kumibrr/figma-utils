@@ -64,27 +64,30 @@ export function toToken(
 
   let $value: unknown;
 
-  if (isAlias(value)) {
-    const target = pathOf(value.aliasId);
-    if (!target) {
-      return { ok: false, reason: 'aliases a variable that is not local to this file', perMode: true };
-    }
+  const alias = isAlias(value) ? value : undefined;
+  const target = alias && pathOf(alias.aliasId);
+  if (target) {
     $value = `{${target.join('.')}}`;
   } else {
+    const literal = alias ? alias.resolved?.value : value;
+    if (literal === undefined) {
+      return { ok: false, reason: 'aliases a variable whose value could not be resolved in Figma', perMode: true };
+    }
     switch (type.type) {
       case 'color':
-        $value = toHex(value as RGBA);
+        $value = toHex(literal as RGBA);
         break;
       case 'fontWeight':
-        $value = recoverNumber(value as number);
+        $value = recoverNumber(literal as number);
         break;
       case 'dimension': {
-        const px = recoverNumber(value as number);
+        const px = recoverNumber(literal as number);
         $value = sizeUnit === 'px' ? { value: px, unit: 'px' } : { value: pxToRem(px, baseFontSize), unit: 'rem' };
         break;
       }
       case 'fontFamily': {
-        const family = fontFamilyValue(value as string, variable.codeSyntax.WEB);
+        const webCodeSyntax = alias ? alias.resolved?.webCodeSyntax : variable.codeSyntax.WEB;
+        const family = fontFamilyValue(literal as string, webCodeSyntax);
         if (!family.ok) {
           return { ok: false, reason: family.reason, perMode: true };
         }
