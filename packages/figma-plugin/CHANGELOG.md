@@ -1,5 +1,11 @@
 # tokensync
 
+## 2.1.1
+
+### Patch Changes
+
+- d1b1c87: Export aliases to library variables using their default-mode values. Keep local variable references and report aliases Figma cannot resolve.
+
 ## 2.1.0
 
 ### Minor Changes
