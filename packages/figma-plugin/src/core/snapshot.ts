@@ -1,8 +1,9 @@
 /** A plain, serializable copy of what the plugin reads from Figma. */
 export type RGBA = { r: number; g: number; b: number; a: number };
-type LiteralValue = RGBA | number | string | boolean;
-export type Alias = { aliasId: string; resolved?: { value: LiteralValue; webCodeSyntax?: string } };
-export type SnapshotValue = LiteralValue | Alias;
+type SnapshotError = { error: string };
+export type ResolvedValue = RGBA | number | string | boolean | SnapshotError;
+export type Alias = { aliasId: string; resolved?: { value: ResolvedValue; webCodeSyntax?: string } };
+export type SnapshotValue = ResolvedValue | Alias;
 
 export type SnapshotMode = { id: string; name: string };
 
@@ -36,3 +37,6 @@ export type Snapshot = {
 
 export const isAlias = (value: SnapshotValue): value is Alias =>
   typeof value === 'object' && value !== null && 'aliasId' in value;
+
+export const isSnapshotError = (value: unknown): value is SnapshotError =>
+  typeof value === 'object' && value !== null && 'error' in value && typeof value.error === 'string';

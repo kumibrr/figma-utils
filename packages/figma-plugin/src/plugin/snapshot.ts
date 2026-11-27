@@ -1,6 +1,11 @@
-import { isAlias, type Alias, type Snapshot, type SnapshotValue } from '../core/snapshot';
+import { isRgba } from '../core/color';
+import { isAlias, isSnapshotError, type Alias, type ResolvedValue, type Snapshot, type SnapshotValue } from '../core/snapshot';
 
-export function toSnapshotValue(value: VariableValue): SnapshotValue {
+function isComposedColor(value: VariableValue): value is VariableComposedColor {
+  return typeof value === 'object' && value !== null && ('color' in value || 'opacity' in value);
+}
+
+export function toSnapshotValue(value: Exclude<VariableValue, VariableComposedColor>): SnapshotValue {
   if (typeof value === 'object' && value !== null) {
     if ('type' in value && value.type === 'VARIABLE_ALIAS') {
       return { aliasId: value.id };
@@ -45,8 +50,13 @@ export async function readSnapshot(): Promise<Snapshot> {
     return lookup;
   }
 
-  async function resolveAlias(id: string, source: Variable, sourceModeId: string): Promise<Alias['resolved']> {
-    const visited = new Set<string>();
+  async function resolveAlias(
+    id: string,
+    source: Variable,
+    sourceModeId: string,
+    ancestors: ReadonlySet<string>,
+  ): Promise<Alias['resolved']> {
+    const visited = new Set(ancestors);
     while (!visited.has(id)) {
       visited.add(id);
       const variable = await getVariable(id);
@@ -60,21 +70,52 @@ export async function readSnapshot(): Promise<Snapshot> {
       const raw = variable.valuesByMode[modeId];
       if (raw === undefined) return;
 
+      if (isComposedColor(raw)) {
+        return { value: await resolveComposedColor(raw, source, sourceModeId, visited), webCodeSyntax: variable.codeSyntax.WEB };
+      }
       const value = toSnapshotValue(raw);
       if (!isAlias(value)) return { value, webCodeSyntax: variable.codeSyntax.WEB };
       id = value.aliasId;
     }
   }
 
+  async function resolveComposedColor(
+    raw: VariableComposedColor,
+    source: Variable,
+    sourceModeId: string,
+    ancestors: ReadonlySet<string>,
+  ): Promise<ResolvedValue> {
+    async function resolveComponent(value: SnapshotValue, component: 'color' | 'color opacity'): Promise<ResolvedValue> {
+      if (!isAlias(value)) return value;
+      const resolved = await resolveAlias(value.aliasId, source, sourceModeId, ancestors);
+      return resolved?.value ?? { error: `composed ${component} alias could not be resolved in Figma` };
+    }
+
+    const [color, opacity] = await Promise.all([
+      resolveComponent(toSnapshotValue(raw.color), 'color'),
+      resolveComponent(toSnapshotValue(raw.opacity), 'color opacity'),
+    ]);
+    if (isSnapshotError(color)) return color;
+    if (!isRgba(color)) return { error: 'composed color requires valid RGB channels' };
+    if (isSnapshotError(opacity)) return opacity;
+    if (typeof opacity !== 'number' || !Number.isFinite(opacity) || opacity < 0 || opacity > 100) {
+      return { error: 'composed color opacity must be a percentage from 0 to 100' };
+    }
+    return { r: color.r, g: color.g, b: color.b, a: opacity / 100 };
+  }
+
   async function snapshotValues(variable: Variable): Promise<Record<string, SnapshotValue>> {
     const entries = await Promise.all(Object.entries(variable.valuesByMode).map(async ([modeId, raw]) => {
+      if (isComposedColor(raw)) {
+        return [modeId, await resolveComposedColor(raw, variable, modeId, new Set([variable.id]))] as const;
+      }
       const value = toSnapshotValue(raw);
       if (!isAlias(value)) return [modeId, value] as const;
 
       const target = localVariables.get(value.aliasId);
       if (target && localCollections.has(target.variableCollectionId)) return [modeId, value] as const;
 
-      const resolved = await resolveAlias(value.aliasId, variable, modeId);
+      const resolved = await resolveAlias(value.aliasId, variable, modeId, new Set([variable.id]));
       return [modeId, resolved ? { ...value, resolved } : value] as const;
     }));
     return Object.fromEntries(entries);
