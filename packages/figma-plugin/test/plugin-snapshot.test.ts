@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { buildExport } from '../src/core/build-export';
+import { multipleFiles } from '../src/core/files';
 import { readSnapshot, toSnapshotValue } from '../src/plugin/snapshot';
 
 describe('toSnapshotValue', () => {
@@ -159,5 +160,155 @@ describe('library aliases in exports', () => {
     expect(result.errors).toEqual([
       { collection: 'semantic', variable: 'surface', mode: 'Default', reason: 'aliases a variable whose value could not be resolved in Figma' },
     ]);
+  });
+});
+
+describe('composed colors in exports', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('exports the Aula Virtual navigation color in each Theme file', async () => {
+    const background = {
+      ...surface,
+      id: 'background',
+      name: 'background',
+      valuesByMode: { light: alias('white'), dark: alias('base-950') },
+    };
+    const navigation = {
+      ...surface,
+      id: 'navigation',
+      name: 'alpha/background-navigation',
+      valuesByMode: {
+        light: { color: alias(background.id), opacity: 60 },
+        dark: { color: alias(background.id), opacity: 60 },
+      },
+    };
+    const api = stubFigma([background, navigation], {
+      ...collection,
+      name: 'Theme',
+      modes: [{ modeId: 'light', name: 'Light' }, { modeId: 'dark', name: 'Dark' }],
+      defaultModeId: 'light',
+      variableIds: [background.id, navigation.id],
+    });
+    api.getVariableByIdAsync.mockImplementation(async (id) => {
+      if (id === 'white') {
+        return { variableCollectionId: 'tailwind', codeSyntax: {}, valuesByMode: { palette: { r: 1, g: 1, b: 1 } } };
+      }
+      if (id === 'base-950') {
+        return { variableCollectionId: 'base-color', codeSyntax: {}, valuesByMode: { base: alias('neutral-950') } };
+      }
+      if (id === 'neutral-950') {
+        const channel = Math.fround(10 / 255);
+        return { variableCollectionId: 'tailwind', codeSyntax: {}, valuesByMode: { palette: { r: channel, g: channel, b: channel } } };
+      }
+      return null;
+    });
+    api.getVariableCollectionByIdAsync.mockImplementation(async (id) => ({ defaultModeId: id === 'tailwind' ? 'palette' : 'base' }));
+
+    const result = buildExport(await readSnapshot());
+    const files = multipleFiles(result);
+
+    expect(result.errors).toEqual([]);
+    expect(files.slice(0, 2).map(({ path, json }) => [path, JSON.parse(json).Theme.alpha['background-navigation'].$value])).toEqual([
+      ['Theme/Light.json', '#ffffff99'],
+      ['Theme/Dark.json', '#0a0a0a99'],
+    ]);
+  });
+
+  it.each([
+    { opacity: 0, expected: '#ff000000' },
+    { opacity: 100, expected: '#ff0000' },
+  ])('uses a mode-specific opacity alias of $opacity% as the alpha channel', async ({ opacity, expected }) => {
+    const alpha: TestVariable = {
+      ...surface,
+      id: 'alpha',
+      resolvedType: 'FLOAT',
+      valuesByMode: { light: 60, dark: alias('library-alpha') },
+    };
+    const composed = { color: { r: 1, g: 0, b: 0, a: 0.25 }, opacity: alias(alpha.id) };
+    const variable = { ...surface, valuesByMode: { light: composed, dark: composed } };
+    const api = stubFigma([variable, alpha], {
+      ...collection,
+      modes: [{ modeId: 'light', name: 'Light' }, { modeId: 'dark', name: 'Dark' }],
+      defaultModeId: 'light',
+    });
+    api.getVariableByIdAsync.mockResolvedValue({
+      variableCollectionId: 'opacity-library',
+      codeSyntax: {},
+      valuesByMode: { default: opacity, other: 25 },
+    });
+    api.getVariableCollectionByIdAsync.mockResolvedValue({ defaultModeId: 'default' });
+
+    const result = buildExport(await readSnapshot());
+
+    expect(result.errors).toEqual([]);
+    expect(result.sets.map(({ tree }) => tree)).toEqual([
+      { semantic: { surface: { $type: 'color', $value: '#ff000099' } } },
+      { semantic: { surface: { $type: 'color', $value: expected } } },
+    ]);
+  });
+
+  it('flattens a composed library color reached by a plain alias', async () => {
+    const api = stubFigma([surface]);
+    api.getVariableByIdAsync.mockImplementation(async (id) => ({
+      variableCollectionId: 'library',
+      codeSyntax: {},
+      valuesByMode: {
+        default: id === 'library-surface'
+          ? { color: alias('library-blue'), opacity: alias('library-alpha') }
+          : id === 'library-blue' ? { r: 0, g: 0, b: 1 } : 50,
+      },
+    }));
+    api.getVariableCollectionByIdAsync.mockResolvedValue({ defaultModeId: 'default' });
+
+    const result = buildExport(await readSnapshot());
+
+    expect(result.errors).toEqual([]);
+    expect(result.sets[0].tree).toEqual({ semantic: { surface: { $type: 'color', $value: '#0000ff80' } } });
+  });
+
+  it.each([
+    {
+      problem: 'missing color alias',
+      value: { color: alias('missing'), opacity: 60 },
+      reason: 'composed color alias could not be resolved in Figma',
+    },
+    {
+      problem: 'cyclic color alias',
+      value: { color: alias(surface.id), opacity: 60 },
+      reason: 'composed color alias could not be resolved in Figma',
+    },
+    {
+      problem: 'wrong color type',
+      value: { color: alias('wrong-type'), opacity: 60 },
+      reason: 'composed color requires valid RGB channels',
+    },
+    {
+      problem: 'out-of-range opacity',
+      value: { color: alias('white'), opacity: -1 },
+      reason: 'composed color opacity must be a percentage from 0 to 100',
+    },
+    {
+      problem: 'missing opacity alias',
+      value: { color: { r: 1, g: 1, b: 1 }, opacity: alias('missing') },
+      reason: 'composed color opacity alias could not be resolved in Figma',
+    },
+    {
+      problem: 'wrong opacity type',
+      value: { color: { r: 1, g: 1, b: 1 }, opacity: alias('wrong-type') },
+      reason: 'composed color opacity must be a percentage from 0 to 100',
+    },
+  ])('reports a $problem on the token and mode', async ({ value, reason }) => {
+    const api = stubFigma([{ ...surface, valuesByMode: { 'local-mode': value } }]);
+    api.getVariableByIdAsync.mockImplementation(async (id) => id === 'missing' ? null : {
+      variableCollectionId: 'library',
+      codeSyntax: {},
+      valuesByMode: { default: id === 'white' ? { r: 1, g: 1, b: 1 } : 'invalid' },
+    });
+    api.getVariableCollectionByIdAsync.mockResolvedValue({ defaultModeId: 'default' });
+
+    const result = buildExport(await readSnapshot());
+
+    expect(result.errors).toEqual([{ collection: 'semantic', variable: 'surface', mode: 'Default', reason }]);
+    expect(result.sets[0].tree).toEqual({});
   });
 });

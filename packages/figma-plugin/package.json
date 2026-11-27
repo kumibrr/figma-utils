@@ -1,6 +1,6 @@
 {
   "name": "tokensync",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
     "preact": "^10.29.8"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.138.0",
+    "@figma/plugin-typings": "^1.139.0",
     "@preact/preset-vite": "^2.10.6",
     "@types/node": "^26.6.2",
     "esbuild": "^0.28.2",

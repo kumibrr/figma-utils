@@ -32,6 +32,16 @@ describe('tokenType', () => {
 });
 
 describe('toToken', () => {
+  it('reports invalid color channels', () => {
+    const color = variable('p', 'color', 'COLOR', {});
+
+    expect(toToken(color, rgba(NaN, 0, 0), noAliases)).toEqual({
+      ok: false,
+      perMode: true,
+      reason: 'has an invalid Figma color value',
+    });
+  });
+
   it('converts literals', () => {
     expect(toToken(variable('p', 'c', 'COLOR', {}), rgba(1, 1, 1), noAliases)).toEqual({
       ok: true,

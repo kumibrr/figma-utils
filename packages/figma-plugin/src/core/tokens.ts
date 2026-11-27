@@ -4,7 +4,7 @@ import { toHex } from './color';
 import { fontFamilyValue } from './font-stack';
 import { recoverNumber } from './numbers';
 import type { Token } from './sets';
-import { isAlias, type RGBA, type SnapshotValue, type SnapshotVariable } from './snapshot';
+import { isAlias, isSnapshotError, type SnapshotValue, type SnapshotVariable } from './snapshot';
 
 export type TokenType = 'color' | 'fontWeight' | 'dimension' | 'fontFamily';
 
@@ -73,10 +73,18 @@ export function toToken(
     if (literal === undefined) {
       return { ok: false, reason: 'aliases a variable whose value could not be resolved in Figma', perMode: true };
     }
+    if (isSnapshotError(literal)) {
+      return { ok: false, reason: literal.error, perMode: true };
+    }
     switch (type.type) {
-      case 'color':
-        $value = toHex(literal as RGBA);
+      case 'color': {
+        const hex = toHex(literal);
+        if (hex === undefined) {
+          return { ok: false, reason: 'has an invalid Figma color value', perMode: true };
+        }
+        $value = hex;
         break;
+      }
       case 'fontWeight':
         $value = recoverNumber(literal as number);
         break;
